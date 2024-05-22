@@ -14,9 +14,11 @@ public class Board {
   
   public Board(int boardWidth, int boardHeight) {
     board = makeBoard(boardWidth, boardHeight);
+    
     currentPiece = null;
     heldPiece = null;
     nextPieces = new ArrayDeque<TPiece>(4);
+    
     dropSpeed = 0;
     dropX = 0;
     dropY = 0;
