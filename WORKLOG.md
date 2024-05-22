@@ -1,10 +1,11 @@
 # Work Log
 
-## GROUP MEMBER 1
+## David Schwartzberg
 
-### date x
+### 5/22
 
-info
+Set up the Board class's instance variables, constructor, and display(). 
+In the main Tetris file, added the keyCodes for the basic rotation and store-piece keys.
 
 ### date y
 
