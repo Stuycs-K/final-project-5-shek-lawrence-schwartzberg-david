@@ -1,3 +1,5 @@
+//import java.util.*;
+
 int SQUARE_SIZE = 30;
 color CYAN = #00ffee;
 color RED = #ff1500;
@@ -6,6 +8,7 @@ color GREEN = #10c443;
 color ORANGE = #ff8c00;
 color YELLOW = #ffee00;
 color PURPLE = #b700ff;
+color GRAY = color(140);
 
 Board board;
 float boardX, boardY;
@@ -70,4 +73,23 @@ public TPiece createNewTPiece() {
   return new TPiece(c);
 }
       
-  
+color getColor(char c) {
+  switch (c) {
+    case 'I':
+      return CYAN;
+    case 'J': 
+      return BLUE;
+    case 'L': 
+      return ORANGE;
+    case 'S':
+      return GREEN;
+    case 'Z': 
+      return RED;
+    case 'O':
+      return YELLOW;
+    case 'T':
+      return PURPLE;
+    default:
+      return GRAY;
+  }
+}

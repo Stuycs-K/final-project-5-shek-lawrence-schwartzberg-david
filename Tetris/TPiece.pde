@@ -39,7 +39,7 @@ public class TPiece {
   public void display(float x, float y) {
     char[][] currOrientation = orientations[state];
     
-    fill(PURPLE);
+    fill(getColor(pieceType));
     
     for (int r = 0; r < currOrientation.length; r++) {
       for (int c = 0; c < currOrientation[0].length; c++) {
@@ -232,14 +232,32 @@ public class TPiece {
   } 
   
   private void setO() {
-    char[][] squar = {
-                      {'-', '-', '-', '-'},
-                      {'-', 'O', 'O', '-'},
-                      {'-', 'O', 'O', '-'},
-                      {'-', '-', '-', '-'}
-                     };
-    for (int i = 0; i < 4; i++) {
-      orientations[i] = squar;
-    }
+    orientations = new char[][][]
+                  {
+                   {
+                    {'-', '-', '-', '-'}, 
+                    {'-', 'O', 'O', '-'},
+                    {'-', 'O', 'O', '-'}, 
+                    {'-', '-', '-', '-'}
+                   },
+                   {
+                    {'-', '-', '-', '-'}, 
+                    {'-', 'O', 'O', '-'},
+                    {'-', 'O', 'O', '-'}, 
+                    {'-', '-', '-', '-'}
+                   },
+                   {
+                    {'-', '-', '-', '-'}, 
+                    {'-', 'O', 'O', '-'},
+                    {'-', 'O', 'O', '-'}, 
+                    {'-', '-', '-', '-'}
+                   },
+                   {
+                    {'-', '-', '-', '-'}, 
+                    {'-', 'O', 'O', '-'},
+                    {'-', 'O', 'O', '-'}, 
+                    {'-', '-', '-', '-'}
+                   }
+                 };
   }
 }

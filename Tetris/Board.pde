@@ -21,7 +21,12 @@ public class Board {
     dropX = 0;
     dropY = 0;
     
+    // test
     currentPiece = new TPiece('T');
+    board[5][5] = 'O';
+    board[5][6] = 'O';
+    board[6][5] = 'O';
+    board[6][6] = 'O';
   }
   
   public char[][] makeBoard(int boardWidth, int boardHeight) {
@@ -32,7 +37,6 @@ public class Board {
         newBoard[r][c] = '-';
       }
     }
-    
     return newBoard;
   }
   
@@ -40,7 +44,8 @@ public class Board {
   public void display(float x, float y) {
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[0].length; c++) {
-        fill(140);
+        fill(getColor(board[r][c]));
+        
         rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
       }
     }
