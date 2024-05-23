@@ -2,6 +2,7 @@ public class TPiece {
   private char[][][] orientations;
   private int state;
   private char pieceType;
+  
   public TPiece(char c) {
     if (c == 'I') {
       setI();
@@ -26,6 +27,10 @@ public class TPiece {
     }
     state = 0;
     pieceType = c;
+  }
+  
+  public char getChar() {
+    return this.pieceType;
   }
   
   public void rotateClockwise() {

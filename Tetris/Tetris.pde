@@ -12,7 +12,8 @@ color GRAY = color(140);
 
 Board board;
 float boardX, boardY;
-int rotateLeftKey, rotateRightKey, storePieceKey;
+
+Controller controller;
 
 void setup() {
   size(1000, 700);
@@ -21,19 +22,16 @@ void setup() {
   boardY = height/2 - SQUARE_SIZE*10;
   board = new Board(20, 10);
   
-  // capital char values are same as their keyCode values in keyPressed()
-  rotateLeftKey = 'Z'; // 90
-  rotateRightKey = 'X'; // 88
-  storePieceKey = 'C'; // 67
+  controller = new Controller();
 }
 
 void draw() {
   board.display(boardX, boardY);
-  board.displayCurrentPiece(-1, 0);
+  board.displayCurrentPiece(0, 0);
 }
 
 void keyPressed(){
-  println(keyCode);
+  controller.keyPressed();
 }
 
 public TPiece createNewTPiece() {
