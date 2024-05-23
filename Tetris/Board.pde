@@ -35,7 +35,7 @@ public class Board {
     //board[6][6] = 'O';
   }
   
-  public char[][] makeBoard(int boardWidth, int boardHeight) {
+  private char[][] makeBoard(int boardWidth, int boardHeight) {
     char[][] newBoard = new char[boardWidth][boardHeight];
     
     for (int r = 0; r < newBoard.length; r++) {
@@ -46,7 +46,7 @@ public class Board {
     return newBoard;
   }
   
-  public void resetCurrentRowAndCol() {
+  private void resetCurrentRowAndCol() {
     currentRow = 0;
     currentCol = board[0].length/2;
   }
@@ -85,14 +85,29 @@ public class Board {
   }
   
   // called when the current piece has reached the bottom of the board
-  public void changeToNextPiece() {
+  private void changeToNextPiece() {
     // function here to add the current piece's data into the board array
+    addCurrentPieceToBoard();
     
     currentPiece = nextPieces.remove();
     nextPieces.add(createNewTPiece());
     
     resetCurrentRowAndCol();
   }
+  
+  // assumes that the piece does not overlap with any other pieces or the board border
+  public void addCurrentPieceToBoard() {
+    char[][] pieceArray = currentPiece.getPieceArray();
+    
+    for (int r = 0; r < pieceArray.length; r++) {
+      for (int c = 0; c < pieceArray[0].length; c++) {
+        if (pieceArray[r][c] != '-') {
+          board[currentRow+r][currentCol+c] = pieceArray[r][c];
+        }
+      }
+    }
+  }
+    
   
   // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
   // returns true if the piece has room to move down again
