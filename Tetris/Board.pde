@@ -13,7 +13,7 @@ public class Board {
   public Board(int boardWidth, int boardHeight) {
     board = makeBoard(boardWidth, boardHeight);
     
-    currentPiece = null;
+    currentPiece = createNewTPiece();
     heldPiece = null;
     nextPieces = new ArrayDeque<TPiece>(4);
     
@@ -36,6 +36,7 @@ public class Board {
     return newBoard;
   }
   
+  // display the board relative to the window
   public void display(float x, float y) {
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[0].length; c++) {
@@ -45,8 +46,9 @@ public class Board {
     }
   }
   
-  public void displayPiece(int row, int col) {
-    currentPiece.display(10 + SQUARE_SIZE*col, 10-SQUARE_SIZE + SQUARE_SIZE*row);
+  // display the current piece relative to the BOARD
+  public void displayCurrentPiece(int row, int col) {
+    currentPiece.display(boardX + SQUARE_SIZE*col, boardY + SQUARE_SIZE*row);
   }
   
 }
