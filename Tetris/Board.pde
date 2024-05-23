@@ -21,7 +21,12 @@ public class Board {
     dropX = 0;
     dropY = 0;
     
+    // test
     currentPiece = new TPiece('T');
+    board[5][5] = 'O';
+    board[5][6] = 'O';
+    board[6][5] = 'O';
+    board[6][6] = 'O';
   }
   
   public char[][] makeBoard(int boardWidth, int boardHeight) {
