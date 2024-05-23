@@ -26,6 +26,14 @@ public class TPiece {
     state = 0;
   }
   
+  public void rotateClockwise() {
+    state = (state + 1) % 4;
+  }
+  
+  public void rotateCounterClockwise() {
+    state = (state - 1 + 4) % 4;
+  }
+  
   private void setI() {
     orientations = new char[][][]
                   {
