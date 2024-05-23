@@ -10,9 +10,14 @@ color YELLOW = #ffee00;
 color PURPLE = #b700ff;
 color GRAY = color(140);
 
+
 Board board;
 float boardX, boardY;
-int rotateLeftKey, rotateRightKey, storePieceKey;
+
+int dropSpeed;
+int frame;
+
+Controller controller;
 
 void setup() {
   size(1000, 700);
@@ -21,19 +26,27 @@ void setup() {
   boardY = height/2 - SQUARE_SIZE*10;
   board = new Board(20, 10);
   
-  // capital char values are same as their keyCode values in keyPressed()
-  rotateLeftKey = 'Z'; // 90
-  rotateRightKey = 'X'; // 88
-  storePieceKey = 'C'; // 67
+  // starts at 1 second
+  dropSpeed = 60;
+  
+  controller = new Controller();
 }
 
 void draw() {
+  background(255);
   board.display(boardX, boardY);
-  board.displayCurrentPiece(-1, 0);
+  board.displayCurrentPiece();
+  
+  // moves the piece down 
+  if (frame == dropSpeed-1) {
+    board.tick();
+  }
+  
+  frame = (frame+1) % dropSpeed;
 }
 
 void keyPressed(){
-  println(keyCode);
+  controller.keyPressed();
 }
 
 public TPiece createNewTPiece() {
@@ -67,6 +80,10 @@ public TPiece createNewTPiece() {
     
     case 6:
       c = 'O';
+      break;
+      
+    default:
+      c = '-';
       break;
   }
   
