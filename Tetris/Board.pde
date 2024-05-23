@@ -4,16 +4,21 @@ public class Board {
   private char[][] board;
   
   private TPiece currentPiece;
+  private int currentRow, currentCol;
+  
   private TPiece heldPiece;
   private ArrayDeque<TPiece> nextPieces;
   
   private int dropSpeed;
   private int dropX, dropY;
   
-  public Board(int boardWidth, int boardHeight) {
-    board = makeBoard(boardWidth, boardHeight);
+  public Board(int numRows, int numCols) {
+    board = makeBoard(numRows, numCols);
     
     currentPiece = createNewTPiece();
+    currentRow = 0;
+    currentCol = numCols/2;
+    
     heldPiece = null;
     nextPieces = new ArrayDeque<TPiece>(4);
     
@@ -52,8 +57,20 @@ public class Board {
   }
   
   // display the current piece relative to the BOARD
-  public void displayCurrentPiece(int row, int col) {
-    currentPiece.display(boardX + SQUARE_SIZE*col, boardY + SQUARE_SIZE*row);
+  public void displayCurrentPiece() {
+    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*currentRow);
+  }
+  
+  // display the current piece's dropping location
+  public void displayShadow() {
+    // fix this later
+    
+  }
+   
+  // current piece goes down a tile
+  // can be called more/less often in order to increase/decrease difficulty
+  public void tick() {
+    currentRow++;
   }
   
 }

@@ -26,8 +26,9 @@ void setup() {
 }
 
 void draw() {
+  background(255);
   board.display(boardX, boardY);
-  board.displayCurrentPiece(0, 0);
+  board.displayCurrentPiece();
 }
 
 void keyPressed(){
@@ -65,6 +66,10 @@ public TPiece createNewTPiece() {
     
     case 6:
       c = 'O';
+      break;
+      
+    default:
+      c = '-';
       break;
   }
   
