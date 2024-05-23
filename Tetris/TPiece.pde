@@ -39,7 +39,7 @@ public class TPiece {
   public void display(float x, float y) {
     char[][] currOrientation = orientations[state];
     
-    fill(PURPLE);
+    fill(getColor(pieceType));
     
     for (int r = 0; r < currOrientation.length; r++) {
       for (int c = 0; c < currOrientation[0].length; c++) {

@@ -32,7 +32,6 @@ public class Board {
         newBoard[r][c] = '-';
       }
     }
-    
     return newBoard;
   }
   
@@ -40,7 +39,8 @@ public class Board {
   public void display(float x, float y) {
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[0].length; c++) {
-        fill(140);
+        fill(getColor(board[r][c]));
+        
         rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
       }
     }
