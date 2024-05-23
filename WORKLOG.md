@@ -7,10 +7,16 @@
 Set up the Board class's instance variables, constructor, and display(). 
 In the main Tetris file, added the keyCodes for the basic rotation and store-piece keys.
 
-### date y
+### 5/23
+
+Added a display function for the current TPiece in the Board class. 
+Changed the TPiece arrays to start from top left instead of bottom left(for simplicity, no effect on game).
+Added the Controller class to deal with all inputs, and made down arrow soft drop the current piece. 
+The piece also automatically moves down now, stops when it reaches the bottom, and adds its data to the board array.
+
+### 5/24
 
 info
-
 
 ## Lawrence Shek
 
