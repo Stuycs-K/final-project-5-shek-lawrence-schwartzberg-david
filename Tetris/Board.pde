@@ -103,7 +103,8 @@ public class Board {
     for (int r = 0; r < pieceArray.length; r++) {
       for (int c = 0; c < pieceArray[0].length; c++) {
         if (pieceArray[r][c] != '-') {
-          if (currentRow + r >= board.length) {
+          // +1 to check NEXT position
+          if ((currentRow + r) + 1 >= board.length) {
             return false;
           }
         }
