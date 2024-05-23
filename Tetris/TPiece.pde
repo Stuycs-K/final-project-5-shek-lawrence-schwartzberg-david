@@ -33,6 +33,10 @@ public class TPiece {
     return this.pieceType;
   }
   
+  public char[][] getPieceArray() {
+    return orientations[state];
+  }
+  
   public void rotateClockwise() {
     state = (state + 1) % 4;
   }

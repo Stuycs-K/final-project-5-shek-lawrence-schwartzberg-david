@@ -25,12 +25,12 @@ public class Board {
     dropX = 0;
     dropY = 0;
     
-    // test
+    //// test
     currentPiece = new TPiece('T');
-    board[5][5] = 'O';
-    board[5][6] = 'O';
-    board[6][5] = 'O';
-    board[6][6] = 'O';
+    //board[5][5] = 'O';
+    //board[5][6] = 'O';
+    //board[6][5] = 'O';
+    //board[6][6] = 'O';
   }
   
   public char[][] makeBoard(int boardWidth, int boardHeight) {
@@ -70,6 +70,35 @@ public class Board {
   // can be called more/less often in order to increase/decrease difficulty
   public void tick() {
     currentRow++;
+    
+    // test
+    println(pieceCanMove());
+  }
+  
+  // called when the current piece has reached the bottom of the board
+  public void changeToNextPiece() {
+    // function here to add the current piece's data into the board array
+    
+    currentPiece = nextPieces.pop();
+  }
+  
+  // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
+  // returns true if the piece has room to move down again
+  // returns false if the piece is either at the bottom of the board, or touching another piece
+  public boolean pieceCanMove() {
+    char[][] pieceArray = currentPiece.getPieceArray();
+    
+    for (int r = 0; r < pieceArray.length; r++) {
+      for (int c = 0; c < pieceArray[0].length; c++) {
+        if (pieceArray[r][c] != '-') {
+          if (currentRow + r >= board.length) {
+            return false;
+          }
+        }
+      }
+    }
+    
+    return true;
   }
   
 }
