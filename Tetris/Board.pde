@@ -15,11 +15,13 @@ public class Board {
     board = makeBoard(numRows, numCols);
     
     currentPiece = createNewTPiece();
-    currentRow = 0;
-    currentCol = numCols/2;
+    resetCurrentRowAndCol();
     
     heldPiece = null;
-    nextPieces = new ArrayDeque<TPiece>(4);
+    nextPieces = new ArrayDeque<TPiece>(3);
+    nextPieces.add(createNewTPiece());
+    nextPieces.add(createNewTPiece());
+    nextPieces.add(createNewTPiece());
     
     dropSpeed = 0;
     dropX = 0;
@@ -42,6 +44,11 @@ public class Board {
       }
     }
     return newBoard;
+  }
+  
+  public void resetCurrentRowAndCol() {
+    currentRow = 0;
+    currentCol = board[0].length/2;
   }
   
   // display the board relative to the window
@@ -69,17 +76,22 @@ public class Board {
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
   public void tick() {
-    currentRow++;
-    
-    // test
-    println(pieceCanMove());
+    if (this.pieceCanMove()) {
+      currentRow++;
+    } else {
+      println("PIECE CAN'T GO FURTHER");
+      changeToNextPiece();
+    }
   }
   
   // called when the current piece has reached the bottom of the board
   public void changeToNextPiece() {
     // function here to add the current piece's data into the board array
     
-    currentPiece = nextPieces.pop();
+    currentPiece = nextPieces.remove();
+    nextPieces.add(createNewTPiece());
+    
+    resetCurrentRowAndCol();
   }
   
   // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
