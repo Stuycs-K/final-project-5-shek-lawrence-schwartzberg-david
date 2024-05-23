@@ -10,8 +10,12 @@ color YELLOW = #ffee00;
 color PURPLE = #b700ff;
 color GRAY = color(140);
 
+
 Board board;
 float boardX, boardY;
+
+int dropSpeed;
+int frame;
 
 Controller controller;
 
@@ -22,6 +26,9 @@ void setup() {
   boardY = height/2 - SQUARE_SIZE*10;
   board = new Board(20, 10);
   
+  // starts at 1 second
+  dropSpeed = 60;
+  
   controller = new Controller();
 }
 
@@ -29,6 +36,13 @@ void draw() {
   background(255);
   board.display(boardX, boardY);
   board.displayCurrentPiece();
+  
+  // moves the piece down 
+  if (frame == dropSpeed-1) {
+    board.tick();
+  }
+  
+  frame = (frame+1) % dropSpeed;
 }
 
 void keyPressed(){

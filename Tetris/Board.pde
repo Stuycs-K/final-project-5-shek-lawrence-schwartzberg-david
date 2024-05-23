@@ -9,7 +9,6 @@ public class Board {
   private TPiece heldPiece;
   private ArrayDeque<TPiece> nextPieces;
   
-  private int dropSpeed;
   private int dropX, dropY;
   
   public Board(int numRows, int numCols) {
