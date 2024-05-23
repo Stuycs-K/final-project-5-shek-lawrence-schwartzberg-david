@@ -58,6 +58,21 @@ public class TPiece {
       }
     }
   }
+  
+  public int getWidth() {
+      char[][] currOrientation = orientations[state];
+      int width = 0;
+      // checking number of columns that have a square filled in
+      for (int c = 0; c < currOrientation[0].length; c++) {
+        for (int r = 0; r < currOrientation.length; r++) {
+          if (currOrientation[r][c] != '-') {
+            width++;
+            break;
+          }
+        }
+      }
+      return width;
+  }
     
   
   private void setI() {

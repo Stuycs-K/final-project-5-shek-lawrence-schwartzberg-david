@@ -29,14 +29,10 @@ public class Board {
     
     //// test
     currentPiece = new TPiece('T');
-    //board[5][5] = 'O';
-    //board[5][6] = 'O';
-    //board[6][5] = 'O';
-    //board[6][6] = 'O';
   }
   
-  private char[][] makeBoard(int boardWidth, int boardHeight) {
-    char[][] newBoard = new char[boardWidth][boardHeight];
+  private char[][] makeBoard(int boardHeight, int boardWidth) {
+    char[][] newBoard = new char[boardHeight][boardWidth];
     
     for (int r = 0; r < newBoard.length; r++) {
       for (int c = 0; c < newBoard[0].length; c++) {
@@ -127,6 +123,14 @@ public class Board {
     }
     
     return true;
+  }
+  
+  void movePieceLeft() {
+    currentCol = max(currentCol - 1, 0);
+  }
+  
+  void movePieceRight() {
+    currentCol = min(currentCol + 1, board[0].length - currentPiece.getWidth());
   }
   
 }
