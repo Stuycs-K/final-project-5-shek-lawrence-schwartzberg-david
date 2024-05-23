@@ -12,11 +12,12 @@ In the main Tetris file, added the keyCodes for the basic rotation and store-pie
 info
 
 
-## GROUP MEMBER 2
+## Lawrence Shek
 
-### date x
+### 5/22
 
-info
+Created constructor for TPiece, wrote all orientations for each piece. 
+Added methods to rotate pieces (does not check if rotation is valid yet).  
 
 ### date y
 
