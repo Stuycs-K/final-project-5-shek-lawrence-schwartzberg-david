@@ -22,9 +22,10 @@ info
 
 ### 5/22
 
-Created constructor for TPiece, wrote all orientations for each piece. 
-Added methods to rotate pieces (does not check if rotation is valid yet).  
+- Created constructor for TPiece, wrote all orientations for each piece. 
+- Added methods to rotate pieces (does not check if rotation is valid yet).  
 
-### date y
+### 5/23
 
-info
+- Added checking for collisions between pieces
+- Added control for moving pieces left/right in the board
