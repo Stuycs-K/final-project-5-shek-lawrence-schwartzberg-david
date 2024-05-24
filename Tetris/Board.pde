@@ -4,6 +4,7 @@ public class Board {
   private char[][] board;
   
   private TPiece currentPiece;
+  private int currentPieceHeight, currentPieceWidth;
   private int currentRow, currentCol;
   
   private TPiece heldPiece;
@@ -29,14 +30,12 @@ public class Board {
     
     //// test
     currentPiece = new TPiece('T');
-    //board[5][5] = 'O';
-    //board[5][6] = 'O';
-    //board[6][5] = 'O';
-    //board[6][6] = 'O';
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
   }
   
-  private char[][] makeBoard(int boardWidth, int boardHeight) {
-    char[][] newBoard = new char[boardWidth][boardHeight];
+  private char[][] makeBoard(int boardHeight, int boardWidth) {
+    char[][] newBoard = new char[boardHeight][boardWidth];
     
     for (int r = 0; r < newBoard.length; r++) {
       for (int c = 0; c < newBoard[0].length; c++) {
@@ -76,7 +75,7 @@ public class Board {
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
   public void tick() {
-    if (this.pieceCanMove()) {
+    if (this.pieceCanMoveDown()) {
       currentRow++;
     } else {
       println("PIECE CAN'T GO FURTHER");
@@ -90,6 +89,8 @@ public class Board {
     addCurrentPieceToBoard();
     
     currentPiece = nextPieces.remove();
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
     nextPieces.add(createNewTPiece());
     
     resetCurrentRowAndCol();
@@ -112,21 +113,46 @@ public class Board {
   // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
   // returns true if the piece has room to move down again
   // returns false if the piece is either at the bottom of the board, or touching another piece
-  public boolean pieceCanMove() {
+  public boolean pieceCanMoveDown() {
     char[][] pieceArray = currentPiece.getPieceArray();
-    
+    if (currentRow + currentPieceHeight >= board.length) {
+      return false;
+    }
     for (int r = 0; r < pieceArray.length; r++) {
       for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-') {
-          // +1 to check NEXT position
-          if ((currentRow + r) + 1 >= board.length) {
+        if (pieceArray[r][c] != '-' && currentRow + currentPieceHeight < board.length && collidesWithPiece(currentRow + 1, currentCol)) {
             return false;
-          }
         }
       }
     }
     
     return true;
+  }
+  
+  private boolean collidesWithPiece(int row, int col) {
+    char[][] pieceArray = currentPiece.getPieceArray();
+    for (int r = 0; r < pieceArray.length; r++) {
+      for (int c = 0; c < pieceArray[0].length; c++) {
+        if (pieceArray[r][c] != '-' && board[row + r][col + c] != '-') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  public void movePieceLeft() {
+    int nextCol = max(currentCol - 1, 0);
+    if (!collidesWithPiece(currentRow, nextCol)) {
+      currentCol = nextCol;
+    }
+  }
+  
+  public void movePieceRight() {
+    int nextCol = min(currentCol + 1, board[0].length - currentPieceWidth);
+    if (!collidesWithPiece(currentRow, nextCol)) {
+      currentCol = nextCol;
+    }
   }
   
 }
