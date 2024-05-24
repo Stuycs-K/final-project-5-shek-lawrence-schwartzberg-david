@@ -17,6 +17,12 @@ public class Controller {
     if (keyCode == downArrow) {
       board.tick();
     }
+    if (keyCode == LEFT) {
+      board.movePieceLeft();
+    }
+    if (keyCode == RIGHT) {
+      board.movePieceRight();
+    }
   }
   
 }
