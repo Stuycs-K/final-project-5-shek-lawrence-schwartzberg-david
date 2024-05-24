@@ -23,6 +23,12 @@ public class Controller {
     if (keyCode == RIGHT) {
       board.movePieceRight();
     }
+    if (keyCode == rotateLeftKey) {
+      board.rotatePieceLeft();
+    }
+    if (keyCode == rotateRightKey) {
+      board.rotatePieceRight();
+    }
   }
   
 }

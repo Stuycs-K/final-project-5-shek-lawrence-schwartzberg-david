@@ -176,4 +176,18 @@ public class Board {
     }
   }
   
+  public void rotatePieceLeft() {
+    currentPiece.rotateLeft();
+    if (collidesWithPiece(currentRow, currentCol)) {
+      currentPiece.rotateRight();
+    }
+  }
+  
+  public void rotatePieceRight() {
+    currentPiece.rotateRight();
+    if (collidesWithPiece(currentRow, currentCol)) {
+      currentPiece.rotateLeft();
+    }
+  }
+  
 }
