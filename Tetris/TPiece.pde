@@ -29,8 +29,19 @@ public class TPiece {
     pieceType = c;
   }
   
+  public TPiece clone() {
+    TPiece newPiece = new TPiece(this.pieceType);
+    newPiece.setState(this.state);
+    
+    return newPiece;
+  }
+  
   public char getChar() {
     return this.pieceType;
+  }
+  
+  private void setState(int newState) {
+    this.state = newState;
   }
   
   public char[][] getPieceArray() {
@@ -49,6 +60,21 @@ public class TPiece {
     char[][] currOrientation = orientations[state];
     
     fill(getColor(pieceType));
+    
+    for (int r = 0; r < currOrientation.length; r++) {
+      for (int c = 0; c < currOrientation[0].length; c++) {
+        if (currOrientation[r][c] != '-') {
+          rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
+        }
+      }
+    }
+  }
+  
+  public void display(float x, float y, color fillColor, color strokeColor) {
+    char[][] currOrientation = orientations[state];
+    
+    fill(fillColor);
+    stroke(strokeColor);
     
     for (int r = 0; r < currOrientation.length; r++) {
       for (int c = 0; c < currOrientation[0].length; c++) {

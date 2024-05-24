@@ -1,6 +1,7 @@
 //import java.util.*;
 
 int SQUARE_SIZE = 30;
+
 color CYAN = #00ffee;
 color RED = #ff1500;
 color BLUE = #0040ff;
@@ -8,7 +9,9 @@ color GREEN = #10c443;
 color ORANGE = #ff8c00;
 color YELLOW = #ffee00;
 color PURPLE = #b700ff;
-color GRAY = color(140);
+
+color GRAY = #8c8c8c;
+color BLACK = #000000;
 
 
 Board board;
@@ -36,6 +39,7 @@ void draw() {
   background(255);
   board.display(boardX, boardY);
   board.displayCurrentPiece();
+  board.displayShadow();
   
   // moves the piece down 
   if (frame == dropSpeed-1) {

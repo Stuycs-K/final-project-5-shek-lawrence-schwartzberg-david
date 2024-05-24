@@ -4,18 +4,22 @@ public class Board {
   private char[][] board;
   
   private TPiece currentPiece;
+  
   private int currentPieceHeight, currentPieceWidth;
   private int currentRow, currentCol;
   
   private TPiece heldPiece;
   private ArrayDeque<TPiece> nextPieces;
   
-  private int dropX, dropY;
+  private int shadowRow;
   
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
     
     currentPiece = createNewTPiece();
+    
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
     resetCurrentRowAndCol();
     
     heldPiece = null;
@@ -24,14 +28,13 @@ public class Board {
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
     
-    dropSpeed = 0;
-    dropX = 0;
-    dropY = 0;
-    
-    //// test
-    currentPiece = new TPiece('T');
     currentPieceHeight = currentPiece.height();
     currentPieceWidth = currentPiece.width();
+        
+    dropSpeed = 0;
+    shadowRow = board.length - currentPieceHeight;
+    updateShadow();
+
   }
   
   private char[][] makeBoard(int boardHeight, int boardWidth) {
@@ -52,6 +55,7 @@ public class Board {
   
   // display the board relative to the window
   public void display(float x, float y) {
+    stroke(BLACK);
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[0].length; c++) {
         fill(getColor(board[r][c]));
@@ -68,26 +72,28 @@ public class Board {
   
   // display the current piece's dropping location
   public void displayShadow() {
-    // fix this later
+    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, GRAY, getColor(currentPiece.getChar()));
     
   }
    
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
   public void softDrop() {
-    if (this.pieceCanMoveDown()) {
+    if (pieceCanMoveDown(currentRow, currentCol)) {
       currentRow++;
     } else {
       changeToNextPiece();
     }
   }
   
-  public void hardDrop() {}
-  
+  public void hardDrop() {
+    while (pieceCanMoveDown(currentRow, currentCol)) {
+      softDrop();
+    }
+  }
   
   // called when the current piece has reached the bottom of the board
   private void changeToNextPiece() {
-    // function here to add the current piece's data into the board array
     addCurrentPieceToBoard();
     
     currentPiece = nextPieces.remove();
@@ -96,6 +102,7 @@ public class Board {
     nextPieces.add(createNewTPiece());
     
     resetCurrentRowAndCol();
+    updateShadow();
   }
   
   // assumes that the piece does not overlap with any other pieces or the board border
@@ -114,14 +121,15 @@ public class Board {
   // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
   // returns true if the piece has room to move down again
   // returns false if the piece is either at the bottom of the board, or touching another piece
-  public boolean pieceCanMoveDown() {
-    char[][] pieceArray = currentPiece.getPieceArray();
-    if (currentRow + currentPieceHeight >= board.length) {
+  public boolean pieceCanMoveDown(int row, int col) {
+    if (row + currentPieceHeight >= board.length) {
       return false;
     }
+    
+    char[][] pieceArray = currentPiece.getPieceArray();
     for (int r = 0; r < pieceArray.length; r++) {
       for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-' && currentRow + currentPieceHeight < board.length && collidesWithPiece(currentRow + 1, currentCol)) {
+        if (pieceArray[r][c] != '-' && row + currentPieceHeight < board.length && collidesWithPiece(row + 1, col)) {
             return false;
         }
       }
@@ -134,7 +142,7 @@ public class Board {
     char[][] pieceArray = currentPiece.getPieceArray();
     for (int r = 0; r < pieceArray.length; r++) {
       for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-' && board[row + r][col + c] != '-') {
+        if (pieceArray[r][c] != '-' && (row+r < board.length) && (col+c < board[0].length) && board[row + r][col + c] != '-') {
           return true;
         }
       }
@@ -146,6 +154,7 @@ public class Board {
     int nextCol = max(currentCol - 1, 0);
     if (!collidesWithPiece(currentRow, nextCol)) {
       currentCol = nextCol;
+      updateShadow();
     }
   }
   
@@ -153,7 +162,19 @@ public class Board {
     int nextCol = min(currentCol + 1, board[0].length - currentPieceWidth);
     if (!collidesWithPiece(currentRow, nextCol)) {
       currentCol = nextCol;
+      updateShadow();
     }
   }
   
+  // called whenever a piece is moved
+  private void updateShadow() {
+    int newShadowRow = board.length - currentPieceHeight;
+    
+    while (!pieceCanMoveDown(newShadowRow-1, currentCol)){
+      newShadowRow--;
+    }
+    
+    shadowRow = newShadowRow;
+  }
+
 }
