@@ -74,18 +74,16 @@ public class Board {
    
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
-  public void tick() {
+  public void softDrop() {
     if (this.pieceCanMoveDown()) {
       currentRow++;
     } else {
-      println("PIECE CAN'T GO FURTHER");
       changeToNextPiece();
     }
   }
   
-  public void hardDrop() {
-    // do stuff here
-  }
+  public void hardDrop() {}
+  
   
   // called when the current piece has reached the bottom of the board
   private void changeToNextPiece() {

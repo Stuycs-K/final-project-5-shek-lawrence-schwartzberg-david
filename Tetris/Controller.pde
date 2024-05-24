@@ -55,7 +55,7 @@ public class Controller {
     }
     
     if (keyPressedArray[2]) {
-      board.tick();
+      board.softDrop();
     }
     
     if (keyPressedArray[3]) {
