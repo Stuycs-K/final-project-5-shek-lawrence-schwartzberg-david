@@ -43,6 +43,7 @@ void draw() {
   }
   
   frame = (frame+1) % dropSpeed;
+  board.clearLines();
 }
 
 void keyPressed(){

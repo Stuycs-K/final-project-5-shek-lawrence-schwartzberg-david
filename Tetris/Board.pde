@@ -155,4 +155,25 @@ public class Board {
     }
   }
   
+  public void clearLines() {
+    for (int r = board.length - 1; r >= 0; r--)  {
+      boolean fullLine = true;
+      for (int c = 0; c < board[0].length; c++) {
+        if (board[r][c] == '-') {
+          fullLine = false;
+          break;
+        }
+      }
+      if (fullLine) {
+        shiftDown(r);
+      }
+    }
+  }
+  
+  private void shiftDown(int bottom) {
+    for (int r = bottom; r > 0; r--) {
+      board[r] = board[r - 1];
+    }
+  }
+  
 }
