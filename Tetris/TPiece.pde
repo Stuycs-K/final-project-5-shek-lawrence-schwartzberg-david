@@ -59,19 +59,32 @@ public class TPiece {
     }
   }
   
-  public int getWidth() {
+  public int width() {
       char[][] currOrientation = orientations[state];
-      int width = 0;
-      // checking number of columns that have a square filled in
+      int totalWidth = 0;
       for (int c = 0; c < currOrientation[0].length; c++) {
         for (int r = 0; r < currOrientation.length; r++) {
           if (currOrientation[r][c] != '-') {
-            width++;
+            totalWidth++;
             break;
           }
         }
       }
-      return width;
+      return totalWidth;
+  }
+  
+  public int height() {
+      char[][] currOrientation = orientations[state];
+      int totalHeight = 0;
+      for (int r = 0; r < currOrientation.length; r++) {
+        for (int c = 0; c < currOrientation[0].length; c++) {
+          if (currOrientation[r][c] != '-') {
+            totalHeight++;
+            break;
+          }
+        }
+      }
+      return totalHeight;
   }
     
   
@@ -259,27 +272,27 @@ public class TPiece {
     orientations = new char[][][]
                   {
                    {
+                    {'O', 'O', '-', '-'}, 
+                    {'O', 'O', '-', '-'},
                     {'-', '-', '-', '-'}, 
-                    {'-', 'O', 'O', '-'},
-                    {'-', 'O', 'O', '-'}, 
                     {'-', '-', '-', '-'}
                    },
                    {
+                    {'O', 'O', '-', '-'}, 
+                    {'O', 'O', '-', '-'},
                     {'-', '-', '-', '-'}, 
-                    {'-', 'O', 'O', '-'},
-                    {'-', 'O', 'O', '-'}, 
                     {'-', '-', '-', '-'}
                    },
                    {
+                    {'O', 'O', '-', '-'}, 
+                    {'O', 'O', '-', '-'},
                     {'-', '-', '-', '-'}, 
-                    {'-', 'O', 'O', '-'},
-                    {'-', 'O', 'O', '-'}, 
                     {'-', '-', '-', '-'}
                    },
                    {
+                    {'O', 'O', '-', '-'}, 
+                    {'O', 'O', '-', '-'},
                     {'-', '-', '-', '-'}, 
-                    {'-', 'O', 'O', '-'},
-                    {'-', 'O', 'O', '-'}, 
                     {'-', '-', '-', '-'}
                    }
                  };

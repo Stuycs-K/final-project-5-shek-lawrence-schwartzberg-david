@@ -4,6 +4,7 @@ public class Board {
   private char[][] board;
   
   private TPiece currentPiece;
+  private int currentPieceHeight, currentPieceWidth;
   private int currentRow, currentCol;
   
   private TPiece heldPiece;
@@ -29,6 +30,8 @@ public class Board {
     
     //// test
     currentPiece = new TPiece('T');
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
   }
   
   private char[][] makeBoard(int boardHeight, int boardWidth) {
@@ -86,6 +89,8 @@ public class Board {
     addCurrentPieceToBoard();
     
     currentPiece = nextPieces.remove();
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
     nextPieces.add(createNewTPiece());
     
     resetCurrentRowAndCol();
@@ -110,14 +115,13 @@ public class Board {
   // returns false if the piece is either at the bottom of the board, or touching another piece
   public boolean pieceCanMove() {
     char[][] pieceArray = currentPiece.getPieceArray();
-    
+    if (currentRow + currentPieceHeight >= board.length) {
+      return false;
+    }
     for (int r = 0; r < pieceArray.length; r++) {
       for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-') {
-          // +1 to check NEXT position
-          if ((currentRow + r) + 1 >= board.length) {
+        if (pieceArray[r][c] != '-' && currentRow + currentPieceHeight < board.length && collidesWithPiece(currentRow + 1, currentCol)) {
             return false;
-          }
         }
       }
     }
@@ -125,12 +129,24 @@ public class Board {
     return true;
   }
   
-  void movePieceLeft() {
+  private boolean collidesWithPiece(int row, int col) {
+    char[][] pieceArray = currentPiece.getPieceArray();
+    for (int r = 0; r < pieceArray.length; r++) {
+      for (int c = 0; c < pieceArray[0].length; c++) {
+        if (pieceArray[r][c] != '-' && board[row + r][col + c] != '-') {
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+  
+  public void movePieceLeft() {
     currentCol = max(currentCol - 1, 0);
   }
   
-  void movePieceRight() {
-    currentCol = min(currentCol + 1, board[0].length - currentPiece.getWidth());
+  public void movePieceRight() {
+    currentCol = min(currentCol + 1, board[0].length - currentPieceWidth);
   }
   
 }
