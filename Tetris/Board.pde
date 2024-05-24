@@ -75,7 +75,7 @@ public class Board {
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
   public void tick() {
-    if (this.pieceCanMove()) {
+    if (this.pieceCanMoveDown()) {
       currentRow++;
     } else {
       println("PIECE CAN'T GO FURTHER");
@@ -113,7 +113,7 @@ public class Board {
   // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
   // returns true if the piece has room to move down again
   // returns false if the piece is either at the bottom of the board, or touching another piece
-  public boolean pieceCanMove() {
+  public boolean pieceCanMoveDown() {
     char[][] pieceArray = currentPiece.getPieceArray();
     if (currentRow + currentPieceHeight >= board.length) {
       return false;
@@ -142,11 +142,17 @@ public class Board {
   }
   
   public void movePieceLeft() {
-    currentCol = max(currentCol - 1, 0);
+    int nextCol = max(currentCol - 1, 0);
+    if (!collidesWithPiece(currentRow, nextCol)) {
+      currentCol = nextCol;
+    }
   }
   
   public void movePieceRight() {
-    currentCol = min(currentCol + 1, board[0].length - currentPieceWidth);
+    int nextCol = min(currentCol + 1, board[0].length - currentPieceWidth);
+    if (!collidesWithPiece(currentRow, nextCol)) {
+      currentCol = nextCol;
+    }
   }
   
 }
