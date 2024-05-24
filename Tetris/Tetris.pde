@@ -43,10 +43,16 @@ void draw() {
   }
   
   frame = (frame+1) % dropSpeed;
+  
+  controller.pressKeys();
 }
 
 void keyPressed(){
-  controller.keyPressed();
+  controller.press(keyCode, true);
+}
+
+void keyReleased(){
+  controller.press(keyCode, false);
 }
 
 public TPiece createNewTPiece() {
