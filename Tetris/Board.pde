@@ -83,6 +83,10 @@ public class Board {
     }
   }
   
+  public void hardDrop() {
+    // do stuff here
+  }
+  
   // called when the current piece has reached the bottom of the board
   private void changeToNextPiece() {
     // function here to add the current piece's data into the board array
@@ -108,7 +112,6 @@ public class Board {
       }
     }
   }
-    
   
   // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
   // returns true if the piece has room to move down again
