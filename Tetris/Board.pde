@@ -166,6 +166,28 @@ public class Board {
     }
   }
   
+  // do later
+  private boolean pieceCanBeRotatedLeft() {
+    return true;
+  }
+  
+  public void rotatePieceLeft() {
+    if (pieceCanBeRotatedLeft()) {
+      currentPiece.rotateLeft();
+    }
+  }
+  
+  // do later
+  private boolean pieceCanBeRotatedRight() {
+    return true;
+  }
+  
+  public void rotatePieceRight() {
+    if (pieceCanBeRotatedRight()) {
+      currentPiece.rotateRight();
+    }
+  }
+  
   // called whenever a piece is moved
   private void updateShadow() {
     int newShadowRow = board.length - currentPieceHeight;

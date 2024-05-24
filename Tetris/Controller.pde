@@ -62,13 +62,13 @@ public class Controller {
       board.hardDrop();
     }
     
-    //if (keyPressedArray[4]) {
-    //  board.rotatePieceLeft();
-    //}
+    if (keyPressedArray[4]) {
+      board.rotatePieceLeft();
+    }
     
-    //if (keyPressedArray[5]) {
-    //  board.rotatePieceRight();
-    //}
+    if (keyPressedArray[5]) {
+      board.rotatePieceRight();
+    }
    
     
     

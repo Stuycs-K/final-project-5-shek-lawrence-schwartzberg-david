@@ -48,11 +48,11 @@ public class TPiece {
     return orientations[state];
   }
   
-  public void rotateClockwise() {
+  public void rotateRight() {
     state = (state + 1) % 4;
   }
   
-  public void rotateCounterClockwise() {
+  public void rotateLeft() {
     state = (state - 1 + 4) % 4;
   }
   
