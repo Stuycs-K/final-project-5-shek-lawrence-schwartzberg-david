@@ -166,25 +166,38 @@ public class Board {
     }
   }
   
-  // do later
-  private boolean pieceCanBeRotatedLeft() {
-    return true;
-  }
-  
-  public void rotatePieceLeft() {
-    if (pieceCanBeRotatedLeft()) {
-      currentPiece.rotateLeft();
+  public void clearLines() {
+    for (int r = board.length - 1; r >= 0; r--)  {
+      boolean fullLine = true;
+      for (int c = 0; c < board[0].length; c++) {
+        if (board[r][c] == '-') {
+          fullLine = false;
+          break;
+        }
+      }
+      if (fullLine) {
+        shiftDown(r);
+      }
     }
   }
   
-  // do later
-  private boolean pieceCanBeRotatedRight() {
-    return true;
+  private void shiftDown(int bottom) {
+    for (int r = bottom; r > 0; r--) {
+      board[r] = board[r - 1];
+    }
   }
   
-  public void rotatePieceRight() {
-    if (pieceCanBeRotatedRight()) {
+  public void rotatePieceLeft() {
+    currentPiece.rotateLeft();
+    if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateRight();
+    }
+  }
+
+  public void rotatePieceRight() {
+    currentPiece.rotateRight();
+    if (collidesWithPiece(currentRow, currentCol)) {
+      currentPiece.rotateLeft();
     }
   }
   

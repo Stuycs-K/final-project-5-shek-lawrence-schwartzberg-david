@@ -47,8 +47,12 @@ void draw() {
   }
   
   frame = (frame+1) % dropSpeed;
+<<<<<<< HEAD
   
   controller.pressKeys();
+=======
+  board.clearLines();
+>>>>>>> 6aea3caa2652014d536979f37335da6b807cfa35
 }
 
 void keyPressed(){

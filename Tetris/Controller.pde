@@ -53,6 +53,7 @@ public class Controller {
     if (keyPressedArray[1]) {
       board.movePieceRight();
     }
+<<<<<<< HEAD
     
     if (keyPressedArray[2]) {
       board.softDrop();
@@ -72,6 +73,14 @@ public class Controller {
    
     
     
+=======
+    if (keyCode == rotateLeftKey) {
+      board.rotatePieceLeft();
+    }
+    if (keyCode == rotateRightKey) {
+      board.rotatePieceRight();
+    }
+>>>>>>> 6aea3caa2652014d536979f37335da6b807cfa35
   }
   
 }
