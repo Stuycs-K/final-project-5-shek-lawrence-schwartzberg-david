@@ -42,8 +42,8 @@ void setup() {
 void draw() {
   background(255);
   board.display(boardX, boardY);
-  board.displayCurrentPiece();
   board.displayShadow();
+  board.displayCurrentPiece();
   
   // moves the piece down 
   if (frame == dropSpeed-1) {

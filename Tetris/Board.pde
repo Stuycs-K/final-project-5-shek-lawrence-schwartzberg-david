@@ -61,12 +61,11 @@ public class Board {
         rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
       }
     }
-    // testing
-    //println(currentRow + " " + currentPieceHeight);
   }
   
   // display the current piece relative to the BOARD
   public void displayCurrentPiece() {
+    stroke(BLACK);
     currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*currentRow);
   }
   
@@ -223,12 +222,9 @@ public class Board {
     currentPieceRow = currentPiece.getTop();
     currentPieceCol = currentPiece.getLeft();
     
-    println("top: " + currentPieceRow + " " + " left " + currentPieceCol);
-
     currentRow += currentPieceRow;
     currentCol += currentPieceCol;
     
-    println("row " + currentRow + " col " + currentCol); 
   }
 
 }
