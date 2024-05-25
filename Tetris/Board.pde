@@ -28,8 +28,7 @@ public class Board {
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
     
-    currentPieceHeight = currentPiece.height();
-    currentPieceWidth = currentPiece.width();
+    updatePiece();
         
     dropSpeed = 0;
     shadowRow = board.length - currentPieceHeight;
@@ -63,6 +62,8 @@ public class Board {
         rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
       }
     }
+    // testing
+    println(currentCol);
   }
   
   // display the current piece relative to the BOARD
@@ -151,17 +152,15 @@ public class Board {
   }
   
   public void movePieceLeft() {
-    int nextCol = max(currentCol - 1, 0);
-    if (!collidesWithPiece(currentRow, nextCol)) {
-      currentCol = nextCol;
+    if (currentCol > 0 && !collidesWithPiece(currentRow, currentCol - 1)) {
+      currentCol--;
       updateShadow();
     }
   }
   
   public void movePieceRight() {
-    int nextCol = min(currentCol + 1, board[0].length - currentPieceWidth);
-    if (!collidesWithPiece(currentRow, nextCol)) {
-      currentCol = nextCol;
+    if (currentCol + currentPieceWidth < board[0].length && !collidesWithPiece(currentRow, currentCol + 1)) {
+      currentCol++;
       updateShadow();
     }
   }
@@ -189,17 +188,24 @@ public class Board {
   
   public void rotatePieceLeft() {
     currentPiece.rotateLeft();
+    updatePiece();
     if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateRight();
+      updatePiece();
+      println("cannot rotate left");
     }
   }
 
   public void rotatePieceRight() {
     currentPiece.rotateRight();
+    updatePiece();
     if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateLeft();
-    }
+      updatePiece();
+      println("cannot rotate right");
+    }    
   }
+  
   
   // called whenever a piece is moved
   private void updateShadow() {
@@ -210,6 +216,14 @@ public class Board {
     }
     
     shadowRow = newShadowRow;
+  }
+  
+  private void updatePiece() {
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
+    
+    currentRow += currentPiece.getTop();
+    currentCol += currentPiece.getLeft();
   }
 
 }
