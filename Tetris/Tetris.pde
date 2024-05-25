@@ -47,7 +47,7 @@ void draw() {
   
   // moves the piece down 
   if (frame == dropSpeed-1) {
-    //board.softDrop();
+    board.softDrop();
   }
   
   frame = (frame+1) % dropSpeed;

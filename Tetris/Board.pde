@@ -186,9 +186,11 @@ public class Board {
   public void rotatePieceLeft() {
     currentPiece.rotateLeft();
     updatePiece();
+    updateShadow();
     if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateRight();
       updatePiece();
+      updateShadow();
       println("cannot rotate left");
     }
   }
@@ -196,20 +198,22 @@ public class Board {
   public void rotatePieceRight() {
     currentPiece.rotateRight();
     updatePiece();
+    updateShadow();
     if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateLeft();
       updatePiece();
+      updateShadow();
       println("cannot rotate right");
     }    
   }
   
   
-  // called whenever a piece is moved
+  // called whenever a piece is moved or rotated
   private void updateShadow() {
-    int newShadowRow = board.length - currentPieceHeight;
+    int newShadowRow = currentRow;
     
-    while (!pieceCanMoveDown(newShadowRow-1, currentCol)){
-      newShadowRow--;
+    while (pieceCanMoveDown(newShadowRow, currentCol)){
+      newShadowRow++;
     }
     
     shadowRow = newShadowRow;
