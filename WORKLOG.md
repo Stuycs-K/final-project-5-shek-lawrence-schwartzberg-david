@@ -16,7 +16,9 @@ The piece also automatically moves down now, stops when it reaches the bottom, a
 
 ### 5/24
 
-info
+Added smooth keyboard input(using booleans).
+Added hardDrop. 
+Added display for shadows.
 
 ## Lawrence Shek
 
