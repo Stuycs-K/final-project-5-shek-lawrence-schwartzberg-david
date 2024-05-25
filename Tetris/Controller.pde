@@ -68,10 +68,12 @@ public class Controller {
     
     if (keyPressedArray[4]) {
       board.rotatePieceLeft();
+      countdown += delay;
     }
     
     if (keyPressedArray[5]) {
       board.rotatePieceRight();
+      countdown += delay;
     }
   }
   

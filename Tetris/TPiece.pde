@@ -120,7 +120,7 @@ public class TPiece {
     char[][] currOrientation = orientations[state];
     for (int r = 0; r < currOrientation.length; r++) {
       for (int c = 0; c < currOrientation[0].length; c++) {
-        if (currOrientation[r][c] != '0') {
+        if (currOrientation[r][c] != '-') {
           return r;
         }
       }
@@ -145,7 +145,10 @@ public class TPiece {
     orientations = new char[][][]
                   {
                    {
+                    {'-', '-', '-', '-'},
                     {'I', 'I', 'I', 'I'},
+                    {'-', '-', '-', '-'},
+                    {'-', '-', '-', '-'}  
                    },
                    {
                     {'-', '-', 'I', '-'}, 
@@ -154,7 +157,10 @@ public class TPiece {
                     {'-', '-', 'I', '-'}
                    },
                    {
+                    {'-', '-', '-', '-'},
+                    {'-', '-', '-', '-'},
                     {'I', 'I', 'I', 'I'},
+                    {'-', '-', '-', '-'}
                    },
                    {
                     {'-', 'I', '-', '-'}, 

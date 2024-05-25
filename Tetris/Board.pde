@@ -61,6 +61,8 @@ public class Board {
         rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
       }
     }
+    // testing
+    //println(currentRow + " " + currentPieceHeight);
   }
   
   // display the current piece relative to the BOARD
@@ -108,7 +110,7 @@ public class Board {
     
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
-        if (pieceArray[r][c] != '-') {
+        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
           board[currentRow+r][currentCol+c] = pieceArray[currentPieceRow + r][currentPieceCol + c];
         }
       }
@@ -126,7 +128,7 @@ public class Board {
     char[][] pieceArray = currentPiece.getPieceArray();
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
-        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-' && row + currentPieceHeight < board.length && collidesWithPiece(row + 1, col)) {
+        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-' && collidesWithPiece(row + 1, col)) {
             return false;
         }
       }
@@ -139,7 +141,7 @@ public class Board {
     char[][] pieceArray = currentPiece.getPieceArray();
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
-        if (pieceArray[currentPieceRow + r][currentPieceCol + col + c] != '-' && (currentPieceRow + row+r < board.length) && (currentPieceCol + col+c < board[0].length) && board[row + r][col + c] != '-') {
+        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-' && (row+r < board.length) && (col+c < board[0].length) && board[row + r][col + c] != '-') {
           return true;
         }
       }
@@ -218,9 +220,15 @@ public class Board {
     currentPieceHeight = currentPiece.height();
     currentPieceWidth = currentPiece.width();
     
+    currentPieceRow = currentPiece.getTop();
+    currentPieceCol = currentPiece.getLeft();
     
-    currentRow += currentPiece.getTop();
-    currentCol += currentPiece.getLeft();
+    println("top: " + currentPieceRow + " " + " left " + currentPieceCol);
+
+    currentRow += currentPieceRow;
+    currentCol += currentPieceCol;
+    
+    println("row " + currentRow + " col " + currentCol); 
   }
 
 }
