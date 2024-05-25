@@ -20,6 +20,9 @@ float boardX, boardY;
 int dropSpeed;
 int frame;
 
+int countdown;
+int delay = 3;
+
 Controller controller;
 
 void setup() {
@@ -33,13 +36,14 @@ void setup() {
   dropSpeed = 60;
   
   controller = new Controller();
+  countdown = 0;
 }
 
 void draw() {
   background(255);
   board.display(boardX, boardY);
-  board.displayCurrentPiece();
   board.displayShadow();
+  board.displayCurrentPiece();
   
   // moves the piece down 
   if (frame == dropSpeed-1) {
@@ -49,6 +53,10 @@ void draw() {
   frame = (frame+1) % dropSpeed;
   
   controller.pressKeys();
+  board.clearLines();
+  if (countdown > 0) {
+    countdown--;
+  }
 }
 
 void keyPressed(){

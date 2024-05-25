@@ -6,6 +6,7 @@ public class Board {
   private TPiece currentPiece;
   
   private int currentPieceHeight, currentPieceWidth;
+  private int currentPieceRow, currentPieceCol;
   private int currentRow, currentCol;
   
   private TPiece heldPiece;
@@ -18,8 +19,6 @@ public class Board {
     
     currentPiece = createNewTPiece();
     
-    currentPieceHeight = currentPiece.height();
-    currentPieceWidth = currentPiece.width();
     resetCurrentRowAndCol();
     
     heldPiece = null;
@@ -28,8 +27,7 @@ public class Board {
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
     
-    currentPieceHeight = currentPiece.height();
-    currentPieceWidth = currentPiece.width();
+    updatePiece();
         
     dropSpeed = 0;
     shadowRow = board.length - currentPieceHeight;
@@ -67,6 +65,7 @@ public class Board {
   
   // display the current piece relative to the BOARD
   public void displayCurrentPiece() {
+    stroke(BLACK);
     currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*currentRow);
   }
   
@@ -97,11 +96,10 @@ public class Board {
     addCurrentPieceToBoard();
     
     currentPiece = nextPieces.remove();
-    currentPieceHeight = currentPiece.height();
-    currentPieceWidth = currentPiece.width();
     nextPieces.add(createNewTPiece());
     
     resetCurrentRowAndCol();
+    updatePiece();
     updateShadow();
   }
   
@@ -109,10 +107,10 @@ public class Board {
   public void addCurrentPieceToBoard() {
     char[][] pieceArray = currentPiece.getPieceArray();
     
-    for (int r = 0; r < pieceArray.length; r++) {
-      for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-') {
-          board[currentRow+r][currentCol+c] = pieceArray[r][c];
+    for (int r = 0; r < currentPieceHeight; r++) {
+      for (int c = 0; c < currentPieceWidth; c++) {
+        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
+          board[currentRow+r][currentCol+c] = pieceArray[currentPieceRow + r][currentPieceCol + c];
         }
       }
     }
@@ -127,9 +125,9 @@ public class Board {
     }
     
     char[][] pieceArray = currentPiece.getPieceArray();
-    for (int r = 0; r < pieceArray.length; r++) {
-      for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-' && row + currentPieceHeight < board.length && collidesWithPiece(row + 1, col)) {
+    for (int r = 0; r < currentPieceHeight; r++) {
+      for (int c = 0; c < currentPieceWidth; c++) {
+        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-' && collidesWithPiece(row + 1, col)) {
             return false;
         }
       }
@@ -140,9 +138,9 @@ public class Board {
   
   private boolean collidesWithPiece(int row, int col) {
     char[][] pieceArray = currentPiece.getPieceArray();
-    for (int r = 0; r < pieceArray.length; r++) {
-      for (int c = 0; c < pieceArray[0].length; c++) {
-        if (pieceArray[r][c] != '-' && (row+r < board.length) && (col+c < board[0].length) && board[row + r][col + c] != '-') {
+    for (int r = 0; r < currentPieceHeight; r++) {
+      for (int c = 0; c < currentPieceWidth; c++) {
+        if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-' && (row+r < board.length) && (col+c < board[0].length) && board[row + r][col + c] != '-') {
           return true;
         }
       }
@@ -151,52 +149,86 @@ public class Board {
   }
   
   public void movePieceLeft() {
-    int nextCol = max(currentCol - 1, 0);
-    if (!collidesWithPiece(currentRow, nextCol)) {
-      currentCol = nextCol;
+    if (currentCol > 0 && !collidesWithPiece(currentRow, currentCol - 1)) {
+      currentCol--;
       updateShadow();
     }
   }
   
   public void movePieceRight() {
-    int nextCol = min(currentCol + 1, board[0].length - currentPieceWidth);
-    if (!collidesWithPiece(currentRow, nextCol)) {
-      currentCol = nextCol;
+    if (currentCol + currentPieceWidth < board[0].length && !collidesWithPiece(currentRow, currentCol + 1)) {
+      currentCol++;
       updateShadow();
     }
   }
   
-  // do later
-  private boolean pieceCanBeRotatedLeft() {
-    return true;
+  public void clearLines() {
+    for (int r = board.length - 1; r >= 0; r--)  {
+      boolean fullLine = true;
+      for (int c = 0; c < board[0].length; c++) {
+        if (board[r][c] == '-') {
+          fullLine = false;
+          break;
+        }
+      }
+      if (fullLine) {
+        shiftDown(r);
+      }
+    }
+  }
+  
+  private void shiftDown(int bottom) {
+    for (int r = bottom; r > 0; r--) {
+      board[r] = board[r - 1];
+    }
   }
   
   public void rotatePieceLeft() {
-    if (pieceCanBeRotatedLeft()) {
-      currentPiece.rotateLeft();
-    }
-  }
-  
-  // do later
-  private boolean pieceCanBeRotatedRight() {
-    return true;
-  }
-  
-  public void rotatePieceRight() {
-    if (pieceCanBeRotatedRight()) {
+    currentPiece.rotateLeft();
+    updatePiece();
+    updateShadow();
+    if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateRight();
+      updatePiece();
+      updateShadow();
+      println("cannot rotate left");
     }
   }
+
+  public void rotatePieceRight() {
+    currentPiece.rotateRight();
+    updatePiece();
+    updateShadow();
+    if (collidesWithPiece(currentRow, currentCol)) {
+      currentPiece.rotateLeft();
+      updatePiece();
+      updateShadow();
+      println("cannot rotate right");
+    }    
+  }
   
-  // called whenever a piece is moved
+  
+  // called whenever a piece is moved or rotated
   private void updateShadow() {
-    int newShadowRow = board.length - currentPieceHeight;
+    int newShadowRow = currentRow;
     
-    while (!pieceCanMoveDown(newShadowRow-1, currentCol)){
-      newShadowRow--;
+    while (pieceCanMoveDown(newShadowRow, currentCol)){
+      newShadowRow++;
     }
     
     shadowRow = newShadowRow;
+  }
+  
+  private void updatePiece() {
+    currentPieceHeight = currentPiece.height();
+    currentPieceWidth = currentPiece.width();
+    
+    currentPieceRow = currentPiece.getTop();
+    currentPieceCol = currentPiece.getLeft();
+    
+    currentRow += currentPieceRow;
+    currentCol += currentPieceCol;
+    
   }
 
 }
