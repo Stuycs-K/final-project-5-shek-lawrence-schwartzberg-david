@@ -29,3 +29,9 @@ info
 
 - Added checking for collisions between pieces
 - Added control for moving pieces left/right in the board
+
+
+### 5/24
+- added line clearing
+- in board class: made it so that currentRow represents topmost row of the piece, currentCol represents leftmost col of piece
+  - the rotations are somewhat working better but checking collisions might be more broken 
