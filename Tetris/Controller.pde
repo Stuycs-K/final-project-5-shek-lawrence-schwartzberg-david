@@ -46,6 +46,10 @@ public class Controller {
   
   // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight
   public void pressKeys() {
+    if (countdown != 0) {
+      return;
+    }
+    countdown += delay;
     if (keyPressedArray[0]) {
       board.movePieceLeft();
     }
