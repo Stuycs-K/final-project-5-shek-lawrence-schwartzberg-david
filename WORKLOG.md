@@ -37,3 +37,7 @@ Added display for shadows.
 - added line clearing
 - in board class: made it so that currentRow represents topmost row of the piece, currentCol represents leftmost col of piece
   - the rotations are somewhat working better but checking collisions might be more broken 
+
+### 5/25
+- fixed bugs with piece dropping and going out of bounds
+- updated drop shadow to account for pieces that were in the way
