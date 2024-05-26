@@ -23,7 +23,7 @@ public class Board {
     
     resetCurrentRowAndCol();
     
-    heldPiece = new TPiece('O');
+    heldPiece = null;
     pieceHasBeenSwitchedThisTurn = false;
     
     nextPieces = new LinkedList<TPiece>();
