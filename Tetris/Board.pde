@@ -23,8 +23,7 @@ public class Board {
     
     resetCurrentRowAndCol();
     
-    heldPiece = new TPiece('I');
-    heldPiece.setState(1);
+    heldPiece = new TPiece('O');
     pieceHasBeenSwitchedThisTurn = false;
     
     nextPieces = new LinkedList<TPiece>();
@@ -85,10 +84,20 @@ public class Board {
     rect(boardX - SQUARE_SIZE*5, boardY, SQUARE_SIZE*5, SQUARE_SIZE*5);
     
     if (heldPiece != null) {
-      if (heldPiece.getChar() == 'I') {
-        heldPiece.display(boardX - SQUARE_SIZE*3, boardY + SQUARE_SIZE*0.5);
-      } else{
-        heldPiece.display(boardX - SQUARE_SIZE*4, boardY + SQUARE_SIZE);
+      char c = heldPiece.getChar();
+      
+      switch(c) {
+        case 'I':
+          heldPiece.display(boardX - SQUARE_SIZE*3, boardY + SQUARE_SIZE*0.5);
+          break;
+          
+        case 'O':
+          heldPiece.display(boardX - SQUARE_SIZE*3.5, boardY + SQUARE_SIZE*1.5);
+          break;
+          
+        default:
+          heldPiece.display(boardX - SQUARE_SIZE*4, boardY + SQUARE_SIZE);
+          break;
       }
     }
   }
