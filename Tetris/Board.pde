@@ -23,7 +23,7 @@ public class Board {
     
     resetCurrentRowAndCol();
     
-    heldPiece = createNewTPiece();
+    heldPiece = null;
     pieceHasBeenSwitchedThisTurn = false;
     
     nextPieces = new ArrayDeque<TPiece>(3);
@@ -79,7 +79,9 @@ public class Board {
   }
   
   public void displayHeldPiece() {
-    heldPiece.display(boardX - SQUARE_SIZE*4, boardY);
+    if (heldPiece != null) {
+      heldPiece.display(boardX - SQUARE_SIZE*4, boardY);
+    }
   }
    
   // current piece goes down a tile
