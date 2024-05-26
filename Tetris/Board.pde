@@ -21,7 +21,7 @@ public class Board {
     
     resetCurrentRowAndCol();
     
-    heldPiece = null;
+    heldPiece = createNewTPiece();
     nextPieces = new ArrayDeque<TPiece>(3);
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
@@ -32,7 +32,7 @@ public class Board {
     dropSpeed = 0;
     shadowRow = board.length - currentPieceHeight;
     updateShadow();
-
+    
   }
   
   private char[][] makeBoard(int boardHeight, int boardWidth) {
@@ -75,6 +75,7 @@ public class Board {
   }
   
   public void displayHeldPiece() {
+    heldPiece.display(boardX - SQUARE_SIZE*4, boardY);
   }
    
   // current piece goes down a tile
