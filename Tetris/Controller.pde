@@ -48,39 +48,48 @@ public class Controller {
     keyPressedArray[type] = flag;
   }
   
-  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight
+  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece
   public void pressKeys() {
     if (countdown != 0) {
       return;
     }
+    
     countdown += delay;
+    
+    // left
     if (keyPressedArray[0]) {
       board.movePieceLeft();
     }
     
+    // right
     if (keyPressedArray[1]) {
       board.movePieceRight();
     }
     
+    // down
     if (keyPressedArray[2]) {
       board.softDrop();
     }
     
+    // space
     if (keyPressedArray[3]) {
       board.hardDrop();
       countdown += delay;
     }
     
+    // rotateLeft
     if (keyPressedArray[4]) {
       board.rotatePieceLeft();
       countdown += delay;
     }
     
+    // rotateRight
     if (keyPressedArray[5]) {
       board.rotatePieceRight();
       countdown += delay;
     }
     
+    // storePiece
     if (keyPressedArray[6]) {
       board.switchPiece();
       countdown += delay;

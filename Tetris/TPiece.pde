@@ -40,7 +40,7 @@ public class TPiece {
     return this.pieceType;
   }
   
-  private void setState(int newState) {
+  public void setState(int newState) {
     this.state = newState;
   }
   

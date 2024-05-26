@@ -23,7 +23,8 @@ public class Board {
     
     resetCurrentRowAndCol();
     
-    heldPiece = null;
+    heldPiece = new TPiece('I');
+    heldPiece.setState(1);
     pieceHasBeenSwitchedThisTurn = false;
     
     nextPieces = new LinkedList<TPiece>();
@@ -79,8 +80,16 @@ public class Board {
   }
   
   public void displayHeldPiece() {
+    fill(GRAY);
+    stroke(BLACK);
+    rect(boardX - SQUARE_SIZE*5, boardY, SQUARE_SIZE*5, SQUARE_SIZE*5);
+    
     if (heldPiece != null) {
-      heldPiece.display(boardX - SQUARE_SIZE*4, boardY);
+      if (heldPiece.getChar() == 'I') {
+        heldPiece.display(boardX - SQUARE_SIZE*3, boardY + SQUARE_SIZE*0.5);
+      } else{
+        heldPiece.display(boardX - SQUARE_SIZE*4, boardY + SQUARE_SIZE);
+      }
     }
   }
   
@@ -116,7 +125,7 @@ public class Board {
       pieceHasBeenSwitchedThisTurn = false;
     }
     
-    currentPiece = nextPieces.remove();
+    currentPiece = nextPieces.remove(0);
     nextPieces.add(createNewTPiece());
     
     resetCurrentRowAndCol();
@@ -127,6 +136,10 @@ public class Board {
   public void switchPiece() {
     if (!pieceHasBeenSwitchedThisTurn) {
       heldPiece = currentPiece;
+      if (heldPiece.getChar() == 'I') {
+        heldPiece.setState(1); // vertical
+      }
+      
       changeToNextPiece(false);
       pieceHasBeenSwitchedThisTurn = true;
     } 
