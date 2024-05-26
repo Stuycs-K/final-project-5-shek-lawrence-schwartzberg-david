@@ -1,4 +1,4 @@
-import java.util.ArrayDeque;
+import java.util.LinkedList;
 
 public class Board {
   private char[][] board;
@@ -12,7 +12,7 @@ public class Board {
   private TPiece heldPiece;
   boolean pieceHasBeenSwitchedThisTurn;
   
-  private ArrayDeque<TPiece> nextPieces;
+  private LinkedList<TPiece> nextPieces;
   
   private int shadowRow;
   
@@ -26,7 +26,7 @@ public class Board {
     heldPiece = null;
     pieceHasBeenSwitchedThisTurn = false;
     
-    nextPieces = new ArrayDeque<TPiece>(3);
+    nextPieces = new LinkedList<TPiece>();
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
@@ -82,6 +82,12 @@ public class Board {
     if (heldPiece != null) {
       heldPiece.display(boardX - SQUARE_SIZE*4, boardY);
     }
+  }
+  
+  public void displayNextPieces() {
+    nextPieces.get(0).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY);
+    nextPieces.get(1).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*4);
+    nextPieces.get(2).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*8);
   }
    
   // current piece goes down a tile
