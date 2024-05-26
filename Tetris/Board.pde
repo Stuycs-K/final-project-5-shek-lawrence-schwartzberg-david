@@ -10,6 +10,8 @@ public class Board {
   private int currentRow, currentCol;
   
   private TPiece heldPiece;
+  boolean pieceHasBeenSwitchedThisTurn;
+  
   private ArrayDeque<TPiece> nextPieces;
   
   private int shadowRow;
@@ -22,6 +24,8 @@ public class Board {
     resetCurrentRowAndCol();
     
     heldPiece = createNewTPiece();
+    pieceHasBeenSwitchedThisTurn = false;
+    
     nextPieces = new ArrayDeque<TPiece>(3);
     nextPieces.add(createNewTPiece());
     nextPieces.add(createNewTPiece());
@@ -101,6 +105,7 @@ public class Board {
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
     if (addCurrentPieceToBoard) {
       addCurrentPieceToBoard();
+      pieceHasBeenSwitchedThisTurn = false;
     }
     
     currentPiece = nextPieces.remove();
@@ -112,8 +117,11 @@ public class Board {
   }
   
   public void switchPiece() {
-    heldPiece = currentPiece;
-    changeToNextPiece(false);
+    if (!pieceHasBeenSwitchedThisTurn) {
+      heldPiece = currentPiece;
+      changeToNextPiece(false);
+      pieceHasBeenSwitchedThisTurn = true;
+    } 
     
   }
   
