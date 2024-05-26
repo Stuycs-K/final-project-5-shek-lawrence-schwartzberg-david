@@ -92,6 +92,8 @@ public class Board {
     while (pieceCanMoveDown(currentRow, currentCol)) {
       softDrop();
     }
+    
+    changeToNextPiece();
   }
   
   // called when the current piece has reached the bottom of the board

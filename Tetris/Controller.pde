@@ -1,7 +1,7 @@
 public class Controller {
   int rotateLeftKey, rotateRightKey, storePieceKey, SPACE;
   boolean[] keyPressedArray;
-  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight
+  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece
   
   public Controller() {
     // capital char values are same as their keyCode values in keyPressed()
@@ -10,7 +10,7 @@ public class Controller {
     storePieceKey = 'C'; // 67
     SPACE = 32;
     
-    keyPressedArray = new boolean[6];
+    keyPressedArray = new boolean[7];
   }
 
   public void press(int code, boolean flag){
@@ -36,6 +36,10 @@ public class Controller {
     
     if (code == rotateRightKey) {
       set(5, flag);
+    }
+    
+    if (code == storePieceKey) {
+      set(6, flag);
     }
     
   }
@@ -64,6 +68,7 @@ public class Controller {
     
     if (keyPressedArray[3]) {
       board.hardDrop();
+      countdown += delay;
     }
     
     if (keyPressedArray[4]) {
@@ -74,6 +79,11 @@ public class Controller {
     if (keyPressedArray[5]) {
       board.rotatePieceRight();
       countdown += delay;
+    }
+    
+    if (keyPressedArray[6]) {
+      //board.switchPiece();
+      //countdown += delay;
     }
   }
   
