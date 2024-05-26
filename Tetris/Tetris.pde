@@ -58,12 +58,13 @@ void draw() {
     board.softDrop();
   }
   
-  
   controller.pressKeys();
   board.clearLines();
   if (countdown > 0) {
     countdown--;
   }
+  
+  frame = (frame+1)%dropSpeed;
 }
 
 void debug() {

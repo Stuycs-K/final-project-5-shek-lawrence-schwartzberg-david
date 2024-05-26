@@ -84,7 +84,7 @@ public class Board {
     if (pieceCanMoveDown(currentRow, currentCol)) {
       currentRow++;
     } else {
-      changeToNextPiece();
+      changeToNextPiece(true);
     }
   }
   
@@ -93,12 +93,15 @@ public class Board {
       softDrop();
     }
     
-    changeToNextPiece();
+    changeToNextPiece(true);
   }
   
   // called when the current piece has reached the bottom of the board
-  private void changeToNextPiece() {
-    addCurrentPieceToBoard();
+  // boolean for switchPiece() to call this without adding the piece to the board
+  private void changeToNextPiece(boolean addCurrentPieceToBoard) {
+    if (addCurrentPieceToBoard) {
+      addCurrentPieceToBoard();
+    }
     
     currentPiece = nextPieces.remove();
     nextPieces.add(createNewTPiece());
@@ -106,6 +109,12 @@ public class Board {
     resetCurrentRowAndCol();
     updatePiece();
     updateShadow();
+  }
+  
+  public void switchPiece() {
+    heldPiece = currentPiece;
+    changeToNextPiece(false);
+    
   }
   
   // assumes that the piece does not overlap with any other pieces or the board border

@@ -82,8 +82,8 @@ public class Controller {
     }
     
     if (keyPressedArray[6]) {
-      //board.switchPiece();
-      //countdown += delay;
+      board.switchPiece();
+      countdown += delay;
     }
   }
   
