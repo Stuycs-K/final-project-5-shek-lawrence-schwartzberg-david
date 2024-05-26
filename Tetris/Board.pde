@@ -72,7 +72,9 @@ public class Board {
   // display the current piece's dropping location
   public void displayShadow() {
     currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, GRAY, getColor(currentPiece.getChar()));
-    
+  }
+  
+  public void displayHeldPiece() {
   }
    
   // current piece goes down a tile

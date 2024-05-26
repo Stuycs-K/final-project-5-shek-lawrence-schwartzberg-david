@@ -19,9 +19,10 @@ float boardX, boardY;
 
 int dropSpeed;
 int frame;
+int inputTimer;
 
 int countdown;
-int delay = 3;
+int delay = 5;
 
 Controller controller;
 
@@ -35,12 +36,18 @@ void setup() {
   // starts at 1 second
   dropSpeed = 60;
   
+  inputTimer = 0;
+  
   controller = new Controller();
   countdown = 0;
 }
 
 void draw() {
   background(255);
+  
+  // remove in final
+  debug();
+  
   board.display(boardX, boardY);
   board.displayShadow();
   board.displayCurrentPiece();
@@ -50,7 +57,6 @@ void draw() {
     board.softDrop();
   }
   
-  frame = (frame+1) % dropSpeed;
   
   controller.pressKeys();
   board.clearLines();
@@ -58,6 +64,14 @@ void draw() {
     countdown--;
   }
 }
+
+void debug() {
+  fill(BLACK);
+  text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
+  text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
+  text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);
+}
+  
 
 void keyPressed(){
   controller.press(keyCode, true);
