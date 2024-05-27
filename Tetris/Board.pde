@@ -1,4 +1,5 @@
 import java.util.LinkedList;
+import java.util.Collections;
 
 public class Board {
   private char[][] board;
@@ -29,9 +30,7 @@ public class Board {
     pieceHasBeenSwitchedThisTurn = false;
     
     nextPieces = new LinkedList<TPiece>();
-    nextPieces.add(createNewTPiece());
-    nextPieces.add(createNewTPiece());
-    nextPieces.add(createNewTPiece());
+    addToNextPieces();
     
     updatePiece();
         
@@ -141,7 +140,9 @@ public class Board {
     }
     
     currentPiece = nextPieces.remove(0);
-    nextPieces.add(createNewTPiece());
+    if (nextPieces.size() <= 3) {
+      addToNextPieces();
+    }
     
     resetCurrentRowAndCol();
     updatePiece();
@@ -187,6 +188,21 @@ public class Board {
           board[currentRow+r][currentCol+c] = pieceArray[currentPieceRow + r][currentPieceCol + c];
         }
       }
+    }
+  }
+  
+  // 7 pieces in a "bag"
+  public void addToNextPieces() {
+    LinkedList<TPiece> bag = new LinkedList<TPiece>();
+    for (int i = 0; i < 7; i++) {  
+      char c = "IJLSZTO".charAt(i);
+      bag.add(new TPiece(c));
+    }
+    
+    Collections.shuffle(bag);
+    
+    for (int i = 0; i < bag.size(); i++) {
+      nextPieces.add(bag.remove(0));
     }
   }
   
