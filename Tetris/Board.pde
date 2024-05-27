@@ -16,6 +16,8 @@ public class Board {
   
   private int shadowRow;
   
+  private boolean lose;
+  
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
     
@@ -129,6 +131,10 @@ public class Board {
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
+    if (currentRow == 0) {
+      lose = true;
+    }
+    
     if (addCurrentPieceToBoard) {
       addCurrentPieceToBoard();
       pieceHasBeenSwitchedThisTurn = false;
@@ -140,6 +146,10 @@ public class Board {
     resetCurrentRowAndCol();
     updatePiece();
     updateShadow();
+  }
+  
+  public boolean checkIfLost() {
+    return lose;
   }
   
   public void switchPiece() {

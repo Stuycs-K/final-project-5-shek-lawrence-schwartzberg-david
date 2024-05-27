@@ -59,6 +59,10 @@ void draw() {
     board.softDrop();
   }
   
+  if (board.checkIfLost()) {
+    println("LOST");
+  }
+  
   controller.pressKeys();
   board.clearLines();
   if (countdown > 0) {
