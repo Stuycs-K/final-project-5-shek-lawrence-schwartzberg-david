@@ -144,13 +144,25 @@ public class Board {
   
   public void switchPiece() {
     if (!pieceHasBeenSwitchedThisTurn) {
-      heldPiece = currentPiece;
-      if (heldPiece.getChar() == 'I') {
-        heldPiece.setState(1); // vertical
+      if (heldPiece != null) {
+        TPiece temp = heldPiece;
+        heldPiece = currentPiece;
+        if (heldPiece.getChar() == 'I') {
+          heldPiece.setState(1); // vertical
+        }
+        
+        currentPiece = temp;
+        resetCurrentRowAndCol();
+        pieceHasBeenSwitchedThisTurn = true;
+      } else {
+        heldPiece = currentPiece;
+        if (heldPiece.getChar() == 'I') {
+          heldPiece.setState(1); // vertical
+        }
+        
+        changeToNextPiece(false);
+        pieceHasBeenSwitchedThisTurn = true;
       }
-      
-      changeToNextPiece(false);
-      pieceHasBeenSwitchedThisTurn = true;
     } 
     
   }
