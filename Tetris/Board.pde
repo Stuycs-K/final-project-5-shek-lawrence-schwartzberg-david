@@ -6,7 +6,7 @@ public class Board {
   private TPiece currentPiece;
   
   private int currentPieceHeight, currentPieceWidth;
-  private int currentPieceRow, currentPieceCol;
+  private int currentPieceRow = 0, currentPieceCol = 0;
   private int currentRow, currentCol;
   
   private TPiece heldPiece;
@@ -243,8 +243,8 @@ public class Board {
       currentPiece.rotateRight();
       updatePiece();
       updateShadow();
-      println("cannot rotate left");
     }
+    adjustBorderRotation();
   }
 
   public void rotatePieceRight() {
@@ -255,8 +255,17 @@ public class Board {
       currentPiece.rotateLeft();
       updatePiece();
       updateShadow();
-      println("cannot rotate right");
     }    
+    adjustBorderRotation();
+  }
+  
+  private void adjustBorderRotation() {
+    while (currentCol < 0) {
+      currentCol++;
+    }
+    while (currentCol + currentPieceWidth - 1 >= board[0].length) {
+      currentCol--;
+    }
   }
   
   
@@ -275,9 +284,13 @@ public class Board {
     currentPieceHeight = currentPiece.height();
     currentPieceWidth = currentPiece.width();
     
+    currentRow = max(currentRow - currentPieceRow, 0);
+    currentCol = max(currentCol - currentPieceCol, 0);
+        
     currentPieceRow = currentPiece.getTop();
     currentPieceCol = currentPiece.getLeft();
     
+
     currentRow += currentPieceRow;
     currentCol += currentPieceCol;
     
