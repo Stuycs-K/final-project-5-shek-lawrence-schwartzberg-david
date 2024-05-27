@@ -45,3 +45,8 @@
 ### 5/25
 - fixed bugs with piece dropping and going out of bounds
 - updated drop shadow to account for pieces that were in the way
+
+### 5/26
+- fixed piece rotation
+  - added method to adjust positions of pieces going out of bounds from rotating
+  - fixed issue of x position of pieces increasing after multiple consecutive rotations 
