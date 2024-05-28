@@ -184,15 +184,21 @@ public class Board {
         heldPiece = currentPiece;
         if (heldPiece.getChar() == 'I') {
           heldPiece.setState(1); // vertical
+        } else {
+          heldPiece.setState(0);
         }
         
         currentPiece = temp;
+        currentPiece.setState(0);
         resetCurrentRowAndCol();
+        updatePiece();
         pieceHasBeenSwitchedThisTurn = true;
       } else {
         heldPiece = currentPiece;
         if (heldPiece.getChar() == 'I') {
           heldPiece.setState(1); // vertical
+        } else {
+          heldPiece.setState(0);
         }
         
         changeToNextPiece(false);
