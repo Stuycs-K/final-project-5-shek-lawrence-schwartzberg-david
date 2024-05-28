@@ -104,9 +104,33 @@ public class Board {
   }
   
   public void displayNextPieces() {
-    nextPieces.get(0).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY);
-    nextPieces.get(1).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*4);
-    nextPieces.get(2).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*8);
+    for (int i = 0; i < 3; i++) {
+      fill(GRAY);
+      stroke(BLACK);
+      rect(boardX + SQUARE_SIZE*10, boardY + SQUARE_SIZE*(i*5), SQUARE_SIZE*5, SQUARE_SIZE*5);
+      
+      TPiece piece = nextPieces.get(i);
+      char c = piece.getChar();
+      
+      switch(c) {
+        case 'I':
+          piece.setState(1);
+          piece.display(boardX + SQUARE_SIZE*12, boardY + SQUARE_SIZE*0.5 + SQUARE_SIZE*(i*5));
+          break;   
+          
+        case 'O':
+          piece.display(boardX + SQUARE_SIZE*11.5, boardY + SQUARE_SIZE*1.5 + SQUARE_SIZE*(i*5));
+          break;
+          
+        default:
+          piece.display(boardX + SQUARE_SIZE*11, boardY + SQUARE_SIZE + SQUARE_SIZE*(i*5));
+          break;
+      }
+    }
+      
+    //nextPieces.get(0).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY);
+    //nextPieces.get(1).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*4);
+    //nextPieces.get(2).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*8);
   }
    
   // current piece goes down a tile
