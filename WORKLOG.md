@@ -32,6 +32,12 @@
 - Implemented the 7 pieces in a bag randomization
 - Made displaying next pieces look nice
 
+### 5/28
+
+- Added lose condition
+- Made a Button class and a start over button
+- Made holding hard drop not do it multiple times
+
 ## Lawrence Shek
 
 ### 5/22
