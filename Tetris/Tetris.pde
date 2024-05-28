@@ -24,6 +24,8 @@ int inputTimer;
 int countdown;
 int delay = 5;
 
+boolean gameActive;
+
 Controller controller;
 
 void setup() {
@@ -40,6 +42,8 @@ void setup() {
   
   controller = new Controller();
   countdown = 0;
+  
+  gameActive = true;
 }
 
 void draw() {
@@ -48,28 +52,41 @@ void draw() {
   // remove in final
   debug();
   
-  board.display(boardX, boardY);
-  board.displayShadow();
-  board.displayCurrentPiece();
-  board.displayHeldPiece();
-  board.displayNextPieces();
-  
-  // moves the piece down 
-  if (frame == dropSpeed-1) {
-    board.softDrop();
+  if (gameActive) {
+    board.display(boardX, boardY);
+    board.displayShadow();
+    board.displayCurrentPiece();
+    board.displayHeldPiece();
+    board.displayNextPieces();
+    
+    // moves the piece down 
+    if (frame == dropSpeed-1) {
+      board.softDrop();
+    }
+    
+    gameActive = !board.checkIfLost();
+    
+    controller.pressKeys();
+    board.clearLines();
+    if (countdown > 0) {
+      countdown--;
+    }
+    
+    frame = (frame+1)%dropSpeed;
+  } else {
+    //fill(#ffffff);
+    //stroke(BLACK);
+    //rect(width/2, height/2, 100, 100);
+    //fill(BLACK);
+    //text("YOU LOSE!", width/2, height/2, 100, 100);
+    
+    board.display(boardX, boardY);
+    board.displayShadow();
+    board.displayCurrentPiece();
+    board.displayHeldPiece();
+    board.displayNextPieces();
+    println("lost");
   }
-  
-  if (board.checkIfLost()) {
-    println("LOST");
-  }
-  
-  controller.pressKeys();
-  board.clearLines();
-  if (countdown > 0) {
-    countdown--;
-  }
-  
-  frame = (frame+1)%dropSpeed;
 }
 
 void debug() {
@@ -81,6 +98,9 @@ void debug() {
   
 
 void keyPressed(){
+  if (keyCode == 'P') {
+    gameActive = false;
+  }
   controller.press(keyCode, true);
 }
 

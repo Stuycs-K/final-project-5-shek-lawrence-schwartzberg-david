@@ -128,9 +128,6 @@ public class Board {
       }
     }
       
-    //nextPieces.get(0).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY);
-    //nextPieces.get(1).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*4);
-    //nextPieces.get(2).display(boardX + SQUARE_SIZE*(board[0].length+1), boardY + SQUARE_SIZE*8);
   }
    
   // current piece goes down a tile
@@ -184,10 +181,14 @@ public class Board {
         heldPiece = currentPiece;
         if (heldPiece.getChar() == 'I') {
           heldPiece.setState(1); // vertical
+        } else {
+          heldPiece.setState(0);
         }
         
         currentPiece = temp;
+        currentPiece.setState(0);
         resetCurrentRowAndCol();
+        updatePiece();
         pieceHasBeenSwitchedThisTurn = true;
         updatePiece();
         updateShadow();
@@ -195,6 +196,8 @@ public class Board {
         heldPiece = currentPiece;
         if (heldPiece.getChar() == 'I') {
           heldPiece.setState(1); // vertical
+        } else {
+          heldPiece.setState(0);
         }
         
         changeToNextPiece(false);
