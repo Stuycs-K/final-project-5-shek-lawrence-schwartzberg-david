@@ -12,7 +12,7 @@ color PURPLE = #b700ff;
 
 color GRAY = #8c8c8c;
 color BLACK = #000000;
-
+color WHITE = #ffffff;
 
 Board board;
 float boardX, boardY;
@@ -27,27 +27,21 @@ int delay = 5;
 boolean gameActive;
 
 Controller controller;
+Button startOverButton;
 
 void setup() {
   size(1000, 700);
   
   boardX = width/2 - SQUARE_SIZE*5;
   boardY = height/2 - SQUARE_SIZE*10;
-  board = new Board(20, 10);
   
-  // starts at 1 second
-  dropSpeed = 60;
+  newGame();
   
-  inputTimer = 0;
-  
-  controller = new Controller();
-  countdown = 0;
-  
-  gameActive = true;
+  startOverButton = new Button(width/2, height/2, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
 }
 
 void draw() {
-  background(255);
+  background(WHITE);
   
   // remove in final
   debug();
@@ -85,27 +79,47 @@ void draw() {
     board.displayCurrentPiece();
     board.displayHeldPiece();
     board.displayNextPieces();
+    
+    startOverButton.update();
+    startOverButton.display();
+    
+    if (startOverButton.isClicked()) {
+      newGame();
+    }
+    
     println("lost");
   }
 }
 
 void debug() {
   fill(BLACK);
+  textSize(10);
   text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
   text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
   text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);
 }
   
 
-void keyPressed(){
-  if (keyCode == 'P') {
-    gameActive = false;
-  }
+void keyPressed() {
   controller.press(keyCode, true);
 }
 
-void keyReleased(){
+void keyReleased() {
   controller.press(keyCode, false);
+}
+
+void newGame() {
+  board = new Board(20, 10);
+  
+  // starts at 1 second
+  dropSpeed = 60;
+  
+  inputTimer = 0;
+  
+  controller = new Controller();
+  countdown = 0;
+  
+  gameActive = true;
 }
 
 public TPiece createNewTPiece() {
