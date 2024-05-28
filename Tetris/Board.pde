@@ -190,6 +190,8 @@ public class Board {
         resetCurrentRowAndCol();
         updatePiece();
         pieceHasBeenSwitchedThisTurn = true;
+        updatePiece();
+        updateShadow();
       } else {
         heldPiece = currentPiece;
         if (heldPiece.getChar() == 'I') {
@@ -200,6 +202,8 @@ public class Board {
         
         changeToNextPiece(false);
         pieceHasBeenSwitchedThisTurn = true;
+        updatePiece();
+        updateShadow();
       }
     } 
     
