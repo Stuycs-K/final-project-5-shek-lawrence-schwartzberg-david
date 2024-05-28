@@ -74,11 +74,18 @@ void draw() {
     
     frame = (frame+1)%dropSpeed;
   } else {
-    fill(#ffffff);
-    stroke(BLACK);
-    rect(width/2, height/2, 100, 100);
-    fill(BLACK);
-    text("YOU LOSE!", width/2, height/2, 100, 100);
+    //fill(#ffffff);
+    //stroke(BLACK);
+    //rect(width/2, height/2, 100, 100);
+    //fill(BLACK);
+    //text("YOU LOSE!", width/2, height/2, 100, 100);
+    
+    board.display(boardX, boardY);
+    board.displayShadow();
+    board.displayCurrentPiece();
+    board.displayHeldPiece();
+    board.displayNextPieces();
+    println("lost");
   }
 }
 
@@ -91,6 +98,9 @@ void debug() {
   
 
 void keyPressed(){
+  if (keyCode == 'P') {
+    gameActive = false;
+  }
   controller.press(keyCode, true);
 }
 
