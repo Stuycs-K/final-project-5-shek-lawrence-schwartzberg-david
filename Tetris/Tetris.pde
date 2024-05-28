@@ -68,12 +68,6 @@ void draw() {
     
     frame = (frame+1)%dropSpeed;
   } else {
-    //fill(#ffffff);
-    //stroke(BLACK);
-    //rect(width/2, height/2, 100, 100);
-    //fill(BLACK);
-    //text("YOU LOSE!", width/2, height/2, 100, 100);
-    
     board.display(boardX, boardY);
     board.displayShadow();
     board.displayCurrentPiece();
@@ -94,6 +88,7 @@ void draw() {
 void debug() {
   fill(BLACK);
   textSize(10);
+  textAlign(LEFT, TOP);
   text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
   text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
   text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);

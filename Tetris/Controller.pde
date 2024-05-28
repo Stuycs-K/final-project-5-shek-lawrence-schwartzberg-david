@@ -3,6 +3,9 @@ public class Controller {
   boolean[] keyPressedArray;
   // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece
   
+  // holding hardDrop doesn't do it multiple times
+  boolean canHardDrop;
+  
   public Controller() {
     // capital char values are same as their keyCode values in keyPressed()
     rotateLeftKey = 'Z'; // 90
@@ -11,6 +14,7 @@ public class Controller {
     SPACE = 32;
     
     keyPressedArray = new boolean[7];
+    canHardDrop = true;
   }
 
   public void press(int code, boolean flag){
@@ -28,6 +32,10 @@ public class Controller {
     
     if (code == SPACE) {
       set(3, flag);
+      // if it was being held down and is now released, allow hard drops again
+      if (!canHardDrop && !flag) {
+        canHardDrop = true;
+      }
     }
     
     if (code == rotateLeftKey) {
@@ -72,9 +80,11 @@ public class Controller {
     }
     
     // space
-    if (keyPressedArray[3]) {
+    if (keyPressedArray[3] && canHardDrop) {
       board.hardDrop();
       countdown += delay;
+      // set to false, changed back when hardDrop is released
+      canHardDrop = false; 
     }
     
     // rotateLeft
