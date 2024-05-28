@@ -1,6 +1,7 @@
 //import java.util.*;
 
 int SQUARE_SIZE = 30;
+
 color CYAN = #00ffee;
 color RED = #ff1500;
 color BLUE = #0040ff;
@@ -8,7 +9,9 @@ color GREEN = #10c443;
 color ORANGE = #ff8c00;
 color YELLOW = #ffee00;
 color PURPLE = #b700ff;
-color GRAY = color(140);
+
+color GRAY = #8c8c8c;
+color BLACK = #000000;
 
 
 Board board;
@@ -16,6 +19,10 @@ float boardX, boardY;
 
 int dropSpeed;
 int frame;
+int inputTimer;
+
+int countdown;
+int delay = 5;
 
 Controller controller;
 
@@ -29,25 +36,56 @@ void setup() {
   // starts at 1 second
   dropSpeed = 60;
   
+  inputTimer = 0;
+  
   controller = new Controller();
+  countdown = 0;
 }
 
 void draw() {
   background(255);
+  
+  // remove in final
+  debug();
+  
   board.display(boardX, boardY);
+  board.displayShadow();
   board.displayCurrentPiece();
+  board.displayHeldPiece();
+  board.displayNextPieces();
   
   // moves the piece down 
   if (frame == dropSpeed-1) {
-    board.tick();
+    board.softDrop();
   }
   
-  frame = (frame+1) % dropSpeed;
+  if (board.checkIfLost()) {
+    println("LOST");
+  }
+  
+  controller.pressKeys();
   board.clearLines();
+  if (countdown > 0) {
+    countdown--;
+  }
+  
+  frame = (frame+1)%dropSpeed;
 }
 
+void debug() {
+  fill(BLACK);
+  text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
+  text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
+  text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);
+}
+  
+
 void keyPressed(){
-  controller.keyPressed();
+  controller.press(keyCode, true);
+}
+
+void keyReleased(){
+  controller.press(keyCode, false);
 }
 
 public TPiece createNewTPiece() {

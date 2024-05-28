@@ -29,19 +29,30 @@ public class TPiece {
     pieceType = c;
   }
   
+  public TPiece clone() {
+    TPiece newPiece = new TPiece(this.pieceType);
+    newPiece.setState(this.state);
+    
+    return newPiece;
+  }
+  
   public char getChar() {
     return this.pieceType;
+  }
+  
+  public void setState(int newState) {
+    this.state = newState;
   }
   
   public char[][] getPieceArray() {
     return orientations[state];
   }
   
-  public void rotateClockwise() {
+  public void rotateRight() {
     state = (state + 1) % 4;
   }
   
-  public void rotateCounterClockwise() {
+  public void rotateLeft() {
     state = (state - 1 + 4) % 4;
   }
   
@@ -49,11 +60,28 @@ public class TPiece {
     char[][] currOrientation = orientations[state];
     
     fill(getColor(pieceType));
-    
+    int startRow = getTop();
+    int startCol = getLeft();
     for (int r = 0; r < currOrientation.length; r++) {
       for (int c = 0; c < currOrientation[0].length; c++) {
         if (currOrientation[r][c] != '-') {
-          rect(x + (SQUARE_SIZE*c), y + (SQUARE_SIZE*r), SQUARE_SIZE, SQUARE_SIZE);
+          rect(x + (SQUARE_SIZE* (c - startCol)), y + (SQUARE_SIZE* (r- startRow)), SQUARE_SIZE, SQUARE_SIZE);
+        }
+      }
+    }
+  }
+  
+  public void display(float x, float y, color fillColor, color strokeColor) {
+    char[][] currOrientation = orientations[state];
+    
+    fill(fillColor);
+    stroke(strokeColor);
+    int startRow = getTop();
+    int startCol = getLeft();
+    for (int r = 0; r < currOrientation.length; r++) {
+      for (int c = 0; c < currOrientation[0].length; c++) {
+        if (currOrientation[r][c] != '-') {
+          rect(x + (SQUARE_SIZE * (c - startCol)), y + (SQUARE_SIZE * (r - startRow)), SQUARE_SIZE, SQUARE_SIZE);
         }
       }
     }
@@ -87,12 +115,40 @@ public class TPiece {
       return totalHeight;
   }
     
+  // returns topmost occupied row of piece array
+  public int getTop() {
+    char[][] currOrientation = orientations[state];
+    for (int r = 0; r < currOrientation.length; r++) {
+      for (int c = 0; c < currOrientation[0].length; c++) {
+        if (currOrientation[r][c] != '-') {
+          return r;
+        }
+      }
+    }
+    return -1;
+  }
+  
+  // returns leftmost occupied column of piece array 
+  public int getLeft() {
+    char[][] currOrientation = orientations[state];
+    for (int c = 0; c < currOrientation[0].length; c++) {
+      for (int r = 0; r < currOrientation.length; r++) {
+        if (currOrientation[r][c] != '-') {
+          return c;
+        }
+      }
+    }
+    return -1;
+  }
   
   private void setI() {
     orientations = new char[][][]
                   {
                    {
+                    {'-', '-', '-', '-'},
                     {'I', 'I', 'I', 'I'},
+                    {'-', '-', '-', '-'},
+                    {'-', '-', '-', '-'}  
                    },
                    {
                     {'-', '-', 'I', '-'}, 
@@ -101,7 +157,10 @@ public class TPiece {
                     {'-', '-', 'I', '-'}
                    },
                    {
+                    {'-', '-', '-', '-'},
+                    {'-', '-', '-', '-'},
                     {'I', 'I', 'I', 'I'},
+                    {'-', '-', '-', '-'}
                    },
                    {
                     {'-', 'I', '-', '-'}, 
