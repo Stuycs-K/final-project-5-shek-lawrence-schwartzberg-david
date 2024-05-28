@@ -25,6 +25,13 @@
 - Implemented switching and holding pieces
 - Made board display the held and next pieces, and switched from an ArrayDeque to LinkedList for nextPieces
 
+### 5/27
+
+- Fixed switching pieces using nextPieces instead of the heldPiece
+- Added lose condition, did not actually make the game end
+- Implemented the 7 pieces in a bag randomization
+- Made displaying next pieces look nice
+
 ## Lawrence Shek
 
 ### 5/22
