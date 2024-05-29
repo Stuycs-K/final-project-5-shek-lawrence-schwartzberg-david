@@ -82,7 +82,7 @@ void draw() {
       newGame();
     }
     
-    println("lost");
+
   }
 }
 
