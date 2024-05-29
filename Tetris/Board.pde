@@ -269,6 +269,13 @@ public class Board {
     
     Collections.shuffle(bag);
     
+    // pieces aren't repeated
+    if (nextPieces.size() > 0 && nextPieces.get(nextPieces.size()-1).getChar() == bag.get(0).getChar()) {
+      TPiece temp = bag.get(0);
+      bag.set(0, bag.get(bag.size()-1));
+      bag.set(bag.size()-1, temp);
+    }
+    
     for (int i = 0; i < bag.size(); i++) {
       nextPieces.add(bag.get(i));
     }
