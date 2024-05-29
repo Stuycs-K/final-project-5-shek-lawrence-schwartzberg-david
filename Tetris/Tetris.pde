@@ -82,7 +82,7 @@ void draw() {
       newGame();
     }
     
-    println("lost");
+
   }
 }
 
@@ -98,6 +98,10 @@ void debug() {
 
 void keyPressed() {
   controller.press(keyCode, true);
+  
+  if (keyCode == 'P') {
+    board.printStuff();
+  }
 }
 
 void keyReleased() {

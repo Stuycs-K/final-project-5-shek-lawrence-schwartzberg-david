@@ -29,6 +29,10 @@ public class TPiece {
     pieceType = c;
   }
   
+  public String toString() {
+    return ""+pieceType;
+  }
+  
   public TPiece clone() {
     TPiece newPiece = new TPiece(this.pieceType);
     newPiece.setState(this.state);
