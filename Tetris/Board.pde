@@ -27,8 +27,6 @@ public class Board {
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
     
-    currentPiece = createNewTPiece();
-    
     resetCurrentRowAndCol();
     
     heldPiece = null;
@@ -36,6 +34,7 @@ public class Board {
     
     nextPieces = new LinkedList<TPiece>();
     addToNextPieces();
+    currentPiece = nextPieces.remove(0);
     
     updatePiece();
         
@@ -248,6 +247,9 @@ public class Board {
   public void addCurrentPieceToBoard() {
     char[][] pieceArray = currentPiece.getPieceArray();
     
+    println("currentPiece: " + currentPiece);
+    println(currentPieceHeight + " height");
+    println(currentPieceWidth + " width");
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
@@ -268,7 +270,7 @@ public class Board {
     Collections.shuffle(bag);
     
     for (int i = 0; i < bag.size(); i++) {
-      nextPieces.add(bag.remove(0));
+      nextPieces.add(bag.get(i));
     }
   }
   
@@ -403,7 +405,6 @@ public class Board {
     currentCol += currentPieceCol;
     
   }
-
 
   public void decrementPieceCountdown() {
     addPieceCountdown--;
