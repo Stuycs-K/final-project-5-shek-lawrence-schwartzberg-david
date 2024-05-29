@@ -81,7 +81,8 @@ public class Board {
   // display the current piece's dropping location
   public void displayShadow() {
     color pieceColor = getColor(currentPiece.getChar());
-    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, color(pieceColor, 75), pieceColor);
+    int opacity = 60;
+    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, color(pieceColor, opacity), pieceColor);
   }
   
   public void displayHeldPiece() {
@@ -223,15 +224,18 @@ public class Board {
   
   // assumes that the piece does not overlap with any other pieces or the board border
   public void addCurrentPieceToBoard() {
+    println("piece " + currentPiece.getChar());
     char[][] pieceArray = currentPiece.getPieceArray();
-    
+    int total = 0;
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
           board[currentRow+r][currentCol+c] = pieceArray[currentPieceRow + r][currentPieceCol + c];
+          total++;
         }
       }
     }
+    println("height " + currentPieceHeight + "\nwidth " + currentPieceWidth + "\ntotal " + total + "\n");
   }
   
   // 7 pieces in a "bag"
@@ -306,6 +310,7 @@ public class Board {
       }
       if (fullLine) {
         shiftDown(r);
+        println("row shifted " + r);
       }
     }
   }
