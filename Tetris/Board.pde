@@ -19,6 +19,10 @@ public class Board {
   
   private boolean lose;
   
+  private int addPieceDelay = 60;
+  private int addPieceCountdown;
+  
+  
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
     
@@ -135,7 +139,10 @@ public class Board {
   public void softDrop() {
     if (pieceCanMoveDown(currentRow, currentCol)) {
       currentRow++;
+      addPieceCountdown = addPieceDelay;
     } else {
+      // less delay if holding down softdrop
+      addPieceCountdown = min(addPieceCountdown, addPieceDelay / 2);
       changeToNextPiece(true);
     }
   }
@@ -144,7 +151,7 @@ public class Board {
     while (pieceCanMoveDown(currentRow, currentCol)) {
       softDrop();
     }
-    
+    addPieceCountdown = 0;
     changeToNextPiece(true);
   }
   
@@ -156,6 +163,10 @@ public class Board {
     }
     
     if (addCurrentPieceToBoard) {
+      // only change piece and add to board if addPieceDelay time has passed after hitting bottom of board or landing on another piece
+      if (addPieceCountdown > 0) {
+        return;
+      }
       addCurrentPieceToBoard();
       pieceHasBeenSwitchedThisTurn = false;
     }
@@ -237,7 +248,7 @@ public class Board {
     }
   }
   
-  // CHANGE LATER TO ALSO ACCOUNT FOR OTHER PIECES
+
   // returns true if the piece has room to move down again
   // returns false if the piece is either at the bottom of the board, or touching another piece
   public boolean pieceCanMoveDown(int row, int col) {
@@ -345,7 +356,9 @@ public class Board {
     while (pieceCanMoveDown(newShadowRow, currentCol)){
       newShadowRow++;
     }
-    
+    if (newShadowRow != currentRow) {
+      addPieceCountdown = addPieceDelay;
+    }
     shadowRow = newShadowRow;
   }
   
@@ -365,4 +378,8 @@ public class Board {
     
   }
 
+
+  public void decrementPieceCountdown() {
+    addPieceCountdown--;
+  }
 }
