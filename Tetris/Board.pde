@@ -1,5 +1,6 @@
 import java.util.LinkedList;
 import java.util.Collections;
+import java.util.Arrays;
 
 public class Board {
   private char[][] board;
@@ -42,6 +43,28 @@ public class Board {
     shadowRow = board.length - currentPieceHeight;
     updateShadow();
     
+  }
+  
+  // debugging
+  public void printStuff() {
+    println("currentPiece: " + currentPiece);
+    println("currentPieceHeight, currentPieceWidth: " + currentPieceHeight + ", " + currentPieceWidth);
+    printArray();
+  }
+  
+  public void printArray() {
+    for (int i = 0; i < board.length; i++) {
+      print("[");
+      for (int j = 0; j < board[i].length; j++) {
+        print(board[i][j]);
+        if (j != board[i].length-1) {
+          print(", ");
+        }
+      }
+      if (i != board.length-1) {
+          print("]\n");
+        }
+    }
   }
   
   private char[][] makeBoard(int boardHeight, int boardWidth) {
@@ -308,6 +331,8 @@ public class Board {
         shiftDown(r);
       }
     }
+    
+    updateShadow();
   }
   
   private void shiftDown(int bottom) {
