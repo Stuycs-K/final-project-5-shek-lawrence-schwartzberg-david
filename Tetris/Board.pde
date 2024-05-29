@@ -80,7 +80,8 @@ public class Board {
   
   // display the current piece's dropping location
   public void displayShadow() {
-    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, GRAY, getColor(currentPiece.getChar()));
+    color pieceColor = getColor(currentPiece.getChar());
+    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, color(pieceColor, 75), pieceColor);
   }
   
   public void displayHeldPiece() {
