@@ -63,3 +63,11 @@
 - fixed piece rotation
   - added method to adjust positions of pieces going out of bounds from rotating
   - fixed issue of x position of pieces increasing after multiple consecutive rotations 
+
+### 5/27
+did nothing
+
+### 5/28
+- changed appearance of drop shadow (transparent background instead of only having outline)
+- added delay for adding pieces to board when they can no longer move down
+- fixed drop shadow when switching to held pieces
