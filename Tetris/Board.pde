@@ -180,8 +180,9 @@ public class Board {
   
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
+  // BUGGED: IF YOU HARDDROP AND THEN QUICKLY HOLD THE NEXT PIECE IT THINKS YOU LOST
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
-    if (currentRow == 0) {
+    if (currentRow == 0 && !pieceCanMoveDown(currentRow, currentCol)) {
       lose = true;
     }
     
