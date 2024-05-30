@@ -38,6 +38,11 @@
 - Made a Button class and a start over button
 - Made holding hard drop not do it multiple times
 
+### 5/29
+
+- Fixed randomization of next pieces
+- Fixed harddropping bug
+
 ## Lawrence Shek
 
 ### 5/22
