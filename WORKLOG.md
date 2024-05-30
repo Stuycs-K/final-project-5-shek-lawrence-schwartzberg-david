@@ -76,3 +76,8 @@ did nothing
 - changed appearance of drop shadow (transparent background instead of only having outline)
 - added delay for adding pieces to board when they can no longer move down
 - fixed drop shadow when switching to held pieces
+
+### 5/29
+I spent the day debugging
+
+did not fix anything
