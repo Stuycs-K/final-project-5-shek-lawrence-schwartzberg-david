@@ -180,7 +180,6 @@ public class Board {
   
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
-  // BUGGED: IF YOU HARDDROP AND THEN QUICKLY HOLD THE NEXT PIECE IT THINKS YOU LOST
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
     if (currentRow == 0 && !pieceCanMoveDown(currentRow, currentCol)) {
       lose = true;
@@ -210,37 +209,38 @@ public class Board {
   }
   
   public void switchPiece() {
-    if (!pieceHasBeenSwitchedThisTurn) {
-      if (heldPiece != null) {
-        TPiece temp = heldPiece;
-        heldPiece = currentPiece;
-        if (heldPiece.getChar() == 'I') {
-          heldPiece.setState(1); // vertical
-        } else {
-          heldPiece.setState(0);
-        }
-        
-        currentPiece = temp;
-        currentPiece.setState(0);
-        resetCurrentRowAndCol();
-        updatePiece();
-        pieceHasBeenSwitchedThisTurn = true;
-        updatePiece();
-        updateShadow();
+    if (pieceHasBeenSwitchedThisTurn) {
+      return;
+    }
+    
+    if (heldPiece != null) {
+      TPiece temp = heldPiece;
+      heldPiece = currentPiece;
+      if (heldPiece.getChar() == 'I') {
+        heldPiece.setState(1); // vertical
       } else {
-        heldPiece = currentPiece;
-        if (heldPiece.getChar() == 'I') {
-          heldPiece.setState(1); // vertical
-        } else {
-          heldPiece.setState(0);
-        }
-        
-        changeToNextPiece(false);
-        pieceHasBeenSwitchedThisTurn = true;
-        updatePiece();
-        updateShadow();
+        heldPiece.setState(0);
       }
-    } 
+      
+      currentPiece = temp;
+      currentPiece.setState(0);
+      resetCurrentRowAndCol();
+      updatePiece();
+      pieceHasBeenSwitchedThisTurn = true;
+      updateShadow();
+    } else {
+      heldPiece = currentPiece;
+      if (heldPiece.getChar() == 'I') {
+        heldPiece.setState(1); // vertical so it looks good in the box
+      } else {
+        heldPiece.setState(0);
+      }
+      
+      changeToNextPiece(false);
+      pieceHasBeenSwitchedThisTurn = true;
+      updatePiece();
+      updateShadow();
+    }
     
   }
   
@@ -342,6 +342,7 @@ public class Board {
       }
     }
     
+    updatePiece();
     updateShadow();
   }
   
