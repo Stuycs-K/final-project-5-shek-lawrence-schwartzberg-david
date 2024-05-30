@@ -61,9 +61,7 @@ public class Board {
           print(", ");
         }
       }
-      if (i != board.length-1) {
-          print("]\n");
-        }
+        print("]\n");
     }
   }
   
@@ -343,6 +341,7 @@ public class Board {
   private void shiftDown(int bottom) {
     for (int r = bottom; r > 0; r--) {
       board[r] = board[r - 1];
+      println("updated board");
     }
   }
   
