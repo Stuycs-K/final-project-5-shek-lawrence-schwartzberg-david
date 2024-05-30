@@ -38,6 +38,11 @@
 - Made a Button class and a start over button
 - Made holding hard drop not do it multiple times
 
+### 5/29
+
+- Fixed randomization of next pieces
+- Fixed harddropping bug
+
 ## Lawrence Shek
 
 ### 5/22
@@ -71,3 +76,8 @@ did nothing
 - changed appearance of drop shadow (transparent background instead of only having outline)
 - added delay for adding pieces to board when they can no longer move down
 - fixed drop shadow when switching to held pieces
+
+### 5/29
+I spent the day debugging
+
+did not fix anything

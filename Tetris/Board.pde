@@ -27,8 +27,6 @@ public class Board {
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
     
-    currentPiece = createNewTPiece();
-    
     resetCurrentRowAndCol();
     
     heldPiece = null;
@@ -36,6 +34,7 @@ public class Board {
     
     nextPieces = new LinkedList<TPiece>();
     addToNextPieces();
+    currentPiece = nextPieces.remove(0);
     
     updatePiece();
         
@@ -61,7 +60,9 @@ public class Board {
           print(", ");
         }
       }
-        print("]\n");
+      if (i != board.length-1) {
+          print("]\n");
+        }
     }
   }
   
@@ -102,8 +103,7 @@ public class Board {
   // display the current piece's dropping location
   public void displayShadow() {
     color pieceColor = getColor(currentPiece.getChar());
-    int opacity = 60;
-    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, color(pieceColor, opacity), pieceColor);
+    currentPiece.display(boardX + SQUARE_SIZE*currentCol, boardY + SQUARE_SIZE*shadowRow, color(pieceColor, 75), pieceColor);
   }
   
   public void displayHeldPiece() {
@@ -180,8 +180,9 @@ public class Board {
   
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
+  // BUGGED: IF YOU HARDDROP AND THEN QUICKLY HOLD THE NEXT PIECE IT THINKS YOU LOST
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
-    if (currentRow == 0) {
+    if (currentRow == 0 && !pieceCanMoveDown(currentRow, currentCol)) {
       lose = true;
     }
     
@@ -245,18 +246,18 @@ public class Board {
   
   // assumes that the piece does not overlap with any other pieces or the board border
   public void addCurrentPieceToBoard() {
-    println("piece " + currentPiece.getChar());
     char[][] pieceArray = currentPiece.getPieceArray();
-    int total = 0;
+    
+    println("currentPiece: " + currentPiece);
+    println(currentPieceHeight + " height");
+    println(currentPieceWidth + " width");
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
           board[currentRow+r][currentCol+c] = pieceArray[currentPieceRow + r][currentPieceCol + c];
-          total++;
         }
       }
     }
-    println("height " + currentPieceHeight + "\nwidth " + currentPieceWidth + "\ntotal " + total + "\n");
   }
   
   // 7 pieces in a "bag"
@@ -269,8 +270,15 @@ public class Board {
     
     Collections.shuffle(bag);
     
+    // pieces aren't repeated
+    if (nextPieces.size() > 0 && nextPieces.get(nextPieces.size()-1).getChar() == bag.get(0).getChar()) {
+      TPiece temp = bag.get(0);
+      bag.set(0, bag.get(bag.size()-1));
+      bag.set(bag.size()-1, temp);
+    }
+    
     for (int i = 0; i < bag.size(); i++) {
-      nextPieces.add(bag.remove(0));
+      nextPieces.add(bag.get(i));
     }
   }
   
@@ -331,7 +339,6 @@ public class Board {
       }
       if (fullLine) {
         shiftDown(r);
-        println("row shifted " + r);
       }
     }
     
@@ -341,7 +348,6 @@ public class Board {
   private void shiftDown(int bottom) {
     for (int r = bottom; r > 0; r--) {
       board[r] = board[r - 1];
-      println("updated board");
     }
   }
   
@@ -407,7 +413,6 @@ public class Board {
     currentCol += currentPieceCol;
     
   }
-
 
   public void decrementPieceCountdown() {
     addPieceCountdown--;
