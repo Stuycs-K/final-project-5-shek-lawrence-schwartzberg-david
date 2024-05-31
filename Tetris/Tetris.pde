@@ -30,6 +30,7 @@ Game game;
 
 Controller controller;
 Button startOverButton;
+Button menuButton;
 
 void setup() {
   size(1000, 700);
@@ -39,7 +40,8 @@ void setup() {
   game = new Game();
   countdown = 0;
 
-  startOverButton = new Button(width/2, height/2, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
+  startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
+  menuButton = new Button(width / 2, height / 2 + 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "menu", true);
   menu = new MenuScreen(1000, 700);
 }
 
@@ -57,6 +59,8 @@ void draw() {
   else {
     startOverButton.update();
     startOverButton.display();
+    menuButton.update();
+    menuButton.display();
     if (startOverButton.isClicked()) {
       game = new Game();
    }
