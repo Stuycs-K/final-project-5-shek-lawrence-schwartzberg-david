@@ -26,7 +26,7 @@ int inputTimer;
 int countdown;
 int delay = 5;
 
-boolean gameActive;
+Game game;
 
 Controller controller;
 Button startOverButton;
@@ -34,10 +34,9 @@ Button startOverButton;
 void setup() {
   size(1000, 700);
   
-  boardX = width/2 - SQUARE_SIZE*5;
-  boardY = height/2 - SQUARE_SIZE*10;
+
   
-  newGame();
+  game = new Game();
   
   startOverButton = new Button(width/2, height/2, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
   menu = new MenuScreen(1000, 700);
@@ -48,39 +47,15 @@ void draw() {
   
   // remove in final
   debug();
-  board.display(boardX, boardY);
-  board.displayShadow();
-  board.displayCurrentPiece();
-  board.displayHeldPiece();
-  board.displayNextPieces();
-  board.decrementPieceCountdown();
-  board.displayScore(boardX - SQUARE_SIZE*2.5, boardY + SQUARE_SIZE*5.2);
-  
-  if (gameActive) {
-    
-    // moves the piece down 
-    if (frame == dropSpeed-1) {
-      board.softDrop();
-    }
-    
-    gameActive = !board.checkIfLost();
-    
-    controller.pressKeys();
-    if (countdown > 0) {
-      countdown--;
-    }
-    
-    frame = (frame+1)%dropSpeed;
-  } else {
-    
+  if (game.isActive()) {
+    game.run();
+  }
+  else {
     startOverButton.update();
     startOverButton.display();
-    
     if (startOverButton.isClicked()) {
-      newGame();
-    }
-    
-
+      game = new Game();
+   }
   }
 }
 
@@ -106,19 +81,6 @@ void keyReleased() {
   controller.press(keyCode, false);
 }
 
-void newGame() {
-  board = new Board(20, 10);
-  
-  // starts at 1 second
-  dropSpeed = 60;
-  
-  inputTimer = 0;
-  
-  controller = new Controller();
-  countdown = 0;
-  
-  gameActive = true;
-}
 
 public TPiece createNewTPiece() {
   int type = (int)(Math.random()*7);

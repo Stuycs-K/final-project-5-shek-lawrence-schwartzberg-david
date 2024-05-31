@@ -109,7 +109,7 @@ public class Controller {
     }
     
     if (keyPressedArray[7]) {
-      gameActive = !gameActive;
+      println("pause");
     }
   }
   
