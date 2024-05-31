@@ -35,18 +35,22 @@ void setup() {
   size(1000, 700);
   
 
-  
+  controller = new Controller();
   game = new Game();
-  
+  countdown = 0;
+
   startOverButton = new Button(width/2, height/2, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
   menu = new MenuScreen(1000, 700);
 }
 
 void draw() {
   background(WHITE);
-  
-  // remove in final
-  debug();
+  debug(); // remove in final
+  if (countdown > 0) {
+    countdown--;
+  }
+  controller.pressKeys();
+  game.display();
   if (game.isActive()) {
     game.run();
   }

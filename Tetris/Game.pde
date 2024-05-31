@@ -10,32 +10,25 @@ public class Game {
     
     inputTimer = 0;
     
-    controller = new Controller();
-    countdown = 0;
     
     active = true;
   }
-
-  public void run() {
+  
+  public void display() {
     board.display(boardX, boardY);
     board.displayShadow();
     board.displayCurrentPiece();
     board.displayHeldPiece();
     board.displayNextPieces();
     board.displayScore(boardX - SQUARE_SIZE*2.5, boardY + SQUARE_SIZE*5.2);
-    board.decrementPieceCountdown();
-    
+  }
 
+  public void run() {
+    board.decrementPieceCountdown();
     if (frame == dropSpeed-1) {
       board.softDrop();
     }
-    
     active = !board.checkIfLost();   
-    controller.pressKeys();
-    if (countdown > 0) {
-      countdown--;
-    }
-    
     frame = (frame+1)%dropSpeed;
 
   }

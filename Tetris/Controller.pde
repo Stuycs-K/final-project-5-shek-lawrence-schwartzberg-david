@@ -19,37 +19,40 @@ public class Controller {
   }
 
   public void press(int code, boolean flag){
-    if (code == LEFT) {
-      set(0, flag);
-    }
-    
-    if (code == RIGHT) {
-      set(1, flag);
-    }
-    
-    if (code == DOWN) {
-      set(2, flag);
-    }
-    
-    if (code == SPACE) {
-      set(3, flag);
-      // if it was being held down and is now released, allow hard drops again
-      if (!canHardDrop && !flag) {
-        canHardDrop = true;
+    if (game.isActive()) {
+      if (code == LEFT) {
+        set(0, flag);
+      }
+      
+      if (code == RIGHT) {
+        set(1, flag);
+      }
+      
+      if (code == DOWN) {
+        set(2, flag);
+      }
+      
+      if (code == SPACE) {
+        set(3, flag);
+        // if it was being held down and is now released, allow hard drops again
+        if (!canHardDrop && !flag) {
+          canHardDrop = true;
+        }
+      }
+      
+      if (code == rotateLeftKey) {
+        set(4, flag);
+      }
+      
+      if (code == rotateRightKey) {
+        set(5, flag);
+      }
+      
+      if (code == storePieceKey) {
+        set(6, flag);
       }
     }
-    
-    if (code == rotateLeftKey) {
-      set(4, flag);
-    }
-    
-    if (code == rotateRightKey) {
-      set(5, flag);
-    }
-    
-    if (code == storePieceKey) {
-      set(6, flag);
-    }
+
     if (code == pauseKey) {
       set(7, flag);
     }
@@ -109,6 +112,8 @@ public class Controller {
     }
     
     if (keyPressedArray[7]) {
+      game.setActive(!game.isActive());
+      countdown += delay;
       println("pause");
     }
   }
