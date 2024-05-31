@@ -24,6 +24,8 @@ public class Board {
   private int addPieceCountdown;
   
   private int score;
+  private int level;
+  private int totalLinesCleared;
   
   
   public Board(int numRows, int numCols) {
@@ -44,6 +46,9 @@ public class Board {
     shadowRow = board.length - currentPieceHeight;
     updateShadow();
     
+    score = 0;
+    level = 0;
+    totalLinesCleared = 0;
   }
   
   // debugging
@@ -84,7 +89,7 @@ public class Board {
     stroke(BLACK);
     textAlign(CENTER, TOP);
     textSize(25);
-    text("Score: " + score, x, y);
+    text("Score: " + score + "\nLevel: " + level, x, y);
   }
   
   private void resetCurrentRowAndCol() {
@@ -352,6 +357,7 @@ public class Board {
       }
       if (fullLine) {
         shiftDown(r);
+        println("shiftdown called");
         numLines++;
       }
     }
@@ -359,6 +365,9 @@ public class Board {
     updateShadow();
     
     updateScore(numLines);
+    
+    totalLinesCleared += numLines;
+    level = totalLinesCleared / 10; // 10 lines per level
   }
   
   private void shiftDown(int bottom) {
@@ -372,14 +381,16 @@ public class Board {
   private void updateScore(int numLines) {
     if (numLines <= 0){
       return;
-    } else if (numLines == 1) {
-      score += 40;
+    } 
+            println("numlines: " +numLines);
+    if (numLines == 1) {
+      score += 40 * (level+1);
     } else if (numLines == 2) {
-      score += 100;
+      score += 100 * (level+1);
     } else if (numLines == 3) {
-      score += 300;
+      score += 300 * (level+1);
     } else if (numLines == 4) {
-      score += 1200;
+      score += 1200 * (level+1);
     } else {
       // shouldn't be possible
       print(numLines);
