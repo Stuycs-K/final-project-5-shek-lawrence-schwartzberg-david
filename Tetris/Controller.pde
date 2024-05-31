@@ -1,7 +1,7 @@
 public class Controller {
-  int rotateLeftKey, rotateRightKey, storePieceKey, SPACE;
+  int rotateLeftKey, rotateRightKey, storePieceKey, SPACE, pauseKey;
   boolean[] keyPressedArray;
-  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece
+  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece, 7-pause
   
   // holding hardDrop doesn't do it multiple times
   boolean canHardDrop;
@@ -11,9 +11,10 @@ public class Controller {
     rotateLeftKey = 'Z'; // 90
     rotateRightKey = 'X'; // 88
     storePieceKey = 'C'; // 67
+    pauseKey = '.';
     SPACE = 32;
     
-    keyPressedArray = new boolean[7];
+    keyPressedArray = new boolean[8];
     canHardDrop = true;
   }
 
@@ -49,7 +50,9 @@ public class Controller {
     if (code == storePieceKey) {
       set(6, flag);
     }
-    
+    if (code == pauseKey) {
+      set(7, flag);
+    }
   }
   
   private void set(int type, boolean flag) {
@@ -103,6 +106,10 @@ public class Controller {
     if (keyPressedArray[6]) {
       board.switchPiece();
       countdown += delay;
+    }
+    
+    if (keyPressedArray[7]) {
+      gameActive = !gameActive;
     }
   }
   

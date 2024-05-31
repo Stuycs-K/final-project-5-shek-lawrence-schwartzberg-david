@@ -14,6 +14,8 @@ color GRAY = #8c8c8c;
 color BLACK = #000000;
 color WHITE = #ffffff;
 
+MenuScreen menu;
+
 Board board;
 float boardX, boardY;
 
@@ -38,6 +40,7 @@ void setup() {
   newGame();
   
   startOverButton = new Button(width/2, height/2, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
+  menu = new MenuScreen(1000, 700);
 }
 
 void draw() {
@@ -63,7 +66,6 @@ void draw() {
     gameActive = !board.checkIfLost();
     
     controller.pressKeys();
-    board.clearLines();
     if (countdown > 0) {
       countdown--;
     }

@@ -263,11 +263,11 @@ public class Board {
   public void addCurrentPieceToBoard() {
     char[][] pieceArray = currentPiece.getPieceArray();
     
-    println("currentPiece: " + currentPiece);
-    println(currentPieceHeight + " height");
-    println(currentPieceWidth + " width");
-    println(currentPieceRow + " currentPieceRow");
-    println(currentPieceCol + " currentPieceCol");
+    //println("currentPiece: " + currentPiece);
+    //println(currentPieceHeight + " height");
+    //println(currentPieceWidth + " width");
+    //println(currentPieceRow + " currentPieceRow");
+    //println(currentPieceCol + " currentPieceCol");
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
@@ -275,6 +275,7 @@ public class Board {
         }
       }
     }
+    clearLines();
   }
   
   // 7 pieces in a "bag"
@@ -357,6 +358,7 @@ public class Board {
       }
       if (fullLine) {
         shiftDown(r);
+        r++;
         println("shiftdown called");
         numLines++;
       }
