@@ -86,3 +86,7 @@ did nothing
 I spent the day debugging
 
 did not fix anything
+
+### 5/30
+- tried to fix rotating piece eating other pieces
+- did not fix it
