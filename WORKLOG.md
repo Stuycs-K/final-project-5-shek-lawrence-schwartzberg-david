@@ -43,6 +43,11 @@
 - Fixed randomization of next pieces
 - Fixed harddropping bug
 
+### 5/30
+
+- Added basic score system
+- Added levels
+
 ## Lawrence Shek
 
 ### 5/22
