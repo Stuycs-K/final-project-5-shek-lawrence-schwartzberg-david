@@ -63,7 +63,6 @@ void draw() {
     gameActive = !board.checkIfLost();
     
     controller.pressKeys();
-
     if (countdown > 0) {
       countdown--;
     }

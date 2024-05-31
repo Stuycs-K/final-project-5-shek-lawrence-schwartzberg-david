@@ -360,6 +360,7 @@ public class Board {
       if (fullLine) {
         shiftDown(r);
         r++;
+        println("shiftdown called");
         numLines++;
       }
     }
