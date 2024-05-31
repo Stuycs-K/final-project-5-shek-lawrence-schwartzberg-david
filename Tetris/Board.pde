@@ -178,6 +178,7 @@ public class Board {
     if (pieceCanMoveDown(currentRow, currentCol)) {
       currentRow++;
       addPieceCountdown = addPieceDelay;
+      updateShadow();
     } else {
       // less delay if holding down softdrop
       addPieceCountdown = min(addPieceCountdown, addPieceDelay / 2);
@@ -331,6 +332,8 @@ public class Board {
       }
     }
     return false;
+
+
   }
   
   public void movePieceLeft() {
@@ -379,12 +382,10 @@ public class Board {
   }
   
   // https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
-  // implement levels later
   private void updateScore(int numLines) {
     if (numLines <= 0){
       return;
     } 
-            println("numlines: " +numLines);
     if (numLines == 1) {
       score += 40 * (level+1);
     } else if (numLines == 2) {
@@ -394,8 +395,6 @@ public class Board {
     } else if (numLines == 4) {
       score += 1200 * (level+1);
     } else {
-      // shouldn't be possible
-      print(numLines);
       score += 1200;
     }
   }
