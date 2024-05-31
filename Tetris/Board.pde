@@ -23,6 +23,8 @@ public class Board {
   private int addPieceDelay = 60;
   private int addPieceCountdown;
   
+  private int score;
+  
   
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
@@ -75,6 +77,14 @@ public class Board {
       }
     }
     return newBoard;
+  }
+  
+  public void displayScore(float x, float y) {
+    fill(BLACK);
+    stroke(BLACK);
+    textAlign(CENTER, TOP);
+    textSize(25);
+    text("Score: " + score, x, y);
   }
   
   private void resetCurrentRowAndCol() {
@@ -180,8 +190,8 @@ public class Board {
   
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
-  // BUGGED: IF YOU HARDDROP AND THEN QUICKLY HOLD THE NEXT PIECE IT THINKS YOU LOST
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
+    println("changetonextpiece called \naddCurrentPieceToBoard: "+addCurrentPieceToBoard);
     if (currentRow == 0 && !pieceCanMoveDown(currentRow, currentCol)) {
       lose = true;
     }
@@ -251,6 +261,8 @@ public class Board {
     println("currentPiece: " + currentPiece);
     println(currentPieceHeight + " height");
     println(currentPieceWidth + " width");
+    println(currentPieceRow + " currentPieceRow");
+    println(currentPieceCol + " currentPieceCol");
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
@@ -329,6 +341,7 @@ public class Board {
   }
   
   public void clearLines() {
+    int numLines = 0;
     for (int r = board.length - 1; r >= 0; r--)  {
       boolean fullLine = true;
       for (int c = 0; c < board[0].length; c++) {
@@ -339,10 +352,13 @@ public class Board {
       }
       if (fullLine) {
         shiftDown(r);
+        numLines++;
       }
     }
     
     updateShadow();
+    
+    updateScore(numLines);
   }
   
   private void shiftDown(int bottom) {
@@ -350,6 +366,27 @@ public class Board {
       board[r] = board[r - 1];
     }
   }
+  
+  // https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
+  // implement levels later
+  private void updateScore(int numLines) {
+    if (numLines <= 0){
+      return;
+    } else if (numLines == 1) {
+      score += 40;
+    } else if (numLines == 2) {
+      score += 100;
+    } else if (numLines == 3) {
+      score += 300;
+    } else if (numLines == 4) {
+      score += 1200;
+    } else {
+      // shouldn't be possible
+      print(numLines);
+      score += 1200;
+    }
+  }
+    
   
   public void rotatePieceLeft() {
     currentPiece.rotateLeft();

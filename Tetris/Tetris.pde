@@ -51,13 +51,9 @@ void draw() {
   board.displayHeldPiece();
   board.displayNextPieces();
   board.decrementPieceCountdown();
+  board.displayScore(boardX - SQUARE_SIZE*2.5, boardY + SQUARE_SIZE*5.2);
+  
   if (gameActive) {
-    //board.display(boardX, boardY);
-    //board.displayShadow();
-    //board.displayCurrentPiece();
-    //board.displayHeldPiece();
-    //board.displayNextPieces();
-    //board.decrementPieceCountdown();
     
     // moves the piece down 
     if (frame == dropSpeed-1) {
@@ -74,11 +70,6 @@ void draw() {
     
     frame = (frame+1)%dropSpeed;
   } else {
-    //board.display(boardX, boardY);
-    //board.displayShadow();
-    //board.displayCurrentPiece();
-    //board.displayHeldPiece();
-    //board.displayNextPieces();
     
     startOverButton.update();
     startOverButton.display();
