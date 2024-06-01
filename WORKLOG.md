@@ -48,6 +48,12 @@
 - Added basic score system
 - Added levels
 
+### 5/31
+
+- Tried debugging, did not work
+- Fixed scoring
+- Made levels increase speed over time
+
 ## Lawrence Shek
 
 ### 5/22
@@ -90,3 +96,8 @@ did not fix anything
 ### 5/30
 - tried to fix rotating piece eating other pieces
 - did not fix it
+
+### 5/31
+- added button for menu screen
+- made it possible to pause game
+- moved board related logic in Tetris class to a Game class

@@ -71,6 +71,7 @@ public class Board {
           print("]\n");
         }
     }
+    print("]\n");
   }
   
   private char[][] makeBoard(int boardHeight, int boardWidth) {
@@ -89,7 +90,7 @@ public class Board {
     stroke(BLACK);
     textAlign(CENTER, TOP);
     textSize(25);
-    text("Score: " + score + "\nLevel: " + level, x, y);
+    text("Score: " + score + "\nLevel: " + level + "\nLines: " + totalLinesCleared, x, y);
   }
   
   private void resetCurrentRowAndCol() {
@@ -175,9 +176,11 @@ public class Board {
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
   public void softDrop() {
+    //println("softDrop called");
     if (pieceCanMoveDown(currentRow, currentCol)) {
       currentRow++;
       addPieceCountdown = addPieceDelay;
+      updateShadow();
     } else {
       // less delay if holding down softdrop
       addPieceCountdown = min(addPieceCountdown, addPieceDelay / 2);
@@ -186,6 +189,7 @@ public class Board {
   }
   
   public void hardDrop() {
+    //println("hardDrop called");
     while (pieceCanMoveDown(currentRow, currentCol)) {
       softDrop();
     }
@@ -196,9 +200,11 @@ public class Board {
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
-    println("changetonextpiece called \naddCurrentPieceToBoard: "+addCurrentPieceToBoard);
+    //println("changetonextpiece called \naddCurrentPieceToBoard: "+addCurrentPieceToBoard);
+    //println("pieceHasBeenSwitchedThisTurn: " +pieceHasBeenSwitchedThisTurn);
     if (currentRow == 0 && !pieceCanMoveDown(currentRow, currentCol)) {
       lose = true;
+      //println("lose = true");
     }
     
     if (addCurrentPieceToBoard) {
@@ -217,6 +223,10 @@ public class Board {
     
     resetCurrentRowAndCol();
     updatePiece();
+    updatePiece();
+    updatePiece();
+    updatePiece();
+    updatePiece();
     updateShadow();
   }
   
@@ -225,6 +235,7 @@ public class Board {
   }
   
   public void switchPiece() {
+    //println("switchPiece called");
     if (!pieceHasBeenSwitchedThisTurn) {
       if (heldPiece != null) {
         TPiece temp = heldPiece;
@@ -261,6 +272,7 @@ public class Board {
   
   // assumes that the piece does not overlap with any other pieces or the board border
   public void addCurrentPieceToBoard() {
+    //println("addCurrentPieceToBoard called");
     char[][] pieceArray = currentPiece.getPieceArray();
     
     //println("currentPiece: " + currentPiece);
@@ -275,6 +287,7 @@ public class Board {
         }
       }
     }
+    
     clearLines();
   }
   
@@ -330,6 +343,8 @@ public class Board {
       }
     }
     return false;
+
+
   }
   
   public void movePieceLeft() {
@@ -347,6 +362,7 @@ public class Board {
   }
   
   public void clearLines() {
+    //println("clearLines called");
     int numLines = 0;
     for (int r = board.length - 1; r >= 0; r--)  {
       boolean fullLine = true;
@@ -359,7 +375,6 @@ public class Board {
       if (fullLine) {
         shiftDown(r);
         r++;
-        println("shiftdown called");
         numLines++;
       }
     }
@@ -369,22 +384,27 @@ public class Board {
     updateScore(numLines);
     
     totalLinesCleared += numLines;
-    level = totalLinesCleared / 10; // 10 lines per level
+    
+    int oldLevel = level;
+    level = totalLinesCleared / 5; // 5 lines per level
+    
+    if (level > oldLevel) {
+      dropSpeed = max(dropSpeed-5, 5);
+    }
   }
   
   private void shiftDown(int bottom) {
+    //println("shiftdown called with bottom: "+ bottom);
     for (int r = bottom; r > 0; r--) {
       board[r] = board[r - 1];
     }
   }
   
   // https://tetris.wiki/Scoring#Original_Nintendo_scoring_system
-  // implement levels later
   private void updateScore(int numLines) {
     if (numLines <= 0){
       return;
     } 
-            println("numlines: " +numLines);
     if (numLines == 1) {
       score += 40 * (level+1);
     } else if (numLines == 2) {
@@ -394,8 +414,6 @@ public class Board {
     } else if (numLines == 4) {
       score += 1200 * (level+1);
     } else {
-      // shouldn't be possible
-      print(numLines);
       score += 1200;
     }
   }
@@ -404,25 +422,27 @@ public class Board {
   public void rotatePieceLeft() {
     currentPiece.rotateLeft();
     updatePiece();
-    updateShadow();
     if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateRight();
       updatePiece();
-      updateShadow();
+    } else {
+      adjustBorderRotation();
     }
-    adjustBorderRotation();
+    updateShadow();
+
   }
 
   public void rotatePieceRight() {
     currentPiece.rotateRight();
     updatePiece();
-    updateShadow();
     if (collidesWithPiece(currentRow, currentCol)) {
       currentPiece.rotateLeft();
       updatePiece();
-      updateShadow();
-    }    
-    adjustBorderRotation();
+    } else {
+      adjustBorderRotation();
+    }
+    updateShadow();
+
   }
   
   private void adjustBorderRotation() {

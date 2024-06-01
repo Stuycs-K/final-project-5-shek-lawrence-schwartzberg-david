@@ -114,7 +114,6 @@ public class Controller {
     if (keyPressedArray[7]) {
       game.setActive(!game.isActive());
       countdown += delay;
-      println("pause");
     }
   }
   

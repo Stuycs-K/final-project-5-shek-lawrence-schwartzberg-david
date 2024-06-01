@@ -24,7 +24,7 @@ int frame;
 int inputTimer;
 
 int countdown;
-int delay = 5;
+int delay = 6;
 
 Game game;
 
@@ -74,6 +74,7 @@ void debug() {
   text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
   text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
   text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);
+  text("dropSpeed: " + dropSpeed, 10, 70);
 }
   
 
@@ -83,6 +84,7 @@ void keyPressed() {
   if (keyCode == 'P') {
     board.printStuff();
   }
+  
 }
 
 void keyReleased() {

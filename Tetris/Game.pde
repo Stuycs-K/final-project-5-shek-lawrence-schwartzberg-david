@@ -6,7 +6,7 @@ public class Game {
     boardX = width/2 - SQUARE_SIZE*5;
     boardY = height/2 - SQUARE_SIZE*10;
     // starts at 1 second
-    dropSpeed = 60;
+    dropSpeed = 50;
     
     inputTimer = 0;
     
