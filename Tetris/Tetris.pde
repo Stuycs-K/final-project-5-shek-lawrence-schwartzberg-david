@@ -22,7 +22,7 @@ int frame;
 int inputTimer;
 
 int countdown;
-int delay = 5;
+int delay = 6;
 
 boolean gameActive;
 
@@ -71,13 +71,12 @@ void draw() {
     frame = (frame+1)%dropSpeed;
   } else {
     
-    startOverButton.update();
-    startOverButton.display();
+    //startOverButton.update();
+    //startOverButton.display();
     
-    if (startOverButton.isClicked()) {
-      newGame();
-    }
-    
+    //if (startOverButton.isClicked()) {
+    //  newGame();
+    //}
 
   }
 }
@@ -89,6 +88,7 @@ void debug() {
   text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
   text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
   text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);
+  text("dropSpeed: " + dropSpeed, 10, 70);
 }
   
 
@@ -97,6 +97,10 @@ void keyPressed() {
   
   if (keyCode == 'P') {
     board.printStuff();
+  }
+  
+  if (keyCode == 'Q') {
+    gameActive = false;
   }
 }
 
@@ -107,8 +111,7 @@ void keyReleased() {
 void newGame() {
   board = new Board(20, 10);
   
-  // starts at 1 second
-  dropSpeed = 60;
+  dropSpeed = 50;
   
   inputTimer = 0;
   
