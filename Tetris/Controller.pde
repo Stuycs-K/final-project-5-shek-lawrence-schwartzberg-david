@@ -55,6 +55,11 @@ public class Controller {
 
     if (code == pauseKey) {
       set(7, flag);
+      for (int i = 0; i < keyPressedArray.length; i++) {
+        if (i != 7) {
+          set(i, false);
+        }
+      }
     }
   }
   
@@ -111,6 +116,7 @@ public class Controller {
       countdown += delay;
     }
     
+    // pause game
     if (keyPressedArray[7]) {
       game.setActive(!game.isActive());
       countdown += delay;
