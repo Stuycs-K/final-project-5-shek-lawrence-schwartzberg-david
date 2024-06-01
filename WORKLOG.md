@@ -48,6 +48,12 @@
 - Added basic score system
 - Added levels
 
+### 5/31
+
+- Tried debugging, did not work
+- Fixed scoring
+- Made levels increase speed over time
+
 ## Lawrence Shek
 
 ### 5/22
