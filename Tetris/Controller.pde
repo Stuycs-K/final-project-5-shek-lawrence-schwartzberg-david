@@ -58,7 +58,7 @@ public class Controller {
       }
     }
 
-    if (code == pauseKey) {
+    if (!game.isPaused() && code == pauseKey) {
       set(7, flag);
 
     }

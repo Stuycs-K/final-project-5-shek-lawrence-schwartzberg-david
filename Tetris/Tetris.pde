@@ -1,5 +1,3 @@
-//import java.util.*;
-
 int SQUARE_SIZE = 30;
 
 color CYAN = #00ffee;
