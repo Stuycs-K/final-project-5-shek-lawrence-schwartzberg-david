@@ -481,6 +481,9 @@ public class Board {
 
     currentRow += currentPieceRow;
     currentCol += currentPieceCol;
+    while (currentCol > 0 && collidesWithPiece(currentRow, currentCol) && !collidesWithPiece(currentRow, currentCol - 1)) {
+      currentCol--;
+    }
     
   }
 
