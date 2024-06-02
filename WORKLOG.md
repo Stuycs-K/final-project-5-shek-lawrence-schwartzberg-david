@@ -105,3 +105,8 @@ did not fix anything
 ### 6/1
 - added menu screen with working play button
 - made code in Tetris and Game class more organized
+
+### 6/2
+- added background to game and menu
+- changed colors of pieces and board
+- (hopefully) fixed rotating pieces eating others 
