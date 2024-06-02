@@ -86,8 +86,8 @@ public class Board {
   }
   
   public void displayScore(float x, float y) {
-    fill(BLACK);
-    stroke(BLACK);
+    fill(WHITE);
+    stroke(WHITE);
     textAlign(CENTER, TOP);
     textSize(25);
     text("Score: " + score + "\nLevel: " + level + "\nLines: " + totalLinesCleared, x, y);

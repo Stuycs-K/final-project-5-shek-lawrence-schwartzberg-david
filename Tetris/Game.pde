@@ -3,6 +3,7 @@ public class Game {
   private static final int screenHeight = 700;
   private boolean active;
   private boolean paused;
+  private PImage backgroundImage;
 
   
   public Game() {
@@ -14,7 +15,8 @@ public class Game {
     inputTimer = 0;
     active = true;
     paused = false;
-  }
+    backgroundImage = loadImage("gameBackground2.jpg");
+}
 
   public void run() {
     display();
@@ -41,6 +43,12 @@ public class Game {
   }
   
   public void display() {
+    image(backgroundImage, 0, 0);
+    image(backgroundImage, backgroundImage.width, 0);
+    image(backgroundImage, 0, backgroundImage.height);
+    image(backgroundImage, backgroundImage.width, backgroundImage.height);
+    //image(backgroundImage, 0, backgroundImage.height * 2);
+    //image(backgroundImage, backgroundImage.width, backgroundImage.height * 2);
     board.display(boardX, boardY);
     board.displayShadow();
     board.displayCurrentPiece();
