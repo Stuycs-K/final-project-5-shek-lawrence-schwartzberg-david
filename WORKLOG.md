@@ -101,3 +101,7 @@ did not fix anything
 - added button for menu screen
 - made it possible to pause game
 - moved board related logic in Tetris class to a Game class
+
+### 6/1
+- added menu screen with working play button
+- made code in Tetris and Game class more organized
