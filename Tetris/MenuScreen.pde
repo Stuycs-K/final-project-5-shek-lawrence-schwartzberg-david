@@ -21,7 +21,6 @@ public class MenuScreen {
     playButton.update();
     display();
     if (playButton.isClicked()) {
-      println("test");
       game = new Game();
     }
   }

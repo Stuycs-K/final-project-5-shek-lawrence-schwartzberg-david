@@ -35,7 +35,7 @@ public class Game {
       if (frame == dropSpeed-1) {
         board.softDrop();
       }
-      active = !board.checkIfLost();   
+      paused = board.checkIfLost();   
       frame = (frame+1)%dropSpeed;
     }
   }
