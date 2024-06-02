@@ -1,12 +1,13 @@
 public class MenuScreen {
-  private int HEIGHT, WIDTH;
+  PImage backgroundImage;
   
-  public MenuScreen(int height, int width) {  
-    HEIGHT = height;
-    WIDTH = width;
+  public MenuScreen() {  
+    backgroundImage = loadImage("background.jpg");
+    println(backgroundImage.width + " " + backgroundImage.height);
   }
   
   public void display() {
-    rect(0, 0, HEIGHT, WIDTH);
+    windowResize(backgroundImage.width, backgroundImage.height);
+    image(backgroundImage, 0, 0);
   }
 }

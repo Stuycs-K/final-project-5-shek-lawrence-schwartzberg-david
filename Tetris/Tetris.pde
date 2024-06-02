@@ -23,6 +23,7 @@ int dropSpeed;
 int frame;
 int inputTimer;
 
+// input delay
 int countdown;
 int delay = 6;
 
@@ -33,16 +34,13 @@ Button startOverButton;
 Button menuButton;
 
 void setup() {
-  size(1000, 700);
-  
-
   controller = new Controller();
   game = new Game();
   countdown = 0;
 
   startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
   menuButton = new Button(width / 2, height / 2 + 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "menu", true);
-  menu = new MenuScreen(1000, 700);
+  menu = new MenuScreen();
 }
 
 void draw() {
@@ -52,18 +50,12 @@ void draw() {
     countdown--;
   }
   controller.pressKeys();
-  game.display();
   if (game.isActive()) {
+    game.display();
     game.run();
   }
   else {
-    startOverButton.update();
-    startOverButton.display();
-    menuButton.update();
-    menuButton.display();
-    if (startOverButton.isClicked()) {
-      game = new Game();
-   }
+    menu.display();
   }
 }
 

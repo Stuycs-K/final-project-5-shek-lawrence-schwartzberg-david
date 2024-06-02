@@ -19,7 +19,7 @@ public class Controller {
   }
 
   public void press(int code, boolean flag){
-    if (game.isActive()) {
+    if (game.isActive() && !game.isPaused()) {
       if (code == LEFT) {
         set(0, flag);
       }
@@ -119,7 +119,7 @@ public class Controller {
     
     // pause game
     if (keyPressedArray[7]) {
-      game.setActive(!game.isActive());
+      game.setPause(!game.isPaused());
       countdown += delay;
     }
   }
