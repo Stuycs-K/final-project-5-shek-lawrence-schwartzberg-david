@@ -2,11 +2,11 @@ int SQUARE_SIZE = 30;
 
 color CYAN = #00E6E6;
 color RED = #E64A53;
-color BLUE = #1856ED;
-color GREEN = #10c443;
+color BLUE = #1C62FF;
+color GREEN = #16D647;
 color ORANGE = #ff8c00;
-color YELLOW = #E6DC45;
-color PURPLE = #A500FF;
+color YELLOW = #F0E549;
+color PURPLE = #B435FA;
 
 //color GRAY = #8c8c8c;
 color OUTLINE = #1B1B1B;

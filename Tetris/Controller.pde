@@ -58,7 +58,7 @@ public class Controller {
       }
     }
 
-    if (!game.isPaused() && code == pauseKey) {
+    if (!board.checkIfLost() && code == pauseKey) {
       set(7, flag);
 
     }
