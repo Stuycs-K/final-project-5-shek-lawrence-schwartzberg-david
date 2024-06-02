@@ -100,7 +100,7 @@ public class Board {
   
   // display the board relative to the window
   public void display(float x, float y) {
-    stroke(BLACK);
+    stroke(OUTLINE);
     for (int r = 0; r < board.length; r++) {
       for (int c = 0; c < board[0].length; c++) {
         fill(getColor(board[r][c]));
