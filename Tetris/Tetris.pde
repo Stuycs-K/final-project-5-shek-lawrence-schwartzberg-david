@@ -36,6 +36,7 @@ Button menuButton;
 void setup() {
   controller = new Controller();
   game = new Game();
+  game.setActive(false);
   countdown = 0;
 
   startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
@@ -55,7 +56,7 @@ void draw() {
     game.run();
   }
   else {
-    menu.display();
+    menu.update();
   }
 }
 
