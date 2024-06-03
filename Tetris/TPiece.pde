@@ -64,6 +64,7 @@ public class TPiece {
     char[][] currOrientation = orientations[state];
     
     fill(getColor(pieceType));
+    stroke(BLACK);
     int startRow = getTop();
     int startCol = getLeft();
     for (int r = 0; r < currOrientation.length; r++) {

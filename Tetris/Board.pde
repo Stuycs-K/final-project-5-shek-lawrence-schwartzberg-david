@@ -129,18 +129,18 @@ public class Board {
     
     if (heldPiece != null) {
       char c = heldPiece.getChar();
-      
+      color pieceColor = color(getColor(heldPiece.getChar()), 100);
       switch(c) {
         case 'I':
-          heldPiece.display(boardX - SQUARE_SIZE*3, boardY + SQUARE_SIZE*0.5);
+          heldPiece.display(boardX - SQUARE_SIZE*3, boardY + SQUARE_SIZE*0.5, pieceColor, BLACK);
           break;
           
         case 'O':
-          heldPiece.display(boardX - SQUARE_SIZE*3.5, boardY + SQUARE_SIZE*1.5);
+          heldPiece.display(boardX - SQUARE_SIZE*3.5, boardY + SQUARE_SIZE*1.5, pieceColor, BLACK);
           break;
           
         default:
-          heldPiece.display(boardX - SQUARE_SIZE*4, boardY + SQUARE_SIZE);
+          heldPiece.display(boardX - SQUARE_SIZE*4, boardY + SQUARE_SIZE, pieceColor, BLACK);
           break;
       }
     }
