@@ -54,6 +54,12 @@
 - Fixed scoring
 - Made levels increase speed over time
 
+### 6/3
+
+- Fixed pieces spawning weirdly
+- Changed leveling system a little bit
+- Made held pieces grayed out to indicate they can't be switched that turn
+
 ## Lawrence Shek
 
 ### 5/22
