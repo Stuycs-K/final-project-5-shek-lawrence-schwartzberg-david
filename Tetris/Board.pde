@@ -386,11 +386,15 @@ public class Board {
     linesClearedSinceLastLevel += numLines;
     
     if (linesClearedSinceLastLevel >= 5) {
-      level += (linesClearedSinceLastLevel / 5);
+      setLevel(level + linesClearedSinceLastLevel / 5);
       linesClearedSinceLastLevel %= 5;
-      dropSpeed = max(dropSpeed-5, 5);
     }
 
+  }
+  
+  public void setLevel(int n) {
+    level = n;
+    dropSpeed = max(-5*level + 50, 5);
   }
   
   private void shiftDown(int bottom) {
