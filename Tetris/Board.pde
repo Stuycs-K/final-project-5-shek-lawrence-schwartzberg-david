@@ -31,14 +31,14 @@ public class Board {
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
     
-    resetCurrentRowAndCol();
-    
     heldPiece = null;
     pieceHasBeenSwitchedThisTurn = false;
     
     nextPieces = new LinkedList<TPiece>();
     addToNextPieces();
     currentPiece = nextPieces.remove(0);
+    
+    resetCurrentRowAndCol();
     
     updatePiece();
         
@@ -95,7 +95,11 @@ public class Board {
   
   private void resetCurrentRowAndCol() {
     currentRow = 0;
-    currentCol = board[0].length/2;
+    if (currentPiece.getChar() == 'I') {
+      currentCol = board[0].length/2 - 2;
+    } else {
+      currentCol = board[0].length/2 - 1;
+    }
   }
   
   // display the board relative to the window
@@ -222,10 +226,6 @@ public class Board {
     }
     
     resetCurrentRowAndCol();
-    updatePiece();
-    updatePiece();
-    updatePiece();
-    updatePiece();
     updatePiece();
     updateShadow();
   }
@@ -472,12 +472,11 @@ public class Board {
     currentPieceHeight = currentPiece.height();
     currentPieceWidth = currentPiece.width();
     
-    currentRow = max(currentRow - currentPieceRow, 0);
-    currentCol = max(currentCol - currentPieceCol, 0);
-        
     currentPieceRow = currentPiece.getTop();
     currentPieceCol = currentPiece.getLeft();
     
+    currentRow = max(currentRow - currentPieceRow, 0);
+    currentCol = max(currentCol - currentPieceCol, 0);
 
     currentRow += currentPieceRow;
     currentCol += currentPieceCol;
