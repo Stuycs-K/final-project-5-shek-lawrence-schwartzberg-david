@@ -129,7 +129,7 @@ public class Board {
     
     if (heldPiece != null) {
       char c = heldPiece.getChar();
-      color pieceColor = color(getColor(heldPiece.getChar()), 100);
+      color pieceColor = pieceHasBeenSwitchedThisTurn ? color(getColor(heldPiece.getChar()), 50) : getColor(heldPiece.getChar());
       switch(c) {
         case 'I':
           heldPiece.display(boardX - SQUARE_SIZE*3, boardY + SQUARE_SIZE*0.5, pieceColor, BLACK);
