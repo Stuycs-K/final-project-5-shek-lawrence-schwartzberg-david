@@ -11,7 +11,7 @@ public class Controller {
     rotateLeftKey = 'Z'; // 90
     rotateRightKey = 'X'; // 88
     storePieceKey = 'C'; // 67
-    pauseKey = '.';
+    pauseKey = 'P';
     SPACE = 32;
     
     keyPressedArray = new boolean[8];

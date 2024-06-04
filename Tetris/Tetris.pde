@@ -74,7 +74,7 @@ void debug() {
 void keyPressed() {
   controller.press(keyCode, true);
   
-  if (keyCode == 'P') {
+  if (keyCode == 'Q') {
     board.printStuff();
   }
   
