@@ -7,7 +7,7 @@ public class MenuScreen {
   
   
   public MenuScreen() {  
-    // background 1
+     //background 1
     //backgroundImage = loadImage("menuBackground1.jpg");
     // background 2
     backgroundImage = loadImage("menuBackground2.png");
@@ -18,10 +18,10 @@ public class MenuScreen {
     color playButtonBg = #3D509B;
     color playButtonText = makeBrighter(playButtonBg);
     //background 1
-    //playButton = new Button(screenWidth / 5, screenHeight / 3, buttonWidth, buttonHeight, playButtonBg, playButtonBg, GRAY, playButtonText, 50, "play", true);  
+    //playButton = new Button(screenWidth / 5, screenHeight / 3, buttonWidth, buttonHeight, playButtonBg, playButtonBg, GRAY, playButtonText, 50, "Play", true);  
   
     // background 2
-    playButton = new Button(screenWidth / 5, screenHeight / 1.5 , buttonWidth, buttonHeight, playButtonBg, playButtonBg, GRAY, playButtonText, 50, "play", true);  
+    playButton = new Button(screenWidth / 5, screenHeight / 1.5 , buttonWidth, buttonHeight, playButtonBg, playButtonBg, GRAY, playButtonText, 50, "Play", true);  
   }
   
   public void update() {

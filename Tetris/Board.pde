@@ -25,7 +25,7 @@ public class Board {
   
   private int score;
   private int level;
-  private int totalLinesCleared;
+  private int linesClearedSinceLastLevel;
   
   
   public Board(int numRows, int numCols) {
@@ -48,7 +48,7 @@ public class Board {
     
     score = 0;
     level = 0;
-    totalLinesCleared = 0;
+    linesClearedSinceLastLevel = 0;
   }
   
   // debugging
@@ -90,7 +90,7 @@ public class Board {
     stroke(WHITE);
     textAlign(CENTER, TOP);
     textSize(25);
-    text("Score: " + score + "\nLevel: " + level + "\nLines: " + totalLinesCleared, x, y);
+    text("Score: " + score + "\nLevel: " + level + "\nLines: " + (level*5 + linesClearedSinceLastLevel), x, y);
   }
   
   private void resetCurrentRowAndCol() {
@@ -383,14 +383,14 @@ public class Board {
     
     updateScore(numLines);
     
-    totalLinesCleared += numLines;
+    linesClearedSinceLastLevel += numLines;
     
-    int oldLevel = level;
-    level = totalLinesCleared / 5; // 5 lines per level
-    
-    if (level > oldLevel) {
+    if (linesClearedSinceLastLevel >= 5) {
+      level += (linesClearedSinceLastLevel / 5);
+      linesClearedSinceLastLevel %= 5;
       dropSpeed = max(dropSpeed-5, 5);
     }
+
   }
   
   private void shiftDown(int bottom) {
