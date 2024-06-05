@@ -26,6 +26,7 @@ public class MenuScreen {
     color configButtonBg = #3D509B;
     color configButtonText = makeBrighter(configButtonBg);
     configButton = new Button(screenWidth / 5 + buttonWidth * 1.3, screenHeight / 1.5, buttonWidth, buttonHeight, configButtonBg, configButtonBg, LIGHT_GRAY, configButtonText, 50, "settings", true);  
+   
   }
   
   public void update() {
@@ -34,6 +35,9 @@ public class MenuScreen {
     display();
     if (playButton.isClicked()) {
       game = new Game();
+    }
+    if (configButton.isClicked()) {
+      config = new ConfigScreen();
     }
   }
   

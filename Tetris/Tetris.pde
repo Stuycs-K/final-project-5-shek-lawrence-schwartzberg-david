@@ -16,6 +16,7 @@ color BLACK = #000000;
 color WHITE = #ffffff;
 
 MenuScreen menu;
+ConfigScreen config;
 
 Board board;
 float boardX, boardY;
@@ -47,7 +48,7 @@ void setup() {
 
 void draw() {
   background(WHITE);
-  debug(); // remove in final
+
   if (countdown > 0) {
     countdown--;
   }
@@ -57,18 +58,13 @@ void draw() {
     game.run();
   }
   else {
-    menu.update();
+    if (config != null) {
+      config.update();
+      config.display();
+    } else {
+      menu.update();
+    }
   }
-}
-
-void debug() {
-  fill(BLACK);
-  textSize(10);
-  textAlign(LEFT, TOP);
-  text("rotateLeftKey: " + (char)controller.rotateLeftKey, 10, 10);
-  text("rotateRightKey: " + (char)controller.rotateRightKey, 10, 30);
-  text("storePieceKey: " + (char)controller.storePieceKey, 10, 50);
-  text("dropSpeed: " + dropSpeed, 10, 70);
 }
   
 
