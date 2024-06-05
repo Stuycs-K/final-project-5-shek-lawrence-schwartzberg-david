@@ -11,6 +11,7 @@ color PURPLE = #B435FA;
 //color GRAY = #8c8c8c;
 color OUTLINE = #1B1B1B;
 color GRAY = #4D4C4F;
+color LIGHT_GRAY = #A6AEB4;
 color BLACK = #000000;
 color WHITE = #ffffff;
 

@@ -3,7 +3,7 @@ public class MenuScreen {
   private int screenWidth, screenHeight;
   private int buttonWidth, buttonHeight;
   private Button playButton;
-  private Button settingsButton;
+  private Button configButton;
   
   
   public MenuScreen() {  
@@ -15,17 +15,22 @@ public class MenuScreen {
     screenHeight = backgroundImage.height;
     buttonWidth = 300;
     buttonHeight = 70;
-    color playButtonBg = #3D509B;
+    color playButtonBg = #653D9B;
     color playButtonText = makeBrighter(playButtonBg);
     //background 1
     //playButton = new Button(screenWidth / 5, screenHeight / 3, buttonWidth, buttonHeight, playButtonBg, playButtonBg, GRAY, playButtonText, 50, "Play", true);  
   
     // background 2
-    playButton = new Button(screenWidth / 5, screenHeight / 1.5 , buttonWidth, buttonHeight, playButtonBg, playButtonBg, GRAY, playButtonText, 50, "Play", true);  
+    playButton = new Button(screenWidth / 5, screenHeight / 1.5 , buttonWidth, buttonHeight, playButtonBg, playButtonBg, LIGHT_GRAY, playButtonText, 50, "play", true);  
+    
+    color configButtonBg = #3D509B;
+    color configButtonText = makeBrighter(configButtonBg);
+    configButton = new Button(screenWidth / 5 + buttonWidth * 1.3, screenHeight / 1.5, buttonWidth, buttonHeight, configButtonBg, configButtonBg, LIGHT_GRAY, configButtonText, 50, "settings", true);  
   }
   
   public void update() {
     playButton.update();
+    configButton.update();
     display();
     if (playButton.isClicked()) {
       game = new Game();
@@ -41,6 +46,7 @@ public class MenuScreen {
     image(backgroundImage, 0, -100);
     image(backgroundImage, 0, backgroundImage.height - 100);
     playButton.display();
+    configButton.display();
   }
   
   private color makeBrighter(color c) {
