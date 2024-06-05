@@ -35,6 +35,8 @@ public class MenuScreen {
     if (playButton.isClicked()) {
       game = new Game();
     }
+    if (configButton.isClicked()) {
+    }
   }
   
   
