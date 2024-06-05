@@ -116,3 +116,9 @@ did not fix anything
 - added background to game and menu
 - changed colors of pieces and board
 - (hopefully) fixed rotating pieces eating others 
+
+### 6/3
+- added settings button, began working on settings class (ConfigScreen)
+
+### 6/4
+did nothing
