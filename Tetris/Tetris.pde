@@ -8,7 +8,6 @@ color ORANGE = #ff8c00;
 color YELLOW = #F0E549;
 color PURPLE = #B435FA;
 
-//color GRAY = #8c8c8c;
 color OUTLINE = #1B1B1B;
 color GRAY = #4D4C4F;
 color LIGHT_GRAY = #A6AEB4;
@@ -67,6 +66,8 @@ void display() {
     game.run();
   }
 }
+
+
 void debug() {
   fill(BLACK);
   textSize(10);

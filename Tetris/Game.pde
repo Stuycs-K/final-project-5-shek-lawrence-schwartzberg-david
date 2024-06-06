@@ -43,6 +43,7 @@ public class Game extends Screen {
     }
   }
   
+  
   public void display() {
     image(backgroundImage, 0, 0);
     image(backgroundImage, backgroundImage.width, 0);

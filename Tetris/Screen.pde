@@ -1,9 +1,11 @@
 public abstract class Screen {
   private int screenWidth, screenHeight;
   private boolean active;
+  ArrayList<Button> buttons;
   
   public Screen() {
     active = true;
+    buttons = new ArrayList<Button>();
   }
   
   public boolean isActive() {
@@ -26,4 +28,6 @@ public abstract class Screen {
     screenWidth = w;
     screenHeight = h;
   }
+  
+  abstract void display();
 }

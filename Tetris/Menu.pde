@@ -1,12 +1,10 @@
 public class Menu extends Screen {
   private PImage backgroundImage;
+  Button playButton;
+  Button configButton;
   private int buttonWidth, buttonHeight;
-  private Button playButton;
-  private Button configButton;
-  
   
   public Menu() {  
-    // background 2
     backgroundImage = loadImage("menuBackground2.png");
     setWindowSize(backgroundImage.width, backgroundImage.height);
     buttonWidth = 300;
@@ -20,9 +18,17 @@ public class Menu extends Screen {
     configButton = new Button(width() / 5 + buttonWidth * 1.3, height() / 1.5, buttonWidth, buttonHeight, configButtonBg, configButtonBg, LIGHT_GRAY, configButtonText, 50, "Settings", true);  
   }
   
-  public void update() {
+  
+  public void display() {
+    windowResize(width(), height());
+    image(backgroundImage, 0, -100);
+    image(backgroundImage, 0, backgroundImage.height - 100);
+    
     playButton.update();
     configButton.update();
+    playButton.display();
+    configButton.display();
+    
     if (playButton.isClicked()) {
       game = new Game();
       setActive(false);
@@ -31,16 +37,5 @@ public class Menu extends Screen {
       setActive(false);
       config.setActive(true);
     }
-  }
-  
-  
-  public void display() {
-    windowResize(width(), height());
-    update();
-    // background 2
-    image(backgroundImage, 0, -100);
-    image(backgroundImage, 0, backgroundImage.height - 100);
-    playButton.display();
-    configButton.display();
   }
 }

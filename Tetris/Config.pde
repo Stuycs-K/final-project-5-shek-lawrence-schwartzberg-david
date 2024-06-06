@@ -13,18 +13,15 @@ public class Config extends Screen {
       returnButton = new Button(width() - 80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, LIGHT_GRAY, returnButtonText, 20, "go back", true);  
   }
   
-  public void update() {
+    
+  public void display() {
+    image(backgroundImage, 0, -100);
+    image(backgroundImage, 0, backgroundImage.height - 100);
     returnButton.update();
+    returnButton.display();
     if (returnButton.isClicked()) {
       setActive(false);
       menu.setActive(true);
     }
-  }
-  
-  public void display() {
-    image(backgroundImage, 0, -100);
-    image(backgroundImage, 0, backgroundImage.height - 100);
-    update();
-    returnButton.display();
   }
 }
