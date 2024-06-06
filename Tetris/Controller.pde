@@ -1,70 +1,44 @@
 public class Controller {
-  int rotateLeftKey, rotateRightKey, storePieceKey, SPACE, pauseKey;
+  int[] keyCodes;
   boolean[] keyPressedArray;
-  // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece, 7-pause
+  // 0-left, 1-right, 2-softdrop, 3-harddrop, 4-rotateLeft, 5-rotateRight, 6-storePiece, 7-pause
   
   // holding hardDrop doesn't do it multiple times
   boolean canHardDrop;
   
   public Controller() {
-    // capital char values are same as their keyCode values in keyPressed()
-    rotateLeftKey = 'Z'; // 90
-    rotateRightKey = 'X'; // 88
-    storePieceKey = 'C'; // 67
-    pauseKey = 'P';
-    SPACE = 32;
-    
+    keyCodes = new int[] {37, 39, 40, 32, 'Z', 'X', 'C', 'P'};
     keyPressedArray = new boolean[8];
+    
     canHardDrop = true;
   }
 
   public void press(int code, boolean flag){
     if (game.isActive() && !game.isPaused()) {
-      if (code == LEFT) {
-        set(0, flag);
-      }
-      
-      if (code == RIGHT) {
-        set(1, flag);
-      }
-      
-      if (code == DOWN) {
-        set(2, flag);
-      }
-      
-      if (code == SPACE) {
-        set(3, flag);
-        // if it was being held down and is now released, allow hard drops again
-        if (!canHardDrop && !flag) {
-          canHardDrop = true;
+      for (int i = 0; i < keyCodes.length; i++) {
+        if (code == keyCodes[i]) {
+          setKeyToBePressed(i, flag);
+          
+          // harddrop
+          // if it was being held down and is now released, allow hard drops again
+          if (code == keyCodes[3] && !canHardDrop && !flag) {
+            canHardDrop = true;
+          }
         }
       }
-      
-      if (code == rotateLeftKey) {
-        set(4, flag);
-      }
-      
-      if (code == rotateRightKey) {
-        set(5, flag);
-      }
-      
-      if (code == storePieceKey) {
-        set(6, flag);
-      }
-    }
-    else {
-      for (int i = 0; i < keyPressedArray.length; i++) {
-          set(i, false);
+     
+    } else {
+      for (int i = 0; i < keyCodes.length; i++) {
+          setKeyToBePressed(i, false);
       }
     }
 
-    if (!board.checkIfLost() && code == pauseKey) {
-      set(7, flag);
-
+    if (!board.checkIfLost() && code == keyCodes[7]) {
+      setKeyToBePressed(7, flag);
     }
   }
   
-  private void set(int type, boolean flag) {
+  private void setKeyToBePressed(int type, boolean flag) {
     keyPressedArray[type] = flag;
   }
   
@@ -86,12 +60,12 @@ public class Controller {
       board.movePieceRight();
     }
     
-    // down
+    // softdrop
     if (keyPressedArray[2]) {
       board.softDrop();
     }
     
-    // space
+    // harddrop
     if (keyPressedArray[3] && canHardDrop) {
       board.hardDrop();
       countdown += delay;
