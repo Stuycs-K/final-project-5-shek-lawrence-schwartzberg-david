@@ -69,6 +69,10 @@ void display() {
 void keyPressed() {
   controller.press(keyCode, true);
   
+  if (config.waitingForKeyPress) {
+    config.setKey(keyCode);
+  }
+  
   if (keyCode == 'Q') {
     board.printStuff();
   }

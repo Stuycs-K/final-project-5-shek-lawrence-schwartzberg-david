@@ -1,6 +1,8 @@
 public class Config extends Screen {
   private PImage backgroundImage;
   private Button returnButton;
+  boolean waitingForKeyPress;
+  int whichButton;
   
   public Config() {
     backgroundImage = loadImage("menuBackground2.png");
@@ -26,6 +28,8 @@ public class Config extends Screen {
       Button b = new Button(x, height() - 170, buttonWidth, buttonHeight, buttonColor, buttonColor, LIGHT_GRAY, buttonTextColor, 20, labels[i], true);  
       buttons.add(b);
     }
+    
+    waitingForKeyPress = false;
   }
   
     
@@ -34,28 +38,54 @@ public class Config extends Screen {
     image(backgroundImage, 0, backgroundImage.height - 100);
     
     returnButton.update();
-    returnButton.display();
-    
+    returnButton.display(); 
     if (returnButton.isClicked()) {
       this.setActive(false);
       menu.setActive(true);
     }
     
-    displayAllButtons();
+    if (!waitingForKeyPress) {
+      displayAllButtons(true);
+    } else {
+      displayAllButtons(false);
+      displayWaitingForKeyCodePrompt();
+    }
   }
   
-  private void displayAllButtons() {
+  private void displayAllButtons(boolean checkForClicked) {
+    int[] keyCodes = controller.keyCodes;
     for (int i = 0; i < buttons.size(); i++) {
       Button button = buttons.get(i);
       
-      button.update();
+      if (checkForClicked) {
+        button.update();
+      }
       button.display();
       
-      if (button.isClicked()) {
-        ;
+      fill(WHITE);
+      Button inputKey = new Button(button.x, button.y+75, button.buttonWidth, button.buttonHeight, button.buttonColor, button.buttonColor, LIGHT_GRAY, button.textColor, 20, ""+(char)keyCodes[i], false);
+      inputKey.display();
+      
+      if (checkForClicked) {
+        if (button.isClicked()) {
+          waitingForKeyPress = true;
+          whichButton = i;
+        }
       }
         
     }
   }
+  
+  public void setKey(int newKeyCode) {
+    controller.setNewKeyCode(whichButton, newKeyCode);
+    waitingForKeyPress = false;
+  }
+  
+  private void displayWaitingForKeyCodePrompt() {
+    int rectWidth = 500;
+    int rectHeight = 500;
+    rect(width()/2 - rectWidth/2, height()/2 - rectHeight/2, rectWidth, rectHeight);
+  }
+    
 
 }
