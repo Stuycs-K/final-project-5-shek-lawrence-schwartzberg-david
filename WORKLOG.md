@@ -60,6 +60,11 @@
 - Changed leveling system a little bit
 - Made held pieces grayed out to indicate they can't be switched that turn
 
+### 6/6
+
+- Added the option to change controls
+- Made a lot of buttons look nicer
+
 ## Lawrence Shek
 
 ### 5/22
