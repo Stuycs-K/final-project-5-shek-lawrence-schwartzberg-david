@@ -22,16 +22,16 @@ public class Config extends Screen {
     
     int numButtons = controller.keyCodes.length;
     String[] labels = new String[] 
-      {"Left", "Right", "Soft\nDrop", "Hard\nDrop", "Rotate\nLeft", "Rotate\nRight", "Store\nPiece", "Pause"};
+      {"Move\nLeft", "Move\nRight", "Soft\nDrop", "Hard\nDrop", "Rotate\nLeft", "Rotate\nRight", "Store\nPiece", "Pause"};
+    color[] colors = new color[] {#f2685e, #e6a85c, #dbd337, #1cbd37, #18add6, #2156db, #9721db, #db21a3};
     int leftBound = 70;
     int rightBound = width()-70;
     buttonWidth = 80;
     buttonHeight = 50;
     for (int i = 0; i < numButtons; i++) {
-      color buttonColor = #32a852;
-      color buttonTextColor = makeBrighter(#32a852);
+      color buttonColor = colors[i];
       int x = (int)(leftBound + (double)i/(numButtons-1) * (rightBound - leftBound));
-      Button b = new Button(x, height() - 170, buttonWidth, buttonHeight, buttonColor, buttonColor, LIGHT_GRAY, buttonTextColor, 20, labels[i], true);  
+      Button b = new Button(x, height() - 170, buttonWidth, buttonHeight, buttonColor, buttonColor, LIGHT_GRAY, WHITE, 20, labels[i], true);  
       buttons.add(b);
     }
     
