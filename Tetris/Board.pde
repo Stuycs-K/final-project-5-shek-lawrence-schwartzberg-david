@@ -476,11 +476,11 @@ public class Board {
     currentPieceHeight = currentPiece.height();
     currentPieceWidth = currentPiece.width();
     
-    currentPieceRow = currentPiece.getTop();
-    currentPieceCol = currentPiece.getLeft();
-    
     currentRow = max(currentRow - currentPieceRow, 0);
     currentCol = max(currentCol - currentPieceCol, 0);
+    
+    currentPieceRow = currentPiece.getTop();
+    currentPieceCol = currentPiece.getLeft();
 
     currentRow += currentPieceRow;
     currentCol += currentPieceCol;

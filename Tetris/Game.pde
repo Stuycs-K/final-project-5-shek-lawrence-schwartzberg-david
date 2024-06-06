@@ -1,25 +1,25 @@
-public class Game {
-  private static final int screenWidth = 1000;
-  private static final int screenHeight = 700;
-  private boolean active;
+public class Game extends Screen {
   private boolean paused;
   private PImage backgroundImage;
+  private Button startOverButton;
+  private Button menuButton;
 
   
   public Game() {
-    windowResize(screenWidth, screenHeight);
+    setWindowSize(1000, 700);
+    windowResize(width(), height());
     board = new Board(20, 10);
     boardX = width/2 - SQUARE_SIZE*5;
     boardY = height/2 - SQUARE_SIZE*10;
     dropSpeed = 50;    
     inputTimer = 0;
-    active = true;
     paused = false;
     backgroundImage = loadImage("gameBackground2.jpg");
+    startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
+    menuButton = new Button(width / 2, height / 2 + 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "menu", true);
 }
 
   public void run() {
-    display();
     if (paused) {
       startOverButton.update();
       startOverButton.display();
@@ -29,7 +29,8 @@ public class Game {
         game = new Game();
       }
       if (menuButton.isClicked()) {
-        active = false;
+        setActive(false);
+        menu.setActive(true);
       }
     }
     else {
@@ -42,13 +43,12 @@ public class Game {
     }
   }
   
+  
   public void display() {
     image(backgroundImage, 0, 0);
     image(backgroundImage, backgroundImage.width, 0);
     image(backgroundImage, 0, backgroundImage.height);
     image(backgroundImage, backgroundImage.width, backgroundImage.height);
-    //image(backgroundImage, 0, backgroundImage.height * 2);
-    //image(backgroundImage, backgroundImage.width, backgroundImage.height * 2);
     board.display(boardX, boardY);
     board.displayShadow();
     board.displayCurrentPiece();
@@ -57,16 +57,9 @@ public class Game {
     board.displayScore(boardX - SQUARE_SIZE*2.5, boardY + SQUARE_SIZE*5.2);
   }
   
-  public boolean isActive() {
-    return active;
-  }
   
   public boolean isPaused() {
     return paused;
-  }
-  
-  public void setActive(boolean status) {
-    active = status;
   }
   
   public void setPause(boolean status) {
