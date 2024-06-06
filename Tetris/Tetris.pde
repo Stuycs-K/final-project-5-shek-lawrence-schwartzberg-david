@@ -14,7 +14,6 @@ color LIGHT_GRAY = #A6AEB4;
 color BLACK = #000000;
 color WHITE = #ffffff;
 
-
 Board board;
 float boardX, boardY;
 
@@ -63,8 +62,9 @@ void display() {
   else if (game.isActive()) {
     game.display();
     game.run();
-  }
+  } 
 }
+ 
 
 void keyPressed() {
   controller.press(keyCode, true);
