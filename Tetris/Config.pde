@@ -23,9 +23,9 @@ public class Config extends Screen {
     int numButtons = controller.keyCodes.length;
     String[] labels = new String[] 
       {"Left", "Right", "Soft\nDrop", "Hard\nDrop", "Rotate\nLeft", "Rotate\nRight", "Store\nPiece", "Pause"};
-    int leftBound = 100;
-    int rightBound = width()-100;
-    buttonWidth = 75;
+    int leftBound = 70;
+    int rightBound = width()-70;
+    buttonWidth = 80;
     buttonHeight = 50;
     for (int i = 0; i < numButtons; i++) {
       color buttonColor = #32a852;
@@ -75,7 +75,13 @@ public class Config extends Screen {
       button.display();
       
       fill(WHITE);
-      Button inputKey = new Button(button.x, button.y+75, button.buttonWidth, button.buttonHeight, button.buttonColor, button.buttonColor, LIGHT_GRAY, button.textColor, 20, ""+(char)keyCodes[i], false);
+      
+      int fontSize = 20;
+      if (keyCodes[i] == 157) {
+        fontSize = 15;
+      }
+      Button inputKey = new Button(button.x, button.y+75, button.buttonWidth, button.buttonHeight, button.buttonColor, button.buttonColor, LIGHT_GRAY, button.textColor, fontSize, 
+                                   keyCodeToString(keyCodes[i]), false);
       inputKey.display();
       
       if (checkForClicked) {
@@ -97,5 +103,64 @@ public class Config extends Screen {
     super.setActive(status);
     countdown = 20;
   }
+  
+  private String keyCodeToString(int code) {
+  switch(code) {
+    case 0:
+      return "FN";
+      
+    case 8:
+      return "BACK-\nSPACE";
+      
+    case 9:
+      return "TAB";
+      
+    case 10:
+      return "ENTER";
+      
+    case 16:
+      return "SHIFT";
+      
+    case 17:
+      return "CONTROL";
+      
+    case 18:
+      return "OPTION";
+      
+    case 20:
+      return "CAPS\nLOCK";
+      
+    case 32:
+      return "SPACE";
+      
+    case 37:
+      return "LEFT";
+      
+    case 38:
+      return "UP";
+    
+    case 39:
+      return "RIGHT";
+      
+    case 40:
+      return "DOWN";
+      
+    case 157:
+      return "COMMAND";
+      
+    case 192:
+      return "`";
+    
+    case 222:
+      return "'";
+    
+    case 65406:
+      return "OPTION2";
+    
+    default:
+      return ""+(char)code;
+  }
+  
+}
 
 }
