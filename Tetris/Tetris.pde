@@ -15,7 +15,6 @@ color LIGHT_GRAY = #A6AEB4;
 color BLACK = #000000;
 color WHITE = #ffffff;
 
-MenuScreen menu;
 
 Board board;
 float boardX, boardY;
@@ -29,20 +28,20 @@ int countdown;
 int delay = 6;
 
 Game game;
+Menu menu;
+Config config;
 
 Controller controller;
-Button startOverButton;
-Button menuButton;
+
 
 void setup() {
   controller = new Controller();
+  menu = new Menu();
+  config = new Config();
+  config.setActive(false);
   game = new Game();
   game.setActive(false);
   countdown = 0;
-
-  startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
-  menuButton = new Button(width / 2, height / 2 + 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "menu", true);
-  menu = new MenuScreen();
 }
 
 void draw() {
@@ -52,15 +51,24 @@ void draw() {
     countdown--;
   }
   controller.pressKeys();
-  if (game.isActive()) {
+  display();
+}
+
+
+void display() {
+  if (menu.isActive()) {
+    menu.display();
+    //println("menu active");
+  }
+  else if (config.isActive()) {
+    //println("config");
+  }
+  else if (game.isActive()) {
+    //println("game active");
     game.display();
     game.run();
   }
-  else {
-    menu.update();
-  }
 }
-
 void debug() {
   fill(BLACK);
   textSize(10);
@@ -146,4 +154,12 @@ color getColor(char c) {
     default:
       return GRAY;
   }
+}
+
+color makeBrighter(color c) {
+  float multiplier = 2.5;
+  float r = min(red(c) * multiplier, 255);
+  float g = min(green(c) * multiplier, 255);
+  float b = min(blue(c) * multiplier, 255);
+  return color(r, g, b);
 }

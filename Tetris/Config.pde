@@ -1,9 +1,9 @@
-public class ConfigScreen {
+public class Config extends Screen {
   private PImage backgroundImage;
   private int screenWidth, screenHeight;
   private int buttonWidth, buttonHeight;
   
-  public ConfigScreen() {
+  public Config() {
       backgroundImage = loadImage("menuBackground2.png");
   }
   
