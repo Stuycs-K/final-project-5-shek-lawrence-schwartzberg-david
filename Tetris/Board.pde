@@ -26,7 +26,7 @@ public class Board {
   private int score;
   private int level;
   private int linesClearedSinceLastLevel;
-  
+  private int totalLines;
   
   public Board(int numRows, int numCols) {
     board = makeBoard(numRows, numCols);
@@ -90,7 +90,7 @@ public class Board {
     stroke(WHITE);
     textAlign(CENTER, TOP);
     textSize(25);
-    text("Score: " + score + "\nLevel: " + level + "\nLines: " + (level*5 + linesClearedSinceLastLevel), x, y);
+    text("Score: " + score + "\nLevel: " + level + "\nLines: " + totalLines, x, y);
   }
   
   private void resetCurrentRowAndCol() {
@@ -384,6 +384,7 @@ public class Board {
     updateScore(numLines);
     
     linesClearedSinceLastLevel += numLines;
+    totalLines += numLines;
     
     if (linesClearedSinceLastLevel >= 5) {
       setLevel(level + linesClearedSinceLastLevel / 5);

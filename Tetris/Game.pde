@@ -15,8 +15,9 @@ public class Game extends Screen {
     inputTimer = 0;
     paused = false;
     backgroundImage = loadImage("gameBackground2.jpg");
-    startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "RESTART GAME", true);
-    menuButton = new Button(width / 2, height / 2 + 50, 400, 100, WHITE, BLACK, GRAY, BLACK, 50, "menu", true);
+
+    startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, LIGHT_GRAY, BLACK, 50, "Restart Game", true);  
+    menuButton = new Button(width/2, height/2 + 50, 400, 100, WHITE, BLACK, LIGHT_GRAY, BLACK, 50, "Menu", true);
 }
 
   public void run() {
