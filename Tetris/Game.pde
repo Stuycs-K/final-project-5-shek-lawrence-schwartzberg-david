@@ -1,6 +1,4 @@
 public class Game extends Screen {
-  private static final int screenWidth = 1000;
-  private static final int screenHeight = 700;
   private boolean paused;
   private PImage backgroundImage;
   private Button startOverButton;
@@ -8,7 +6,8 @@ public class Game extends Screen {
 
   
   public Game() {
-    windowResize(screenWidth, screenHeight);
+    setWindowSize(1000, 700);
+    windowResize(width(), height());
     board = new Board(20, 10);
     boardX = width/2 - SQUARE_SIZE*5;
     boardY = height/2 - SQUARE_SIZE*10;

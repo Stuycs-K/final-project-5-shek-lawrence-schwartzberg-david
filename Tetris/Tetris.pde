@@ -58,13 +58,11 @@ void draw() {
 void display() {
   if (menu.isActive()) {
     menu.display();
-    //println("menu active");
   }
   else if (config.isActive()) {
-    //println("config");
+    config.display();
   }
   else if (game.isActive()) {
-    //println("game active");
     game.display();
     game.run();
   }
