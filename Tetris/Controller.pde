@@ -42,6 +42,10 @@ public class Controller {
     keyPressedArray[type] = flag;
   }
   
+  public void setNewKeyCode(int whichKey, int newKeyCode) {
+    keyCodes[whichKey] = newKeyCode;
+  }
+  
   // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece
   public void pressKeys() {
     if (countdown != 0) {
