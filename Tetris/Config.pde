@@ -14,8 +14,9 @@ public class Config extends Screen {
     int buttonWidth = 120;
     int buttonHeight = 40;
     color returnButtonBg = #653D9B;
+    color returnButtonhighlightColor = makeBrighter(returnButtonBg, 1.5);
     color returnButtonTextColor = makeBrighter(returnButtonBg);
-    returnButton = new Button(width() - 80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, LIGHT_GRAY, returnButtonTextColor, 20, "Main Menu", true);  
+    returnButton = new Button(width() - 80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, returnButtonhighlightColor, returnButtonTextColor, 20, "Main Menu", true);  
     
     promptButton = new Button(width()/2, height()/2 - 100, 500, 200, #4287f5, #4287f5, #4287f5, #1527c2, 100, "Press a Key", true);
 
@@ -23,15 +24,16 @@ public class Config extends Screen {
     int numButtons = controller.keyCodes.length;
     String[] labels = new String[] 
       {"Move\nLeft", "Move\nRight", "Soft\nDrop", "Hard\nDrop", "Rotate\nLeft", "Rotate\nRight", "Store\nPiece", "Pause"};
-    color[] colors = new color[] {#f2685e, #e6a85c, #dbd337, #1cbd37, #18add6, #2156db, #9721db, #db21a3};
+    color[] colors = new color[] {#f04848, #e6a85c, #e0c112, #1cbd37, #18add6, #2156db, #9721db, #db21a3};
     int leftBound = 70;
     int rightBound = width()-70;
     buttonWidth = 80;
     buttonHeight = 50;
     for (int i = 0; i < numButtons; i++) {
       color buttonColor = colors[i];
+      color highlightColor = makeBrighter(buttonColor, 1.3);
       int x = (int)(leftBound + (double)i/(numButtons-1) * (rightBound - leftBound));
-      Button b = new Button(x, height() - 170, buttonWidth, buttonHeight, buttonColor, buttonColor, LIGHT_GRAY, WHITE, 20, labels[i], true);  
+      Button b = new Button(x, height() - 170, buttonWidth, buttonHeight, buttonColor, buttonColor, highlightColor, WHITE, 20, labels[i], true);  
       buttons.add(b);
     }
     
