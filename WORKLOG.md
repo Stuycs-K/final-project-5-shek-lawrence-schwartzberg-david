@@ -122,3 +122,8 @@ did not fix anything
 
 ### 6/4
 did nothing
+
+### 6/5
+- created abstract class for displaying screens (main menu, config, game)
+- worked on config screen (did not add any options to change keybinds yet)
+- note: might want to add delay between mouse clicks when pressing buttons
