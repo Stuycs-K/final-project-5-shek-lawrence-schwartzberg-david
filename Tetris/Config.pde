@@ -1,20 +1,26 @@
 public class Config extends Screen {
   private PImage backgroundImage;
   private Button returnButton;
+  private Button promptButton;
   boolean waitingForKeyPress;
   int whichButton;
+  
+  int countdown;
   
   public Config() {
     backgroundImage = loadImage("menuBackground2.png");
     setWindowSize(backgroundImage.width, backgroundImage.height);
+    
     int buttonWidth = 120;
     int buttonHeight = 40;
     color returnButtonBg = #653D9B;
-    color returnButtonText = makeBrighter(returnButtonBg);
-    returnButton = new Button(width() - 80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, LIGHT_GRAY, returnButtonText, 20, "Main Menu", true);  
+    color returnButtonTextColor = makeBrighter(returnButtonBg);
+    returnButton = new Button(width() - 80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, LIGHT_GRAY, returnButtonTextColor, 20, "Main Menu", true);  
+    
+    promptButton = new Button(width()/2, height()/2 - 100, 500, 200, #4287f5, #4287f5, #4287f5, #1527c2, 100, "Press a Key", true);
+
     
     int numButtons = controller.keyCodes.length;
-      // 0-left, 1-right, 2-softdrop, 3-harddrop, 4-rotateLeft, 5-rotateRight, 6-storePiece, 7-pause
     String[] labels = new String[] 
       {"Left", "Right", "Soft\nDrop", "Hard\nDrop", "Rotate\nLeft", "Rotate\nRight", "Store\nPiece", "Pause"};
     int leftBound = 100;
@@ -30,6 +36,7 @@ public class Config extends Screen {
     }
     
     waitingForKeyPress = false;
+    countdown = 60;
   }
   
     
@@ -42,13 +49,18 @@ public class Config extends Screen {
     if (returnButton.isClicked()) {
       this.setActive(false);
       menu.setActive(true);
+      waitingForKeyPress = false;
     }
     
     if (!waitingForKeyPress) {
-      displayAllButtons(true);
+      displayAllButtons(countdown <= 0);
     } else {
       displayAllButtons(false);
-      displayWaitingForKeyCodePrompt();
+      promptButton.display();
+    }
+    
+    if (countdown > 0) {
+      countdown--;
     }
   }
   
@@ -81,11 +93,9 @@ public class Config extends Screen {
     waitingForKeyPress = false;
   }
   
-  private void displayWaitingForKeyCodePrompt() {
-    int rectWidth = 500;
-    int rectHeight = 500;
-    rect(width()/2 - rectWidth/2, height()/2 - rectHeight/2, rectWidth, rectHeight);
+  public void setActive(boolean status) {
+    super.setActive(status);
+    countdown = 20;
   }
-    
 
 }

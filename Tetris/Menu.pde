@@ -34,8 +34,9 @@ public class Menu extends Screen {
       setActive(false);
     }
     if (configButton.isClicked()) {
-      setActive(false);
+      this.setActive(false);
       config.setActive(true);
+      
     }
   }
 }
