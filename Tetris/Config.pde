@@ -29,9 +29,15 @@ public class Config extends Screen {
     buttonHeight = 50;
     for (int i = 0; i < numButtons; i++) {
       color buttonColor = colors[i];
-      color highlightColor = makeBrighter(buttonColor, 1.3);
+      color highlightColor = makeBrighter(buttonColor, 1.25);
+      // make red, blue, purple, pink highlights a little brighter
+      if (i >= 6) {
+        highlightColor = makeBrighter(buttonColor, 1.5);
+      } else if (i == 0){
+        highlightColor = #ff7e75;
+      }
       int x = (int)(leftBound + (double)i/(numButtons-1) * (rightBound - leftBound));
-      Button b = new Button(x, height() - 170, buttonWidth, buttonHeight, buttonColor, buttonColor, highlightColor, WHITE, 20, labels[i], true);  
+      Button b = new Button(x, height() - 140, buttonWidth, buttonHeight, buttonColor, buttonColor, highlightColor, WHITE, 20, labels[i], true);  
       buttons.add(b);
     }
     
@@ -80,7 +86,7 @@ public class Config extends Screen {
       if (keyCodes[i] == 157) {
         fontSize = 15;
       }
-      Button inputKey = new Button(button.x, button.y+75, button.buttonWidth, button.buttonHeight, button.buttonColor, button.buttonColor, LIGHT_GRAY, button.textColor, fontSize, 
+      Button inputKey = new Button(button.x, button.y+55, button.buttonWidth, button.buttonHeight, button.buttonColor, button.buttonColor, LIGHT_GRAY, button.textColor, fontSize, 
                                    keyCodeToString(keyCodes[i]), false);
       inputKey.display();
       
