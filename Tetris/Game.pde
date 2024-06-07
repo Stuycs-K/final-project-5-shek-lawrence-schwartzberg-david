@@ -1,8 +1,11 @@
 public class Game extends Screen {
+  int dropSpeed;
+  
   private boolean paused;
   private PImage backgroundImage;
   private Button startOverButton;
   private Button menuButton;
+  
 
   
   public Game() {

@@ -17,7 +17,6 @@ color WHITE = #ffffff;
 Board board;
 float boardX, boardY;
 
-int dropSpeed;
 int frame;
 int inputTimer;
 

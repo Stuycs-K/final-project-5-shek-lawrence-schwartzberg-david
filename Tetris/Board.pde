@@ -42,7 +42,6 @@ public class Board {
     
     updatePiece();
         
-    dropSpeed = 0;
     shadowRow = board.length - currentPieceHeight;
     updateShadow();
     
@@ -395,7 +394,7 @@ public class Board {
   
   public void setLevel(int n) {
     level = n;
-    dropSpeed = max(-5*level + 50, 5);
+    game.dropSpeed = max(-5*level + 50, 5);
   }
   
   private void shiftDown(int bottom) {
