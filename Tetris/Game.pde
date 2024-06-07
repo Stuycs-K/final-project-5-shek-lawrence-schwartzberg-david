@@ -1,7 +1,7 @@
 public class Game extends Screen {
   int dropSpeed;
-  int frame;
   
+  private int frame;
   private boolean paused;
   private PImage backgroundImage;
   private Button startOverButton;
@@ -19,7 +19,6 @@ public class Game extends Screen {
 
     dropSpeed = 50;    
     frame = 0;
-    inputTimer = 0;
     paused = false;
     backgroundImage = loadImage("gameBackground2.jpg");
 

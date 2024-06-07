@@ -14,8 +14,6 @@ color LIGHT_GRAY = #A6AEB4;
 color BLACK = #000000;
 color WHITE = #ffffff;
 
-int inputTimer;
-
 // input delay
 int countdown;
 int delay = 6;
