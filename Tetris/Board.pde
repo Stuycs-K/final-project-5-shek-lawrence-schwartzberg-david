@@ -467,6 +467,9 @@ public class Board {
     while (currentCol > 0 && collidesWithPiece(currentRow, currentCol) && !collidesWithPiece(currentRow, currentCol - 1)) {
       currentCol--;
     }
+    while (currentRow + currentPieceHeight > board.length) {
+      currentRow--;
+    }
     
   }
 
