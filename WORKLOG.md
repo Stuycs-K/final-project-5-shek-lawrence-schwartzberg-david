@@ -132,3 +132,6 @@ did nothing
 - created abstract class for displaying screens (main menu, config, game)
 - worked on config screen (did not add any options to change keybinds yet)
 - note: might want to add delay between mouse clicks when pressing buttons
+
+### 6/6
+- change appearance of menu and reset buttons that show when game is paused
