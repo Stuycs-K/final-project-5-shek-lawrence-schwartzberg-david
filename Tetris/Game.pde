@@ -29,16 +29,17 @@ public class Game extends Screen {
     gameLost = false;
     backgroundImage = loadImage("gameBackground2.jpg");
 
-    int opacity = 150;
-    color buttonColor = color(#7B8CCE, 220);
+    int opacity = 220;
+    color buttonColor = color(#7B8CCE, opacity);
+    color highlightColor = color(makeBrighter(buttonColor, 1.5), opacity);
     color outlineColor = makeBrighter(buttonColor, 1.25);
     color textColor = makeBrighter(buttonColor);
-    continueButton = new Button(width/2, height/2 - 100, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Continue Game", true);  
-    startOverButton = new Button(width/2, height/2, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Restart Game", true);  
-    menuButton = new Button(width/2, height/2 + 100, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Menu", true);
+    continueButton = new Button(width/2, height/2 - 100, 400, 100, buttonColor, outlineColor, highlightColor, textColor, 50, "Continue Game", true);  
+    startOverButton = new Button(width/2, height/2, 400, 100, buttonColor, outlineColor, highlightColor, textColor, 50, "Restart Game", true);  
+    menuButton = new Button(width/2, height/2 + 100, 400, 100, buttonColor, outlineColor, highlightColor, textColor, 50, "Menu", true);
     
-    startOverButton2 = new Button(width/2, height/2 - 50, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Restart Game", true);  
-    menuButton2 = new Button(width/2, height/2 + 50, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Menu", true);
+    startOverButton2 = new Button(width/2, height/2 - 50, 400, 100, buttonColor, outlineColor, highlightColor, textColor, 50, "Restart Game", true);  
+    menuButton2 = new Button(width/2, height/2 + 50, 400, 100, buttonColor, outlineColor, highlightColor, textColor, 50, "Menu", true);
 }
 
   public void run() {
