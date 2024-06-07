@@ -39,3 +39,9 @@ The amount of points you get corresponds to the amount of lines cleared in a sin
 | 1 line | 2 lines | 3 lines | 4 lines |
 |:------:|:-------:|:-------:|:-------:|
 |$(n+1)*40$|$(n+1)*100$|$(n+1)*300$|$(n+1)*1200$|
+
+
+### Bugs
+- sometimes when a piece is placed it adds extra squares to the board for some reason
+  - we have no idea why this happens or when it happens (it seems to happen randomly)
+- rotating on the border will sometimes eat other pieces  
