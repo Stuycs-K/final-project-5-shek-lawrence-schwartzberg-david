@@ -14,7 +14,7 @@ public class Controller {
   }
 
   public void press(int code, boolean flag){
-    if (game.isActive() && !game.isPaused()) {
+    if (game.isActive() && !game.isPaused() && !game.isLost()) {
       for (int i = 0; i < keyCodes.length; i++) {
         if (code == keyCodes[i]) {
           setKeyToBePressed(i, flag);
