@@ -45,20 +45,16 @@ void draw() {
   display();
 }
 
-
 void display() {
   if (menu.isActive()) {
     menu.display();
-  }
-  else if (config.isActive()) {
+  } else if (config.isActive()) {
     config.display();
-  }
-  else if (game.isActive()) {
+  } else if (game.isActive()) {
     game.display();
     game.run();
   } 
-}
- 
+} 
 
 void keyPressed() {
   controller.press(keyCode, true);
@@ -75,48 +71,6 @@ void keyPressed() {
 
 void keyReleased() {
   controller.press(keyCode, false);
-}
-
-
-public TPiece createNewTPiece() {
-  int type = (int)(Math.random()*7);
-  
-  char c = 'I';
-  switch(type) {
-    case 0:
-      c = 'I';
-      break;
-      
-    case 1:
-      c = 'J';
-      break;
-    
-    case 2:
-      c = 'L';
-      break;
-      
-    case 3:
-      c = 'S';
-      break;
-    
-    case 4:
-      c = 'Z';
-      break;
-    
-    case 5: 
-      c = 'T';
-      break;
-    
-    case 6:
-      c = 'O';
-      break;
-      
-    default:
-      c = '-';
-      break;
-  }
-  
-  return new TPiece(c);
 }
       
 color getColor(char c) {
