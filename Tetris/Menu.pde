@@ -12,12 +12,12 @@ public class Menu extends Screen {
     color playButtonBg = #653D9B;
     color playButtonHighlight = makeBrighter(playButtonBg, 1.6);
     color playButtonText = makeBrighter(playButtonBg);
-    playButton = new Button(width() / 4, height() / 1.5 , buttonWidth, buttonHeight, playButtonBg, playButtonBg, playButtonHighlight, playButtonText, 50, "Play", true);  
+    playButton = new Button(width() / 2 - 200, height() / 1.5 , buttonWidth, buttonHeight, playButtonBg, playButtonBg, playButtonHighlight, playButtonText, 50, "Play", true);  
     
     color configButtonBg = #3D509B;
     color configButtonHighlight = makeBrighter(configButtonBg, 1.6);
     color configButtonText = makeBrighter(configButtonBg);
-    configButton = new Button(width() / 4 * 3, height() / 1.5, buttonWidth, buttonHeight, configButtonBg, configButtonBg, configButtonHighlight, configButtonText, 50, "Settings", true);  
+    configButton = new Button(width() / 2 + 200, height() / 1.5, buttonWidth, buttonHeight, configButtonBg, configButtonBg, configButtonHighlight, configButtonText, 50, "Settings", true);  
   }
   
   

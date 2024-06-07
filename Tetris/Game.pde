@@ -22,8 +22,12 @@ public class Game extends Screen {
     paused = false;
     backgroundImage = loadImage("gameBackground2.jpg");
 
-    startOverButton = new Button(width/2, height/2 - 50, 400, 100, WHITE, BLACK, LIGHT_GRAY, BLACK, 50, "Restart Game", true);  
-    menuButton = new Button(width/2, height/2 + 50, 400, 100, WHITE, BLACK, LIGHT_GRAY, BLACK, 50, "Menu", true);
+    int opacity = 150;
+    color buttonColor = color(#7B8CCE, 220);
+    color outlineColor = makeBrighter(buttonColor, 1.25);
+    color textColor = makeBrighter(buttonColor);
+    startOverButton = new Button(width/2, height/2 - 60, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Restart Game", true);  
+    menuButton = new Button(width/2, height/2 + 60, 400, 100, buttonColor, outlineColor, LIGHT_GRAY, textColor, 50, "Menu", true);
 }
 
   public void run() {

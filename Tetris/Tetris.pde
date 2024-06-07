@@ -90,17 +90,13 @@ color getColor(char c) {
   }
 }
 
-color makeBrighter(color c) {
-  float multiplier = 2.5;
-  float r = min(red(c) * multiplier, 255);
-  float g = min(green(c) * multiplier, 255);
-  float b = min(blue(c) * multiplier, 255);
-  return color(r, g, b);
-}
-
 color makeBrighter(color c, float mult) {
   float r = min(red(c) * mult, 255);
   float g = min(green(c) * mult, 255);
   float b = min(blue(c) * mult, 255);
   return color(r, g, b);
+}
+
+color makeBrighter(color c) {
+  return makeBrighter(c, 2.5);
 }
