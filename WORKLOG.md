@@ -64,6 +64,7 @@
 
 - Added the option to change controls
 - Made a lot of buttons look nicer
+- Added Tetris logo
 
 ## Lawrence Shek
 
