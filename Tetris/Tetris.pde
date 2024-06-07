@@ -26,7 +26,13 @@ Menu menu;
 Config config;
 Controller controller;
 
+PImage menuScreenBackgroundImage;
+PImage tetrisLogo;
+
 void setup() {
+  menuScreenBackgroundImage = loadImage("menuBackground2.png");
+  tetrisLogo = loadImage("tetris-logo.png");
+  
   controller = new Controller();
   menu = new Menu();
   config = new Config();
@@ -68,6 +74,16 @@ void keyPressed() {
 void keyReleased() {
   controller.press(keyCode, false);
 }
+
+void displayMenuScreenBackgroundImage() {
+  image(menuScreenBackgroundImage, 0, height - menuScreenBackgroundImage.height);
+}
+
+void displayTetrisLogo() {
+  float scale = 3;
+  image(tetrisLogo, width/2 - 217, 40, width/(scale*0.65), height/scale);
+}
+    
       
 color getColor(char c) {
   switch (c) {

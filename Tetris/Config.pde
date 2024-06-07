@@ -1,5 +1,4 @@
 public class Config extends Screen {
-  private PImage backgroundImage;
   private Button returnButton;
   private Button promptButton;
   boolean waitingForKeyPress;
@@ -8,8 +7,7 @@ public class Config extends Screen {
   int countdown;
   
   public Config() {
-    backgroundImage = loadImage("menuBackground2.png");
-    setWindowSize(backgroundImage.width, backgroundImage.height);
+    setWindowSize(menuScreenBackgroundImage.width, menuScreenBackgroundImage.height);
     
     int buttonWidth = 120;
     int buttonHeight = 40;
@@ -43,8 +41,8 @@ public class Config extends Screen {
   
     
   public void display() {
-    image(backgroundImage, 0, -100);
-    image(backgroundImage, 0, backgroundImage.height - 100);
+    displayMenuScreenBackgroundImage();
+    displayTetrisLogo();
     
     returnButton.update();
     returnButton.display(); 

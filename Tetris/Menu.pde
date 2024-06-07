@@ -25,10 +25,9 @@ public class Menu extends Screen {
   
   public void display() {
     windowResize(width(), height());
-    image(backgroundImage, 0, height - backgroundImage.height);
     
-    float scale = 3;
-    image(tetrisLogo, width/2 - 217, 40, width/(scale*0.65), height/scale);
+    displayMenuScreenBackgroundImage();
+    displayTetrisLogo();
     
     playButton.update();
     configButton.update();
