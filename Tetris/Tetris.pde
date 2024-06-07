@@ -63,10 +63,6 @@ void keyPressed() {
     config.setKey(keyCode);
   }
   
-  if (keyCode == 'Q') {
-    board.printStuff();
-  }
-  
 }
 
 void keyReleased() {

@@ -50,13 +50,6 @@ public class Board {
     linesClearedSinceLastLevel = 0;
   }
   
-  // debugging
-  public void printStuff() {
-    println("currentPiece: " + currentPiece);
-    println("currentPieceHeight, currentPieceWidth: " + currentPieceHeight + ", " + currentPieceWidth);
-    printArray();
-  }
-  
   public void printArray() {
     for (int i = 0; i < board.length; i++) {
       print("[");
@@ -179,7 +172,6 @@ public class Board {
   // current piece goes down a tile
   // can be called more/less often in order to increase/decrease difficulty
   public void softDrop() {
-    //println("softDrop called");
     if (pieceCanMoveDown(currentRow, currentCol)) {
       currentRow++;
       addPieceCountdown = addPieceDelay;
@@ -192,7 +184,6 @@ public class Board {
   }
   
   public void hardDrop() {
-    //println("hardDrop called");
     while (pieceCanMoveDown(currentRow, currentCol)) {
       softDrop();
     }
@@ -203,11 +194,8 @@ public class Board {
   // called when the current piece has reached the bottom of the board
   // boolean for switchPiece() to call this without adding the piece to the board
   private void changeToNextPiece(boolean addCurrentPieceToBoard) {
-    //println("changetonextpiece called \naddCurrentPieceToBoard: "+addCurrentPieceToBoard);
-    //println("pieceHasBeenSwitchedThisTurn: " +pieceHasBeenSwitchedThisTurn);
     if (currentRow == 0 && !pieceCanMoveDown(currentRow, currentCol)) {
       lose = true;
-      //println("lose = true");
     }
     
     if (addCurrentPieceToBoard) {
@@ -234,7 +222,6 @@ public class Board {
   }
   
   public void switchPiece() {
-    //println("switchPiece called");
     if (!pieceHasBeenSwitchedThisTurn) {
       if (heldPiece != null) {
         TPiece temp = heldPiece;
@@ -271,14 +258,9 @@ public class Board {
   
   // assumes that the piece does not overlap with any other pieces or the board border
   public void addCurrentPieceToBoard() {
-    //println("addCurrentPieceToBoard called");
     char[][] pieceArray = currentPiece.getPieceArray();
     
-    //println("currentPiece: " + currentPiece);
-    //println(currentPieceHeight + " height");
-    //println(currentPieceWidth + " width");
-    //println(currentPieceRow + " currentPieceRow");
-    //println(currentPieceCol + " currentPieceCol");
+  
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
@@ -361,7 +343,6 @@ public class Board {
   }
   
   public void clearLines() {
-    //println("clearLines called");
     int numLines = 0;
     for (int r = board.length - 1; r >= 0; r--)  {
       boolean fullLine = true;
@@ -398,7 +379,6 @@ public class Board {
   }
   
   private void shiftDown(int bottom) {
-    //println("shiftdown called with bottom: "+ bottom);
     for (int r = bottom; r > 0; r--) {
       board[r] = board[r - 1];
     }
