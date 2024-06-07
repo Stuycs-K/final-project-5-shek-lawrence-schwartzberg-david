@@ -14,22 +14,19 @@ color LIGHT_GRAY = #A6AEB4;
 color BLACK = #000000;
 color WHITE = #ffffff;
 
-Board board;
-float boardX, boardY;
-
-int frame;
 int inputTimer;
 
 // input delay
 int countdown;
 int delay = 6;
 
+float boardX, boardY;
+
+Board board;
 Game game;
 Menu menu;
 Config config;
-
 Controller controller;
-
 
 void setup() {
   controller = new Controller();

@@ -1,5 +1,6 @@
 public class Game extends Screen {
   int dropSpeed;
+  int frame;
   
   private boolean paused;
   private PImage backgroundImage;
@@ -11,10 +12,13 @@ public class Game extends Screen {
   public Game() {
     setWindowSize(1000, 700);
     windowResize(width(), height());
-    board = new Board(20, 10);
+    
     boardX = width/2 - SQUARE_SIZE*5;
     boardY = height/2 - SQUARE_SIZE*10;
+    board = new Board(20, 10);
+
     dropSpeed = 50;    
+    frame = 0;
     inputTimer = 0;
     paused = false;
     backgroundImage = loadImage("gameBackground2.jpg");
