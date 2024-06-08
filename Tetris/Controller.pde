@@ -42,8 +42,15 @@ public class Controller {
     keyPressedArray[type] = flag;
   }
   
-  public void setNewKeyCode(int whichKey, int newKeyCode) {
+  public boolean setNewKeyCode(int whichKey, int newKeyCode) {
+    for (int i = 0; i < keyCodes.length; i++) {
+      if (i != whichKey && newKeyCode == keyCodes[i]) {
+        return false;
+      }
+    }
+    
     keyCodes[whichKey] = newKeyCode;
+    return true;
   }
   
   // 0-left, 1-right, 2-down, 3-space, 4-rotateLeft, 5-rotateRight, 6-storePiece

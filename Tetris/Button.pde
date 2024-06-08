@@ -58,5 +58,5 @@ public class Button {
   public boolean isClicked() {
     return highlight && mousePressed;
   }
-  
+
 }

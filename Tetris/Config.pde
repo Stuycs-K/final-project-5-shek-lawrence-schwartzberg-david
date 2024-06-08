@@ -16,7 +16,7 @@ public class Config extends Screen {
     color returnButtonTextColor = makeBrighter(returnButtonBg);
     returnButton = new Button(width() - 80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, returnButtonhighlightColor, returnButtonTextColor, 20, "Main Menu", true);  
     
-    promptButton = new Button(width()/2, height()/2 - 100, 500, 200, #4287f5, #4287f5, #4287f5, #1527c2, 100, "Press a Key", true);
+    promptButton = new Button(width()/2, height()/2 - 100, 480, 190, #4287f5, #4287f5, #4287f5, #1527c2, 80, "Press a key", true);
 
     
     int numButtons = controller.keyCodes.length;
@@ -101,8 +101,12 @@ public class Config extends Screen {
   }
   
   public void setKey(int newKeyCode) {
-    controller.setNewKeyCode(whichButton, newKeyCode);
-    waitingForKeyPress = false;
+    if (controller.setNewKeyCode(whichButton, newKeyCode)) {  
+      waitingForKeyPress = false;
+      promptButton.text = "Press a key";
+    } else {
+      promptButton.text = "Choose\nanother key";
+    }
   }
   
   public void setActive(boolean status) {
