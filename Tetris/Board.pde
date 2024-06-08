@@ -46,7 +46,7 @@ public class Board {
     updateShadow();
     
     score = 0;
-    level = 0;
+    level = startLevel;
     linesClearedSinceLastLevel = 0;
   }
   

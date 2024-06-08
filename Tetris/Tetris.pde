@@ -19,6 +19,7 @@ int countdown;
 int delay = 6;
 
 float boardX, boardY;
+int startLevel = 0;
 
 Board board;
 Game game;
@@ -67,6 +68,10 @@ void keyPressed() {
   
   if (config.waitingForKeyPress) {
     config.setKey(keyCode);
+  }
+  
+  if (config.waitingForLevelSelect) {
+    config.setLevel(keyCode);
   }
   
 }

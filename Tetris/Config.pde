@@ -1,7 +1,9 @@
 public class Config extends Screen {
   private Button returnButton;
   private Button promptButton;
+  private Button levelSelectButton;
   boolean waitingForKeyPress;
+  boolean waitingForLevelSelect;
   int whichButton;
   
   int countdown;
@@ -18,6 +20,7 @@ public class Config extends Screen {
     
     promptButton = new Button(width()/2, height()/2 - 100, 480, 190, #4287f5, #4287f5, #4287f5, #1527c2, 80, "Press a key", true);
 
+    levelSelectButton = new Button(80, height() - 30, buttonWidth, buttonHeight, returnButtonBg, returnButtonBg, returnButtonhighlightColor, returnButtonTextColor, 20, "Start Level: 0", true);  
     
     int numButtons = controller.keyCodes.length;
     String[] labels = new String[] 
@@ -52,14 +55,29 @@ public class Config extends Screen {
     
     returnButton.update();
     returnButton.display(); 
+    
     if (returnButton.isClicked()) {
       this.setActive(false);
       menu.setActive(true);
       waitingForKeyPress = false;
+      promptButton.text = "Press a key";
     }
     
+    if (levelSelectButton.isClicked()) {
+      waitingForLevelSelect = true;
+      promptButton.text = "Choose your\nstarting level";
+    }
+    
+    if (!waitingForLevelSelect) {
+      levelSelectButton.update();
+    } else {
+      promptButton.display();
+    }
+    
+    levelSelectButton.display(); 
+    
     if (!waitingForKeyPress) {
-      displayAllButtons(countdown <= 0);
+      displayAllButtons(countdown <= 0 && !waitingForLevelSelect);
     } else {
       displayAllButtons(false);
       promptButton.display();
@@ -106,6 +124,14 @@ public class Config extends Screen {
       promptButton.text = "Press a key";
     } else {
       promptButton.text = "Choose\nanother key";
+    }
+  }
+  
+  public void setLevel(int newKeyCode) {
+    if (Character.isDigit((char)newKeyCode)){
+      startLevel = Integer.parseInt(""+(char)newKeyCode);
+      levelSelectButton.text = "Start Level: " + startLevel;
+      waitingForLevelSelect = false;
     }
   }
   

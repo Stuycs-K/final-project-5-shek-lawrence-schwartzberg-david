@@ -23,7 +23,7 @@ public class Game extends Screen {
     boardY = height/2 - SQUARE_SIZE*10;
     board = new Board(20, 10);
 
-    dropSpeed = 50;    
+    dropSpeed = max(-5*board.level + 50, 5);
     frame = 0;
     paused = false;
     gameLost = false;
