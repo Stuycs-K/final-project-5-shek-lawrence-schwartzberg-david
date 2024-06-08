@@ -68,7 +68,7 @@ public class Config extends Screen {
       promptButton.text = "Choose your\nstarting level";
     }
     
-    if (!waitingForLevelSelect) {
+    if (!waitingForLevelSelect && !waitingForKeyPress) {
       levelSelectButton.update();
     } else {
       promptButton.display();
