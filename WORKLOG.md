@@ -136,3 +136,7 @@ did nothing
 
 ### 6/6
 - change appearance of menu and reset buttons that show when game is paused
+
+### 6/7
+- played around with different sounds
+  - added sound for dropping, need to fix delay and make louder
