@@ -260,7 +260,6 @@ public class Board {
   public void addCurrentPieceToBoard() {
     char[][] pieceArray = currentPiece.getPieceArray();
     
-  
     for (int r = 0; r < currentPieceHeight; r++) {
       for (int c = 0; c < currentPieceWidth; c++) {
         if (pieceArray[currentPieceRow + r][currentPieceCol + c] != '-') {
@@ -268,7 +267,7 @@ public class Board {
         }
       }
     }
-    
+    dropSound.play();
     clearLines();
   }
   

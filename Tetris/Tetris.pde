@@ -1,3 +1,5 @@
+import processing.sound.*;
+
 int SQUARE_SIZE = 30;
 
 color CYAN = #00E6E6;
@@ -29,6 +31,8 @@ Controller controller;
 PImage menuScreenBackgroundImage;
 PImage tetrisLogo;
 
+SoundFile dropSound;
+
 void setup() {
   menuScreenBackgroundImage = loadImage("menuBackground2.png");
   tetrisLogo = loadImage("tetris-logo.png");
@@ -40,6 +44,8 @@ void setup() {
   game = new Game();
   game.setActive(false);
   countdown = 0;
+  
+  dropSound = new SoundFile(this, "drop.mp3");
 }
 
 void draw() {
