@@ -66,6 +66,14 @@
 - Made a lot of buttons look nicer
 - Added Tetris logo
 
+### 6/7
+
+- Worked on README
+
+### 6/8
+
+- Added level select button
+
 ## Lawrence Shek
 
 ### 5/22
