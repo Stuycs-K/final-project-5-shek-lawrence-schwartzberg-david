@@ -146,5 +146,8 @@ did nothing
 - change appearance of menu and reset buttons that show when game is paused
 
 ### 6/7
-- played around with different sounds
-  - added sound for dropping, need to fix delay and make louder
+- played around with different sounds (did not end up adding to final version)
+  - added sound for dropping, need to fix delay and make louder 
+
+### 6/8
+- deleted unused images, organized images into a folder
