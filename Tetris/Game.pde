@@ -27,7 +27,7 @@ public class Game extends Screen {
     frame = 0;
     paused = false;
     gameLost = false;
-    backgroundImage = loadImage("gameBackground2.jpg");
+    backgroundImage = loadImage("images/gameBackground.jpg");
 
     int opacity = 220;
     color buttonColor = color(#7B8CCE, opacity);

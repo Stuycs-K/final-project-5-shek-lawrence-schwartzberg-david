@@ -6,8 +6,8 @@ public class Menu extends Screen {
   private int buttonWidth, buttonHeight;
   
   public Menu() {  
-    backgroundImage = loadImage("menuBackground2.png");
-    tetrisLogo = loadImage("tetris-logo.png");
+    backgroundImage = loadImage("images/menuBackground.png");
+    tetrisLogo = loadImage("images/tetris-logo.png");
     setWindowSize(backgroundImage.width, backgroundImage.height);
     buttonWidth = 300;
     buttonHeight = 70;

@@ -31,8 +31,8 @@ PImage menuScreenBackgroundImage;
 PImage tetrisLogo;
 
 void setup() {
-  menuScreenBackgroundImage = loadImage("menuBackground2.png");
-  tetrisLogo = loadImage("tetris-logo.png");
+  menuScreenBackgroundImage = loadImage("images/menuBackground.png");
+  tetrisLogo = loadImage("images/tetris-logo.png");
   
   controller = new Controller();
   menu = new Menu();
