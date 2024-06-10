@@ -41,7 +41,7 @@ The amount of points you get corresponds to the amount of lines cleared in a sin
 |$(n+1)*40$|$(n+1)*100$|$(n+1)*300$|$(n+1)*1200$|
 
 
-### [Presentation](https://drive.google.com/file/d/1KItV9IXt0gwXrcgZi2gb-de3LABWR3qz/view?usp=drive_link)
+## [Video Presentation](https://drive.google.com/file/d/1KItV9IXt0gwXrcgZi2gb-de3LABWR3qz/view?usp=drive_link)
 
 ### Bugs
 - sometimes when a piece is placed it adds extra squares to the board for some reason
