@@ -5,7 +5,7 @@
 David Schwartzberg and Lawrence Shek
 
 ## Overview
-Play Tetris - complete with moving left and right, rotating clockwise and counterclockwise, soft-drops and hard-drops, and storing pieces. Go to settings to change your controls if you want, and then go back to the main menu and hit play! Try to clear as many lines as possible to increase your level and get a high score!
+Play Tetris - complete with moving left and right, rotating clockwise and counterclockwise, soft-drops and hard-drops, and storing pieces. Go to settings to change your controls if you want, and then go back to the main menu and hit play! Try to clear as many lines as possible to increase your level and get a high score! If you want an extra challenge, try starting on a higher starting level to get extra points earlier on!
 
 ## Instructions
 
@@ -41,9 +41,9 @@ The amount of points you get corresponds to the amount of lines cleared in a sin
 |$(n+1)*40$|$(n+1)*100$|$(n+1)*300$|$(n+1)*1200$|
 
 
-## [Video Presentation](https://drive.google.com/file/d/1KItV9IXt0gwXrcgZi2gb-de3LABWR3qz/view?usp=drive_link)
-
 ### Bugs
-- sometimes when a piece is placed it adds extra squares to the board for some reason
-  - we have no idea why this happens or when it happens (it seems to happen randomly)
-- rotating on the border will sometimes eat other pieces  
+- Sometimes when a piece is placed it adds extra squares to the top of the board
+  - We have no idea why this happens or when it happens (it seems to happen randomly, but only after clearing a couple of lines)
+- Rotating on the border/near a wall of pieces will sometimes eat into other pieces
+
+- ## [Video Presentation](https://drive.google.com/file/d/1KItV9IXt0gwXrcgZi2gb-de3LABWR3qz/view?usp=drive_link)
